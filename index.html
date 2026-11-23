@@ -68,8 +68,9 @@ button:disabled{cursor:default;opacity:.5}
 .unit-slots{display:grid;gap:4px;grid-template-rows:repeat(2,minmax(51px,1fr));margin:6px 6px 0;padding:4px;border-radius:8px;background:#dbc69f;grid-row:4}
 .slot{position:relative;display:grid;align-content:start;gap:2px;min-width:0;width:100%;border:1px solid #ad8d62;border-radius:4px;background:#f5e4bd;color:#36261b;padding:4px 5px;text-align:left;font-size:clamp(10px,1.24vw,13px);line-height:1.33;overflow-wrap:anywhere}
 .slot-label{font-weight:750;color:#694a32;font-size:.82em}
-.pick:hover:not(:disabled),.pick[aria-pressed=true]{border-color:#86581b;background:#ffe199;box-shadow:inset 0 0 0 1px #9c6e35}
-.slot.mid.applied,.flying{background:#ffdd98;border-color:#a66226;color:#4f280f}
+.pick:enabled:not([data-vacant=true]){border-color:#42c871;box-shadow:inset 0 0 0 1px #42c871,0 0 8px #52e57b9c}
+.pick:enabled:not([data-vacant=true]):is(:hover,:focus-visible){background:#e9f7d4;border-color:#309a53;box-shadow:inset 0 0 0 1px #3ccf70,0 0 12px #62f58dbd}
+.flying{background:#ffdd98;border-color:#cdae44;color:#4f280f}
 .mid[data-marker="유지"]{border-color:#577a65}
 .mid[data-marker]:not([data-marker=""])::after{content:attr(data-marker);position:absolute;right:5px;top:4px;color:#4f6952;font-size:.78em;font-weight:bold}
 .mid.applied::after{color:#94491a!important}
@@ -111,6 +112,8 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .stage[data-phase=select] .unit[data-side="0"]{animation-delay:.025s}
 @keyframes deal{from{opacity:.25;transform:translateY(15px) scale(.95)}}
 .selection .mid.target{border-color:#c57c2b;box-shadow:inset 0 0 0 1px #e0a451}
+.slot.mid.applied{background:#ffedb7;border-color:#f4c528;color:#4f280f;box-shadow:inset 0 0 0 1px #f4c528,0 0 9px #ffd63d9e;animation:option-lock 180ms ease-out}
+@keyframes option-lock{from{border-color:#fff0a3;box-shadow:inset 0 0 0 2px #fff0a3,0 0 16px 2px #ffda5299}}
 .pick[data-vacant="true"]{border-style:dashed;background:#b39a73;color:#513d2c;box-shadow:none}
 .pick[data-vacant="true"] .slot-label,.pick[data-vacant="true"] .wording{visibility:hidden}
 .flying{display:block;padding:6px 8px;overflow:hidden;background:#ffe2a2;box-shadow:0 0 14px #f4ba6588}
@@ -1271,10 +1274,9 @@ function moveWording(from, to, wording, returning) {
   const dx = to.x-from.x;
   const dy = to.y-from.y;
   return animate(flight, [
-    {transform:'none',opacity:.98},
-    {transform:`translate(${dx*.52}px,${dy*.52-18}px) scale(1.04)`,offset:.46,opacity:1},
-    {transform:`translate(${dx}px,${dy}px) scale(${to.w/from.w},${to.h/from.h})`,opacity:1},
-  ], {duration:returning ? 300 : 390,easing:'cubic-bezier(.24,.69,.24,1)'});
+    {transform:'translate(0,0) scale(1,1)'},
+    {transform:`translate(${dx}px,${dy}px) scale(${to.w/from.w},${to.h/from.h})`},
+  ], {duration:returning ? 135 : 165,easing:'cubic-bezier(.45,0,.8,1)'});
 }
 
 async function choose(button, row) {
@@ -1305,10 +1307,6 @@ async function choose(button, row) {
   if (ticket !== action) return;
   stage.classList.remove('moving');
   showSelection(true);
-  if (chosen) {
-    const to = coordinates(middle[row]);
-    sparks(to.x + to.w/2,to.y + to.h/2,8,50);
-  }
   status.textContent = cancelling ? '선택을 취소했어요.' : '선택한 문구가 적용됐어요. 다른 문구를 고르거나 조합을 확정하세요.';
 }
 function reset(focus = false) {
