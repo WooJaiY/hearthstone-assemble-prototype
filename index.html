@@ -42,13 +42,8 @@ button:disabled{cursor:default;opacity:.5}
 .battle-row i{display:grid;place-items:center;width:59px;height:75px;border-radius:48% 48% 42% 42%;border:2px solid #b7825b;background:radial-gradient(circle at 50% 40%,#ab735a,#4d2e24);box-shadow:0 4px 10px #160e08a0;color:#f2c890;font:700 26px Georgia}
 .battle-row.ours i{border-color:#93b3a0;background:radial-gradient(circle at 50% 40%,#698e78,#28483d);color:#e1e7a0}
 .scenario{position:relative;z-index:1;padding:75px 18px 19px;text-align:center}
-.scenario h2,.selection h2,.result h2{text-shadow:0 2px 6px #100907}
+.scenario h2,.selection h2{text-shadow:0 2px 6px #100907}
 .scenario > div{display:grid;justify-items:center;gap:7px;margin:142px auto 0}
-.hand-card{display:flex;align-items:center;gap:9px;padding:8px 13px;border:2px solid #be975e;border-radius:8px;background:#36291c;color:#ffe6b7;font-weight:750;box-shadow:0 6px 18px #0e0a08;text-align:left}
-.hand-card:hover{background:#4a3724}
-.hand-card .mana-gem{position:static;width:25px;height:25px;flex:none;font-size:14px}
-.hand-card .hand-thumb{width:35px;height:35px;border-radius:5px;object-fit:contain}
-.hand-card small{display:block;color:var(--muted);font-weight:500;font-size:11px}
 .selection{position:relative;padding:18px clamp(5px,2vw,24px) 17px;text-align:center}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(4px,3vw,28px);align-items:stretch;margin:10px auto 0;max-width:735px}
 .unit{position:relative;display:grid;grid-template-rows:auto auto auto 1fr auto;min-width:0;border:2px solid #b48c58;border-radius:48% 48% 10px 10px / 16% 16% 10px 10px;background:linear-gradient(130deg,#3b2b20,#68492f 50%,#3b2a20);box-shadow:0 7px 17px #0e0a07a0,inset 0 0 0 2px #483120;text-align:center;transition:opacity .3s,transform .3s}
@@ -76,8 +71,6 @@ button:disabled{cursor:default;opacity:.5}
 .mid.applied::after{color:#94491a!important}
 .controls{max-width:735px;margin:8px auto 0}
 .controls button{font-size:12px}
-.result{position:relative;z-index:2;display:grid;justify-items:center;gap:8px;padding:15px 8px}
-.result .unit{width:min(220px,85%);animation:reveal .48s ease-out both}
 @keyframes reveal{from{transform:translateY(18px) scale(.91);opacity:0}}
 .stage[data-phase=assembling] .unit[data-side]{opacity:.27;transform:scale(.94)}
 .flying,.beam,.spark,.flare{position:absolute;pointer-events:none;z-index:5}
@@ -111,7 +104,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     radial-gradient(ellipse at 50% 41%,#5c3373 0%,#25193e 52%,#100e24 95%);
 }
 .stage:is([data-phase=select],[data-phase=assembling]) .arena::after{opacity:1}
-.selection,.scenario,.result{z-index:1}
+.selection,.scenario{z-index:1}
 .stage[data-phase=select] .unit{animation:deal .32s cubic-bezier(.18,.71,.24,1) both}
 .stage[data-phase=select] .unit[data-side="1"]{animation-delay:.05s}
 .stage[data-phase=select] .unit[data-side="0"]{animation-delay:.025s}
@@ -126,8 +119,6 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .stage[data-phase=assembling] .unit[data-side="0"]{transform:translateX(22px) scale(.87)}
 .stage[data-phase=assembling] .unit[data-side="1"]{transform:translateX(-22px) scale(.87)}
 .stage[data-phase=assembling] .unit.center{filter:brightness(1.18);transform:scale(1.035)}
-.hand-flight{position:absolute;z-index:7;pointer-events:none;transform-origin:0 0;animation:none!important}
-.hand-card.completed{border-color:#9dd6c4;box-shadow:0 0 17px #68b29d80,0 6px 18px #0e0a08}
 
 .arena{aspect-ratio:55 / 31;min-height:min-content}
 .arena{
@@ -192,12 +183,12 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .selection .unit-slots{
   z-index:1;margin:0 clamp(2px,.65vw,8px);padding:3px;background:#35283f;
 }
-.selection .slot,.result .slot{
+.selection .slot,.completed-cards .slot{
   min-height:clamp(59px,6vw,83px);padding:7px 8px;
   font-size:clamp(11px,1.25vw,16px);line-height:1.37;
 }
-.selection .slot-label,.result .slot-label{font-size:.73em}
-.selection .center .wording,.result .wording{font-weight:700}
+.selection .slot-label,.completed-cards .slot-label{font-size:.73em}
+.selection .center .wording,.completed-cards .wording{font-weight:700}
 .selection .mid:not(.applied){background:#262231;border-color:#795e8f;color:#f1e7fa}
 .selection .mid:not(.applied) .slot-label{color:#cdc0dd}
 .selection .mid:not(.applied)[data-marker]::after{color:#d8c8e8}
@@ -258,6 +249,17 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
   .assembly-controls button{padding-inline:5px}
 }
 
+
+.completed-section{margin-top:12px;padding:15px;border:1px solid #65513b;border-radius:8px;background:#221c18}
+.completed-section > p{margin-top:8px;color:var(--muted);font-size:13px}
+.completed-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(216px,100%),1fr));gap:14px;margin:10px 0 0;padding:0;list-style:none}
+.completed-cards:empty{margin:0}
+.completed-cards .unit{height:100%;grid-template-rows:auto auto 1fr auto;border-radius:12px;animation:reveal .3s ease-out}
+.completed-cards .unit-heading{position:relative;inline-size:auto;block-size:auto;clip-path:none;margin:7px 14px 3px;padding:4px;white-space:normal;grid-row:1}
+.completed-cards .unit-cost{top:33px}
+.completed-cards .illustration{grid-row:2;margin-inline:15%;height:102px}
+.completed-cards .unit-slots{grid-row:3}
+.completed-cards .stats{grid-row:4}
 </style>
 </head>
 <body>
@@ -310,24 +312,10 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     <div class="scenario board" hidden>
       <h2>전장</h2>
       <div>
-        <button type="button" class="hand-card return" hidden>
-          <b class="mana-gem"></b><img class="hand-thumb" alt="" referrerpolicy="no-referrer">
-          <span><strong class="hand-title"></strong><small>완성 카드 보기</small></span>
-        </button>
         <button type="button" class="primary start-assembly">조합 시작</button>
       </div>
     </div>
-    <div class="view result" hidden>
-      <h2>손패에 추가된 카드</h2><article class="unit center" data-art="base">
-  <div class="unit-role">완성 카드</div>
-  <span class="unit-cost" aria-label="마나 비용"><b class="mana-gem"></b></span>
-  <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="unit-heading"><h3 class="unit-title"></h3></div>
-  <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
-  <div class="unit-slots"><div class="slot mid" data-row="0"><span class="slot-label">발동 조건</span><span class="wording"></span></div><div class="slot mid" data-row="1"><span class="slot-label">효과</span><span class="wording"></span></div></div>
-</article>
-      <button class="quiet replay" type="button">전장으로 돌아가기</button>
-    </div>
+
     <div class="controls assembly-controls" hidden>
       <button class="quiet hide" type="button">숨기기</button>
       <button class="primary confirm" type="button" disabled>조립</button>
@@ -336,6 +324,18 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     </div>
   </section>
   <footer><p id="status" role="status" aria-live="polite"></p></footer>
+  <section class="completed-section" aria-labelledby="completed-title">
+    <h2 id="completed-title">완성 카드 목록</h2>
+    <p id="completed-empty">조립한 카드가 여기에 표시돼요.</p>
+    <ul id="completed-cards" class="completed-cards"></ul>
+    <template id="completed-card-template"><li><article class="unit center" data-art="base">
+  <span class="unit-cost" aria-label="마나 비용"><b class="mana-gem"></b></span>
+  <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
+  <div class="unit-heading"><h3 class="unit-title"></h3></div>
+  <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
+  <div class="unit-slots"><div class="slot mid" data-row="0"><span class="slot-label">발동 조건</span><span class="wording"></span></div><div class="slot mid" data-row="1"><span class="slot-label">효과</span><span class="wording"></span></div></div>
+</article></li></template>
+  </section>
   <dialog id="card-sidebar" class="card-sidebar" aria-labelledby="sidebar-title">
     <header><h2 id="sidebar-title">하수인 목록</h2><form method="dialog"><button class="quiet">닫기</button></form></header>
     <div class="sidebar-pickers">
@@ -1100,7 +1100,9 @@ const stage = document.querySelector('.stage');
 const selection = stage.querySelector('.selection');
 const center = selection.querySelector('.center');
 const board = stage.querySelector('.board');
-const result = stage.querySelector('.result');
+const completedCards = document.querySelector('#completed-cards');
+const completedCardTemplate = document.querySelector('#completed-card-template');
+const completedEmpty = document.querySelector('#completed-empty');
 const assemblyControls = stage.querySelector('.assembly-controls');
 const confirm = assemblyControls.querySelector('.confirm');
 const hide = assemblyControls.querySelector('.hide');
@@ -1112,12 +1114,10 @@ const middle = [...center.querySelectorAll('.mid')];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const cardData = JSON.parse(document.querySelector('#card-data').textContent);
 const artBase = 'https://art.hearthstonejson.com/v1/256x/';
-const hand = board.querySelector('.hand-card');
 const startButton = board.querySelector('.start-assembly');
 const sidebar = document.querySelector('#card-sidebar');
 const donorPickers = [document.querySelector('#donor-a'),document.querySelector('#donor-b')];
 const randomBase = document.querySelector('#random-base');
-let completed = null;
 const raceNames = {ALL:'모든 종족', BEAST:'야수', DEMON:'악마', DRAENEI:'드레나이', DRAGON:'용족',
   ELEMENTAL:'정령', MECHANICAL:'기계', MURLOC:'멀록', NAGA:'나가', PIRATE:'해적', QUILBOAR:'가시멧돼지', TOTEM:'토템', UNDEAD:'언데드'};
 const cardSource = 'https://api.hearthstonejson.com/v1/256589/koKR/cards.collectible.json';
@@ -1211,21 +1211,6 @@ function paintRace(unit, id) {
 function baseChoices() {
   return eligibleCards.filter(card => card.cost===Number(costPicker.value) && allowedClass(card) && donorPool(card).length>=2);
 }
-function refreshHand() {
-  const card = completed?.card;
-  hand.hidden = !card;
-  hand.classList.toggle('completed',!!completed);
-  if (!card) return;
-  hand.querySelector('.mana-gem').textContent = card.cost;
-  hand.querySelector('.hand-title').textContent = card.name;
-  const thumbnail = hand.querySelector('img');
-  const picture = artBase + encodeURIComponent(card.id) + '.jpg';
-  if (thumbnail.getAttribute('src') !== picture) {
-    thumbnail.hidden = false;
-    thumbnail.onerror = () => { thumbnail.hidden = true; };
-    thumbnail.src = picture;
-  }
-}
 function updateDonors(pool) {
   for (const [side,picker] of donorPickers.entries()) {
     picker.replaceChildren(...pool.map(card => {
@@ -1239,7 +1224,6 @@ function updateDonors(pool) {
 }
 function rebuild(requestedId, {donor,reroll=false,screen}={}) {
   const next = screen || (stage.dataset.phase === 'peek' ? 'peek' : 'select');
-  completed = null;
   const pool = baseChoices();
   central = pool.find(card => card.id===requestedId) || draw(pool,1)[0] || null;
   centerPicker.replaceChildren(...pool.map(card => option(card.id,card.name)));
@@ -1284,7 +1268,6 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
   }
   reset();
   phase(central ? next : 'board');
-  refreshHand();
   if (!central) status.textContent = '이 비용과 직업에서는 보조 두 장을 갖춘 기본 하수인이 없어요. 다른 비용이나 직업을 골라주세요.';
   else scheduleAssemblyClock();
   if(catalog.open) renderCatalog();
@@ -1293,10 +1276,8 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
 function prepareStart() {
   central = null;
   offers = [];
-  completed = null;
   reset();
   phase('board');
-  refreshHand();
   const available = baseChoices().length>0;
   startButton.disabled = !available;
   centerPicker.replaceChildren(option('','조합 시작 후 표시'));
@@ -1408,9 +1389,7 @@ function phase(next) {
   assemblyControls.hidden = !choosing && !peeking;
   hide.textContent = peeking ? '조합' : '숨기기';
   confirm.hidden = !choosing;
-  hand.disabled = peeking;
   startButton.hidden = next !== 'board';
-  result.hidden = next !== 'result';
   confirm.disabled = !choosing || !chosen || stage.classList.contains('moving');
 }
 function coordinates(node) {
@@ -1449,7 +1428,6 @@ function stopMotion() {
   motion.clear();
   stage.classList.remove('moving');
   for (const slot of middle) slot.classList.remove('target');
-  hand.style.removeProperty('opacity');
 }
 function showSelection(showPreview) {
   for (const button of picks) {
@@ -1561,58 +1539,31 @@ function assemble(automatic = false) {
     animate(node,[{opacity:0},{opacity:.9,offset:.48},{opacity:0}],{duration:410});
     sparks(box.x+box.w/2,box.y+box.h/2,17,95);
   }
-  resultTimer = setTimeout(async () => {
+  resultTimer = setTimeout(() => {
     if (ticket !== action) return;
-    const from = coordinates(center);
-    const clone = center.cloneNode(true);
-    completed = snapshot;
-    refreshHand();
+    addCompletedCard(snapshot);
     phase('board');
-    if (wait) {
-      const to = coordinates(hand);
-      const flying = effect('hand-flight',from.x,from.y);
-      flying.style.width = from.w + 'px';
-      clone.style.width = '100%';
-      flying.append(clone);
-      hand.style.opacity = '0';
-      const dx = to.x + to.w/2 - from.x - from.w*.18;
-      const dy = to.y + to.h/2 - from.y - from.h*.18;
-      const motion = [
-        {transform:'none',opacity:1},
-        {transform:`translate(${dx*.38}px,${dy*.28-12}px) scale(.78) rotate(4deg)`,offset:.38,opacity:1},
-        {transform:`translate(${dx}px,${dy}px) scale(.36)`,opacity:.18},
-      ];
-      await animate(flying,motion,{duration:510,easing:'cubic-bezier(.23,.72,.19,1)'});
-      if (ticket !== action) return;
-    }
-    hand.style.removeProperty('opacity');
-    hand.focus({preventScroll:true});
+    startButton.focus({preventScroll:true});
     status.textContent = automatic
-      ? (snapshot.row === null ? '시간이 끝나 기본 하수인을 그대로 손패에 넣었어요.' : '시간이 끝나 선택한 문구로 조립했어요.')
-      : '완성 카드를 손패에 추가했어요. 손패에서 카드를 눌러 확인하세요.';
+      ? (snapshot.row === null ? '시간이 끝나 기본 하수인을 완성 카드 목록에 추가했어요.' : '시간이 끝나 선택한 문구로 조립했어요. 전장 아래에서 확인할 수 있어요.')
+      : '완성 카드를 전장 아래 목록에 추가했어요.';
   },wait);
 }
 confirm.addEventListener('click', () => {
   if (!confirm.disabled) assemble();
 });
-function showResult() {
-  const {card,row,wording} = completed;
-  paintUnit(result.querySelector('.unit'),card);
-  for (const [index,box] of result.querySelectorAll('.mid').entries()) {
+function addCompletedCard({card,row,wording}) {
+  const entry = completedCardTemplate.content.firstElementChild.cloneNode(true);
+  const unit = entry.querySelector('.unit');
+  paintUnit(unit,card);
+  for (const [index,box] of unit.querySelectorAll('.mid').entries()) {
     const changed = index===row;
     box.querySelector('.wording').textContent = changed ? wording : card.parts[index];
     box.dataset.marker = changed ? '교체' : row === null ? '' : '유지';
     box.classList.toggle('applied',changed);
   }
-  phase('result');
-  result.querySelector('.replay').focus({preventScroll:true});
-}
-function openBoard() {
-  stopMotion();
-  showSelection(true);
-  phase('board');
-  hand.focus({preventScroll:true});
-  status.textContent = '손패에서 완성 카드를 다시 볼 수 있어요.';
+  completedCards.prepend(entry);
+  completedEmpty.hidden = true;
 }
 function showAssembly() {
   phase('select');
@@ -1630,9 +1581,6 @@ hide.addEventListener('click',()=>{
   if (stage.dataset.phase === 'peek') showAssembly();
   else peekAtBoard();
 });
-hand.addEventListener('click',()=>{
-  if (completed) { stopMotion(); showResult(); return; }
-});
 startButton.addEventListener('click',()=>{
   rebuild(undefined,{reroll:true,screen:'select'});
   if (central) showAssembly();
@@ -1641,10 +1589,8 @@ document.addEventListener('keydown',event=>{
   if (event.key !== 'Escape' || !central) return;
   if (stage.dataset.phase === 'select') peekAtBoard();
   else if (stage.dataset.phase === 'peek') showAssembly();
-  else if (stage.dataset.phase === 'result') openBoard();
 });
 document.querySelector('#reset').addEventListener('click',prepareStart);
-result.querySelector('.replay').addEventListener('click',openBoard);
 prepareStart();
 
 fetch(cardSource).then(response => {
@@ -1652,7 +1598,7 @@ fetch(cardSource).then(response => {
   return response.json();
 }).then(cards => {
   racesById = new Map(cards.filter(card => card.races).map(card => [card.id,card.races]));
-  for (const unit of stage.querySelectorAll('[data-card-id]')) paintRace(unit,unit.dataset.cardId);
+  for (const unit of document.querySelectorAll('.unit[data-card-id]')) paintRace(unit,unit.dataset.cardId);
 }).catch(() => {});
 </script>
 </body>
