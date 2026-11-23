@@ -5,164 +5,176 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>하스스톤 조합 프로토타입</title>
 <style>
-:root {
-  color-scheme:dark;
-  font-family:Inter,"Malgun Gothic",system-ui,sans-serif;
-  background:#101715;
-  color:#f4eee2;
-  --muted:#c0c9bd; --line:#3b4d43; --panel:#202e27;
-  --accent:#f1ba80; --mint:#a9dec2; --move:cubic-bezier(.23,.79,.28,1);
-}
-* {box-sizing:border-box}
-body,h1,h2,h3,p {margin:0}
-body {min-height:100vh;background:radial-gradient(ellipse at 45% 0,#2b4033,#101715 63%)}
-[hidden] {display:none!important}
-main {max-width:1210px;margin:auto;padding:clamp(14px,4vw,44px)}
-header,.controls {display:flex;align-items:center;justify-content:space-between;gap:12px}
-h1 {font-size:clamp(26px,4vw,43px);line-height:1.15;letter-spacing:-.055em}
-h2 {font-size:clamp(20px,3vw,30px);letter-spacing:-.045em}
-h3 {font-size:clamp(13px,2vw,20px);line-height:1.3;overflow-wrap:anywhere}
-button,select,input {font:inherit;color:inherit}
-button {cursor:pointer}
-button:disabled {cursor:default;opacity:.5}
-:focus-visible {outline:2px solid var(--accent);outline-offset:3px}
-.workbench {display:flex;align-items:end;flex-wrap:wrap;gap:10px 16px;margin:22px 0 15px}
-.workbench label {display:grid;gap:5px;font-size:13px;color:var(--muted)}
-select,input[type=search],.quiet,.primary {min-height:39px;padding:7px 12px;background:#233229;border:1px solid #506358;border-radius:7px}
-select {max-width:100%}
-.primary {background:var(--accent);color:#281c15;border-color:var(--accent);font-weight:750}
-.quiet:hover:not(:disabled) {background:#32483b}
-.primary:hover:not(:disabled) {background:#ffd6a4}
-.stage {position:relative;isolation:isolate;overflow:hidden;min-height:515px;border:1px solid var(--line);border-radius:16px;
-  background:radial-gradient(ellipse at 50% 66%,#30483a,#17231c 70%);box-shadow:0 18px 55px #080f0b70}
-.selection {padding:24px clamp(10px,4vw,42px) 19px}
-.selection h2,.select-meta {text-align:center}
-.cards {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:clamp(8px,2.8vw,30px);max-width:920px;margin:18px auto 0}
-.unit {display:grid;grid-template-rows:auto auto 1fr auto auto;min-width:0;overflow:hidden;background:#1d2b23;border:1px solid #587060;border-radius:11px;transition:opacity .3s,transform .3s,border-color .2s}
-.unit.center {border-color:var(--mint);box-shadow:0 0 24px #86dba41c}
-.unit.center.has-choice {border-color:var(--accent)}
-.unit-role {padding:8px 10px;color:var(--muted);font-size:12px;font-weight:700}
-.center .unit-role {color:var(--mint)}
-.illustration {height:clamp(61px,13vw,133px);overflow:hidden;background:repeating-linear-gradient(135deg,#263c30 0 16px,#213329 16px 30px)}
-.illustration img {display:block;width:100%;height:100%;object-fit:cover;object-position:center 36%}
-.unit-heading {display:flex;justify-content:space-between;align-items:start;gap:6px;padding:9px 10px 5px}
-.unit-cost {color:var(--accent);font-size:12px;white-space:nowrap}
-.unit-cost b {font-size:1.2em}
-.stats {display:flex;gap:5px 10px;flex-wrap:wrap;padding:0 10px 8px;font-size:12px;color:var(--muted)}
-.stats b {color:#f4eee2}
-.race {color:var(--mint)}
-.unit-slots {display:grid;grid-template-rows:repeat(2,minmax(76px,1fr));gap:6px;padding:0 8px 8px}
-.slot {width:100%;position:relative;display:grid;align-content:start;gap:5px;min-width:0;padding:8px;border:1px solid #566b5a;border-radius:6px;background:#2b3d31;color:#f4eee2;
-  text-align:left;font-size:clamp(11px,1.35vw,14px);line-height:1.4;overflow-wrap:anywhere}
-.slot-label {color:var(--muted);font-size:.82em;font-weight:750}
-.pick:hover:not(:disabled),.pick[aria-pressed=true] {border-color:var(--accent);background:#4d392b}
-.mid {background:#17221c}
-.mid.applied,.flying {background:#4a3325;border-color:var(--accent);color:#fff5e8}
-.mid[data-marker="유지"] {border-color:#7aaa90}
-.mid[data-marker]:not([data-marker=""])::after {content:attr(data-marker);position:absolute;top:7px;right:7px;font-size:.77em;color:var(--mint)}
-.mid.applied::after {color:var(--accent)!important}
-.select-meta {margin:13px auto 0;font-size:13px;color:var(--muted)}
-.controls {max-width:920px;margin:13px auto 0}
-.empty {padding:55px 0;text-align:center;color:var(--muted)}
-footer {min-height:38px;padding:12px 2px 4px;font-size:13px;color:var(--mint)}
-.view {position:absolute;inset:0;z-index:8;display:grid;align-content:safe center;justify-items:center;gap:12px;padding:14px;overflow:auto;background:radial-gradient(at 50% 47%,#314b3b,#16221bc7 68%),#17221c}
-.view .unit {width:min(270px,91%);box-shadow:0 12px 35px #0005}
-.view .illustration {height:clamp(58px,11vw,105px)}
-.result .unit {animation:reveal .52s var(--move) both}
-@keyframes reveal {from {transform:translateY(30px) scale(.92);opacity:0}}
-.stage[data-phase=assembling] .unit[data-side] {opacity:.22;transform:scale(.94)}
-.stage[data-phase=assembling] .unit.center {transform:scale(1.03)}
-.flying,.beam,.spark,.flare {position:absolute;pointer-events:none;z-index:5}
-.flying {transform-origin:0 0;width:auto;align-content:center;z-index:6;box-shadow:0 0 15px #e9ad807d}
-.beam {height:3px;transform-origin:0 50%;background:linear-gradient(90deg,transparent,#f0b287,#fff2d8)}
-.spark {width:5px;height:5px;border-radius:50%;background:#ffeacb;box-shadow:0 0 10px #f7b487}
-.flare {width:220px;height:220px;border-radius:50%;background:radial-gradient(closest-side,#fff9dc,#edbc807c 38%,transparent 100%);transform:translate(-50%,-50%)}
-details {margin-top:10px;padding:14px 16px;border:1px solid var(--line);border-radius:9px;background:#1a261f}
-summary {cursor:pointer;font-weight:720}
-details p,caption {margin-top:10px;color:var(--muted);font-size:13px;line-height:1.6}
-details a {color:var(--mint)}
-.catalog-controls {display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:12px 0}
-.table-scroll {overflow:auto;max-height:390px}
-table {width:100%;border-collapse:collapse;text-align:left;font-size:13px}
-caption {text-align:left;margin:0 0 6px}
-th,td {padding:8px;border-bottom:1px solid var(--line);min-width:54px}
-td:last-child {min-width:140px}
-th {position:sticky;top:0;background:#25362b}
-td button {border:0;padding:0;background:none;color:var(--mint);text-align:left;text-decoration:underline}
-@media (max-width:550px) {
-  main {padding:12px}
-  .selection {padding:15px 7px}
-  .cards {gap:5px}
-  .unit-role,.unit-heading,.stats {padding-inline:5px}
-  .unit-heading {display:grid}
-  .unit-slots {padding-inline:3px}
-  .slot {padding:6px 4px;font-size:11px;min-height:60px}
-  .mid[data-marker]:not([data-marker=""])::after {right:4px;top:6px}
-  .stats {font-size:10px;gap:4px}
-  .select-meta {font-size:11px}
-  .workbench label:last-of-type {width:min(100%,240px)}
-}
-@media (prefers-reduced-motion:reduce) {* {animation:none!important;transition:none!important}}
+:root{color-scheme:dark;font-family:"Malgun Gothic",system-ui,sans-serif;background:#100e0d;color:#f5e6cc;--line:#a77e52;--gold:#ffd088;--muted:#d5c1a1}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body,h1,h2,h3,p{margin:0}
+body{background:radial-gradient(ellipse at top,#30241c,#100e0d 65%);min-height:100vh}
+main{max-width:1330px;margin:auto;padding:clamp(10px,3vw,31px)}
+header,.controls{display:flex;align-items:center;justify-content:space-between;gap:10px}
+header{margin-bottom:12px}
+h1,h2{font-family:Georgia,"Malgun Gothic",serif;letter-spacing:-.045em}
+h1{font-size:clamp(22px,3.8vw,38px)}
+h2{font-size:clamp(18px,2.8vw,27px)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.5}
+:focus-visible{outline:2px solid #fff2c5;outline-offset:3px}
+.quiet,.primary,select,input[type=search]{min-height:36px;border:1px solid #8b6948;border-radius:6px;padding:6px 10px;background:#2c231c}
+.quiet:hover:not(:disabled){background:#493727}
+.primary{color:#291907;background:linear-gradient(#ffe1a2,#dca75f);border-color:#ffdc9b;font-weight:750}
+.primary:hover:not(:disabled){background:#ffe5ae}
+.stage{position:relative;overflow:hidden;isolation:isolate;min-height:625px;border:4px solid #a17b53;border-radius:19px;box-shadow:0 0 0 2px #39271c,0 14px 38px #000a,inset 0 0 80px #080605b5;background:radial-gradient(ellipse at 50% 47%,#525744 0,#323c30 44%,#292219 83%)}
+.stage::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#392b21 0 5%,transparent 16% 84%,#392b21 95%),repeating-linear-gradient(0deg,#fff0c005 0 1px,transparent 1px 4px),radial-gradient(ellipse at center,transparent 35%,#100c0895 95%);pointer-events:none}
+.workbench{display:grid;grid-template-columns:repeat(2,minmax(65px,.72fr)) repeat(3,minmax(95px,1fr)) auto;gap:6px 10px;position:relative;z-index:3;padding:10px clamp(8px,2vw,23px);background:#201a15ed;border-bottom:1px solid #8b6948;align-items:end}
+.workbench label{min-width:0;display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)}
+.workbench select{min-width:0;width:100%;padding-right:4px}
+.reroll{display:flex;gap:5px;flex-wrap:wrap}
+.reroll button{white-space:nowrap;font-size:12px}
+.arena{position:relative;min-height:550px;display:grid;align-items:center;isolation:isolate}
+.tabletop{position:absolute;inset:13px clamp(11px,4vw,45px);z-index:-1;pointer-events:none;display:grid;grid-template-rows:75px 1fr 1fr 68px;justify-items:center;border:1px solid #d0a67563;border-radius:38% 38% 35% 35% / 13% 13% 12% 12%;box-shadow:inset 0 0 35px #120f0b9d,0 0 0 5px #3e2f23;background:radial-gradient(ellipse,#73644155 0,transparent 62%),linear-gradient(0deg,#173a3a6e 0%,transparent 49%,#b85b3a3b 51%,#62372367)}
+.tabletop::before{content:"";position:absolute;left:5%;right:5%;top:50%;border-top:1px solid #efbb8170;box-shadow:0 3px 16px #ffdda04b}
+.avatar{display:grid;place-items:center;align-self:center;width:63px;height:63px;position:relative;border:3px solid #c58c5a;border-radius:50%;background:radial-gradient(circle,#7e4837,#3a251f);box-shadow:0 0 0 3px #2b2018,0 3px 12px #14100b;color:#ffe09e;font-size:21px}
+.avatar.ours{border-color:#6baaa2;background:radial-gradient(circle,#3c817b,#183230);color:#d2fff2}
+.avatar small{position:absolute;right:-5px;bottom:-4px;display:grid;place-items:center;width:24px;height:24px;border:1px solid #e29a79;border-radius:50%;background:#762e2c;color:#fff6da;font-size:11px}
+.battle-row{display:flex;align-items:center;gap:21px}
+.battle-row i{display:grid;place-items:center;width:59px;height:75px;border-radius:48% 48% 42% 42%;border:2px solid #b7825b;background:radial-gradient(circle at 50% 40%,#ab735a,#4d2e24);box-shadow:0 4px 10px #160e08a0;color:#f2c890;font:700 26px Georgia}
+.battle-row.ours i{border-color:#93b3a0;background:radial-gradient(circle at 50% 40%,#698e78,#28483d);color:#e1e7a0}
+.scenario{position:relative;z-index:1;padding:75px 18px 19px;text-align:center}
+.scenario h2,.selection h2,.result h2{text-shadow:0 2px 6px #100907}
+.scenario > div{display:grid;justify-items:center;gap:7px;margin:142px auto 0}
+.hand-card{display:flex;align-items:center;gap:9px;padding:8px 13px;border:2px solid #be975e;border-radius:8px;background:#36291c;color:#ffe6b7;font-weight:750;box-shadow:0 6px 18px #0e0a08;text-align:left}
+.hand-card:hover{background:#4a3724}
+.hand-card .mana-gem{position:static;width:25px;height:25px;flex:none;font-size:14px}
+.hand-card .hand-thumb{width:35px;height:35px;border-radius:47%;object-fit:cover}
+.hand-card small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.selection{position:relative;padding:18px clamp(5px,2vw,24px) 17px;text-align:center}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(4px,3vw,28px);align-items:stretch;margin:10px auto 0;max-width:735px}
+.unit{position:relative;display:grid;grid-template-rows:auto auto auto 1fr auto;min-width:0;border:2px solid #b48c58;border-radius:48% 48% 10px 10px / 16% 16% 10px 10px;background:linear-gradient(130deg,#3b2b20,#68492f 50%,#3b2a20);box-shadow:0 7px 17px #0e0a07a0,inset 0 0 0 2px #483120;text-align:center;transition:opacity .3s,transform .3s}
+.unit.center{border-color:#ffcc81;box-shadow:0 0 24px #f6bc604f,0 7px 17px #100b07}
+.unit.center.has-choice{border-color:#ffe899}
+.unit-role{font-size:11px;color:#f5d9af;font-weight:700;padding:5px 8px 3px}
+.illustration{height:clamp(62px,12vw,122px);margin:2px 20% 0;border:3px solid #c1935c;border-radius:48% 48% 41% 41% / 47% 47% 43% 43%;overflow:hidden;background:radial-gradient(#67847d,#273630)}
+.illustration img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.unit-heading{display:grid;place-items:center;position:relative;z-index:1;margin:-6px 5% 0;min-height:30px;border:1px solid #ad8151;border-radius:8px;background:linear-gradient(#7b5737,#453120);padding:4px 7px;box-shadow:0 2px 5px #1e120a}
+.unit-title{font-size:clamp(10px,1.65vw,16px);line-height:1.23;overflow-wrap:anywhere;text-wrap:balance}
+.unit-cost{position:absolute;top:20px;left:6px;z-index:2}
+.mana-gem,.stats b{display:grid;place-items:center;width:clamp(21px,4vw,37px);height:clamp(21px,4vw,37px);border-radius:50%;border:2px solid #bcf4ff;background:radial-gradient(at 37% 29%,#48b8db,#1d5379 73%);box-shadow:0 2px 5px #2c1b11;color:#fff9de;font:bold clamp(13px,2.6vw,23px) Georgia;text-shadow:0 1px #552c19}
+.stats{display:flex;align-items:center;justify-content:space-between;min-height:31px;padding:5px 7px;grid-row:5}
+.stats .attack{border-color:#efcd79;background:radial-gradient(at 35% 30%,#d49641,#724521 72%)}
+.stats .health{border-color:#ffc290;background:radial-gradient(at 35% 30%,#d76148,#7b2c30 72%)}
+.race{color:#ffe9be;font-size:11px}
+.unit-slots{display:grid;gap:4px;grid-template-rows:repeat(2,minmax(51px,1fr));margin:6px 6px 0;padding:4px;border-radius:8px;background:#dbc69f;grid-row:4}
+.slot{position:relative;display:grid;align-content:start;gap:2px;min-width:0;width:100%;border:1px solid #ad8d62;border-radius:4px;background:#f5e4bd;color:#36261b;padding:4px 5px;text-align:left;font-size:clamp(10px,1.24vw,13px);line-height:1.33;overflow-wrap:anywhere}
+.slot-label{font-weight:750;color:#694a32;font-size:.82em}
+.pick:hover:not(:disabled),.pick[aria-pressed=true]{border-color:#86581b;background:#ffe199;box-shadow:inset 0 0 0 1px #9c6e35}
+.slot.mid.applied,.flying{background:#ffdd98;border-color:#a66226;color:#4f280f}
+.mid[data-marker="유지"]{border-color:#577a65}
+.mid[data-marker]:not([data-marker=""])::after{content:attr(data-marker);position:absolute;right:5px;top:4px;color:#4f6952;font-size:.78em;font-weight:bold}
+.mid.applied::after{color:#94491a!important}
+.select-meta{margin:8px auto 0;color:#f0d9ad;font-size:11px;text-shadow:0 2px #21150e}
+.controls{max-width:735px;margin:8px auto 0}
+.controls button{font-size:12px}
+.result{position:relative;z-index:2;display:grid;justify-items:center;gap:8px;padding:15px 8px}
+.result .unit{width:min(220px,85%);animation:reveal .48s ease-out both}
+@keyframes reveal{from{transform:translateY(18px) scale(.91);opacity:0}}
+.stage[data-phase=assembling] .unit[data-side]{opacity:.27;transform:scale(.94)}
+.flying,.beam,.spark,.flare{position:absolute;pointer-events:none;z-index:5}
+.flying{width:auto;align-content:center;transform-origin:0 0;z-index:6;box-shadow:0 0 18px #ffcb70}
+.beam{height:3px;transform-origin:0 50%;background:linear-gradient(90deg,transparent,#fde0a3,#fff1c9)}
+.spark{width:5px;height:5px;border-radius:50%;background:#ffeacb;box-shadow:0 0 10px #f7b487}
+.flare{width:220px;height:220px;border-radius:50%;background:radial-gradient(closest-side,#fff9dc,#edbc807c 38%,transparent 100%);transform:translate(-50%,-50%)}
+footer{min-height:34px;padding:8px 0 0;font-size:13px;color:var(--muted)}
+details{margin-top:8px;padding:12px 14px;border:1px solid #65513b;border-radius:8px;background:#221c18}
+summary{cursor:pointer;font-weight:700}
+details p,caption{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.6}
+details a,td button{color:#ffdd9b}
+.catalog-controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0}
+.table-scroll{overflow:auto;max-height:390px}
+table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
+caption{text-align:left;margin:0}
+th,td{padding:7px;border-bottom:1px solid #65513b}
+td:last-child{min-width:155px}
+th{position:sticky;top:0;background:#30251c;white-space:nowrap}
+td button{border:0;padding:0;background:none;text-align:left;text-decoration:underline}
+@media(max-width:790px){.workbench{grid-template-columns:repeat(3,minmax(0,1fr))}.reroll{grid-column:3;grid-row:1}.reroll button{flex:auto}.workbench select{min-height:30px;font-size:11px}.stage,.arena{min-height:0}.arena{min-height:470px}}
+@media(max-width:490px){.stage{border-width:2px}.unit-cost{left:0;top:19px}.unit-slots{margin-inline:3px;padding:2px}.slot{padding:4px 3px;min-height:50px}.illustration{margin-inline:15%}.unit-role,.race{font-size:9px}.unit-heading{min-height:26px}.arena{min-height:425px}.scenario>div{margin-top:113px}.tabletop{grid-template-rows:58px 1fr 1fr 52px}.avatar{width:43px;height:43px}.battle-row i{width:43px;height:55px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
 <main>
-  <header><h1>하스스톤 조합</h1><button id="reset" class="quiet" type="button">처음부터</button></header>
-  <div class="workbench" aria-label="조합 설정">
-    <label>직업<select id="hero-class"></select></label>
-    <label>기본 하수인 비용<select id="mana"></select></label>
-    <label>기본 하수인<select id="center-card"></select></label>
-    <button class="quiet" id="roll" type="button">후보 다시 뽑기</button>
-  </div>
-  <section class="stage" aria-label="조합 실험 화면" data-phase="select">
+  <header><h1>하스스톤 조합</h1><button id="reset" class="quiet" type="button">전장 초기화</button></header>
+  <section class="stage" aria-label="조합 전장" data-phase="board">
+    <div class="workbench" aria-label="조합 하수인 선택">
+      <label>직업<select id="hero-class"></select></label>
+      <label>기본 비용<select id="mana"></select></label>
+      <label>기본 하수인<select id="center-card"></select></label>
+      <label>보조 하수인 A<select id="donor-a"></select></label>
+      <label>보조 하수인 B<select id="donor-b"></select></label>
+      <div class="reroll">
+        <button class="quiet" id="random-base" type="button">기본 무작위</button>
+        <button class="quiet" id="roll" type="button">보조 다시 뽑기</button>
+      </div>
+    </div>
+    <div class="arena">
+      <div class="tabletop" aria-hidden="true">
+        <span class="avatar">✦<small>26</small></span>
+        <div class="battle-row"><i>✧</i><i>☾</i></div>
+        <div class="battle-row ours"><i>✥</i></div>
+        <span class="avatar ours">◆<small>19</small></span>
+      </div>
     <div class="selection">
       <h2>교체할 능력을 선택하세요</h2>
-      <p class="empty" hidden></p>
       <div class="cards">
 <article class="unit" data-side="0">
   <div class="unit-role">보조 하수인 A</div>
+  <span class="unit-cost" aria-label="마나 비용"><b class="mana-gem"></b></span>
   <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="unit-heading"><h3 class="unit-title"></h3><span class="unit-cost"><b class="mana-gem"></b> 마나</span></div>
-  <div class="stats"><span>공격력 <b></b></span><span>생명력 <b></b></span><span class="race" hidden></span></div>
+  <div class="unit-heading"><h3 class="unit-title"></h3></div>
+  <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
   <div class="unit-slots"><button class="slot pick" data-row="0" type="button"><span class="slot-label">발동 조건</span><span class="wording"></span></button><button class="slot pick" data-row="1" type="button"><span class="slot-label">효과</span><span class="wording"></span></button></div>
 </article>
 <article class="unit center" data-art="base">
   <div class="unit-role">기본 하수인</div>
+  <span class="unit-cost" aria-label="마나 비용"><b class="mana-gem"></b></span>
   <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="unit-heading"><h3 class="unit-title"></h3><span class="unit-cost"><b class="mana-gem"></b> 마나</span></div>
-  <div class="stats"><span>공격력 <b></b></span><span>생명력 <b></b></span><span class="race" hidden></span></div>
+  <div class="unit-heading"><h3 class="unit-title"></h3></div>
+  <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
   <div class="unit-slots"><div class="slot mid" data-row="0"><span class="slot-label">발동 조건</span><span class="wording"></span></div><div class="slot mid" data-row="1"><span class="slot-label">효과</span><span class="wording"></span></div></div>
 </article>
 <article class="unit" data-side="1">
   <div class="unit-role">보조 하수인 B</div>
+  <span class="unit-cost" aria-label="마나 비용"><b class="mana-gem"></b></span>
   <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="unit-heading"><h3 class="unit-title"></h3><span class="unit-cost"><b class="mana-gem"></b> 마나</span></div>
-  <div class="stats"><span>공격력 <b></b></span><span>생명력 <b></b></span><span class="race" hidden></span></div>
+  <div class="unit-heading"><h3 class="unit-title"></h3></div>
+  <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
   <div class="unit-slots"><button class="slot pick" data-row="0" type="button"><span class="slot-label">발동 조건</span><span class="wording"></span></button><button class="slot pick" data-row="1" type="button"><span class="slot-label">효과</span><span class="wording"></span></button></div>
 </article>
 </div><p class="select-meta"></p>
-      <div class="controls"><button class="quiet hide" type="button">교체 전 보기</button><button class="primary confirm" type="button" disabled>조합 확정</button></div>
+      <div class="controls"><button class="quiet hide" type="button">전장으로</button><button class="primary confirm" type="button" disabled>조합 확정</button></div>
     </div>
-    <div class="view board" hidden>
-      <h2>교체 전 능력 확인</h2>
-      <article class="unit center" data-art="base">
-  <div class="unit-role">기본 하수인</div>
-  <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="unit-heading"><h3 class="unit-title"></h3><span class="unit-cost"><b class="mana-gem"></b> 마나</span></div>
-  <div class="stats"><span>공격력 <b></b></span><span>생명력 <b></b></span><span class="race" hidden></span></div>
-  <div class="unit-slots"><div class="slot mid" data-row="0"><span class="slot-label">발동 조건</span><span class="wording"></span></div><div class="slot mid" data-row="1"><span class="slot-label">효과</span><span class="wording"></span></div></div>
-</article>
-      <button class="primary return" type="button">조합 시작</button>
+    <div class="scenario board" hidden>
+      <h2>전장</h2>
+      <div>
+        <button type="button" class="hand-card return">
+          <b class="mana-gem"></b><img class="hand-thumb" alt="" referrerpolicy="no-referrer">
+          <span><strong class="hand-title"></strong><small>눌러서 조합 시작</small></span>
+        </button>
+      </div>
     </div>
     <div class="view result" hidden>
       <h2>손패에 추가된 카드</h2><article class="unit center" data-art="base">
   <div class="unit-role">완성 카드</div>
+  <span class="unit-cost" aria-label="마나 비용"><b class="mana-gem"></b></span>
   <div class="illustration" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="unit-heading"><h3 class="unit-title"></h3><span class="unit-cost"><b class="mana-gem"></b> 마나</span></div>
-  <div class="stats"><span>공격력 <b></b></span><span>생명력 <b></b></span><span class="race" hidden></span></div>
+  <div class="unit-heading"><h3 class="unit-title"></h3></div>
+  <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
   <div class="unit-slots"><div class="slot mid" data-row="0"><span class="slot-label">발동 조건</span><span class="wording"></span></div><div class="slot mid" data-row="1"><span class="slot-label">효과</span><span class="wording"></span></div></div>
 </article>
-      <button class="quiet replay" type="button">다시 조합하기</button>
+      <button class="quiet replay" type="button">전장으로 돌아가기</button>
+    </div>
     </div>
   </section>
   <footer><p id="status" role="status" aria-live="polite"></p></footer>
@@ -927,7 +939,10 @@ const middle = [...center.querySelectorAll('.mid')];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const cardData = JSON.parse(document.querySelector('#card-data').textContent);
 const artBase = 'https://art.hearthstonejson.com/v1/256x/';
-const boardUnit = board.querySelector('.unit');
+const hand = board.querySelector('.hand-card');
+const donorPickers = [document.querySelector('#donor-a'),document.querySelector('#donor-b')];
+const randomBase = document.querySelector('#random-base');
+let completed = null;
 const raceNames = {ALL:'모든 종족', BEAST:'야수', DEMON:'악마', DRAENEI:'드레나이', DRAGON:'용족',
   ELEMENTAL:'정령', MECHANICAL:'기계', MURLOC:'멀록', NAGA:'나가', PIRATE:'해적', QUILBOAR:'가시멧돼지', TOTEM:'토템', UNDEAD:'언데드'};
 const cardSource = 'https://api.hearthstonejson.com/v1/256589/koKR/cards.collectible.json';
@@ -940,7 +955,6 @@ const centerPicker = document.querySelector('#center-card');
 const roll = document.querySelector('#roll');
 const meta = selection.querySelector('.select-meta');
 const cardsPanel = selection.querySelector('.cards');
-const emptyPanel = selection.querySelector('.empty');
 const catalog = document.querySelector('#catalog');
 const catalogText = document.querySelector('#catalog-text');
 const catalogCost = document.querySelector('#catalog-cost');
@@ -999,7 +1013,10 @@ function paintUnit(unit,card) {
   unit.querySelector('.mana-gem').textContent = card.cost;
   const values = unit.querySelectorAll('.stats b');
   values[0].textContent = card.atk;
+  values[0].setAttribute('aria-label','공격력 '+card.atk);
   values[1].textContent = card.hp;
+  values[1].setAttribute('aria-label','생명력 '+card.hp);
+  unit.querySelector('.unit-cost').setAttribute('aria-label','마나 비용 '+card.cost);
   const art = unit.querySelector('.illustration img');
   const picture = artBase + encodeURIComponent(card.id) + '.jpg';
   if (art.getAttribute('src') !== picture) {
@@ -1018,52 +1035,79 @@ function paintRace(unit, id) {
   race.hidden = !race.textContent;
 }
 
-function rebuild(requestedId) {
-  const cost = Number(costPicker.value);
-  const bases = eligibleCards.filter(card => card.cost===cost && allowedClass(card));
-  const [min,max] = costRange(cost);
-  centerPicker.replaceChildren();
-  const playable = bases.filter(card => donorPool(card).length>=2);
-  for (const card of bases) {
-    const entry = option(card.id,card.name + (playable.includes(card) ? '' : ' (후보 부족)'));
-    entry.disabled = !playable.includes(card);
-    centerPicker.add(entry);
+function baseChoices() {
+  return eligibleCards.filter(card => card.cost===Number(costPicker.value) && allowedClass(card) && donorPool(card).length>=2);
+}
+function refreshHand() {
+  const card = completed?.card || central;
+  hand.hidden = !card;
+  if (!card) return;
+  hand.querySelector('.mana-gem').textContent = card.cost;
+  hand.querySelector('.hand-title').textContent = card.name;
+  hand.querySelector('small').textContent = completed ? '완성 카드 보기' : '눌러서 조합 시작';
+  const thumbnail = hand.querySelector('img');
+  const picture = artBase + encodeURIComponent(card.id) + '.jpg';
+  if (thumbnail.getAttribute('src') !== picture) {
+    thumbnail.hidden = false;
+    thumbnail.onerror = () => { thumbnail.hidden = true; };
+    thumbnail.src = picture;
   }
-  central = playable.find(card=>card.id===requestedId) || draw(playable,1)[0] || null;
+}
+function updateDonors(pool) {
+  for (const [side,picker] of donorPickers.entries()) {
+    picker.replaceChildren(...pool.map(card => {
+      const entry = option(card.id,card.name + ' · ' + card.cost);
+      entry.disabled = card.id === offers[1-side]?.id;
+      return entry;
+    }));
+    picker.disabled = !central;
+    picker.value = offers[side]?.id || '';
+  }
+}
+function rebuild(requestedId, {donor,reroll=false,screen}={}) {
+  const next = screen || (stage.dataset.phase === 'select' ? 'select' : 'board');
+  completed = null;
+  const pool = baseChoices();
+  central = pool.find(card => card.id===requestedId) || draw(pool,1)[0] || null;
+  centerPicker.replaceChildren(...pool.map(card => option(card.id,card.name)));
+  if (!central) centerPicker.add(option('','가능한 하수인 없음'));
+  centerPicker.value = central?.id || '';
   centerPicker.disabled = !central;
+  randomBase.disabled = pool.length<2;
   roll.disabled = !central;
   cardsPanel.hidden = !central;
   hide.disabled = !central;
-  emptyPanel.hidden = !!central;
-  if (!central) {
-    centerPicker.add(option('','선택 가능한 기본 하수인 없음'),0);
-    centerPicker.value='';
-    reset();
-    status.textContent = bases.length ? '비용과 직업 조건에 맞는 보조 카드가 2장 미만이에요.' : '이 비용으로 선택할 수 있는 기본 하수인가 없어요.';
-    emptyPanel.textContent = status.textContent + ' 다른 비용이나 직업을 골라주세요.';
-    meta.textContent = '보조 후보 비용 '+costLabel([min,max])+' 코스트';
-    if(catalog.open) renderCatalog();
-    return;
+
+  const donors = central ? donorPool(central) : [];
+  const previous = reroll ? [] : offers;
+  const desired = [previous[0],previous[1]];
+  if (donor) desired[donor.side] = donors.find(card => card.id===donor.id);
+  offers = desired.map(card => donors.find(candidate => candidate.id===card?.id));
+  const available = donors.filter(card => !offers.includes(card));
+  const drawn = draw(available,2-offers.filter(Boolean).length);
+  offers = offers.map(card => card || drawn.shift());
+  updateDonors(donors);
+
+  if (central) {
+    original = central.parts;
+    paintUnit(center,central);
+    offers.forEach((card,side) => {
+      paintUnit(presented[side],card);
+      for (const button of presented[side].querySelectorAll('.pick')) {
+        const row = Number(button.dataset.row);
+        button.dataset.copy = card.parts[row];
+        button.disabled = !canReplace(central,card,row);
+        button.title = button.disabled ? (card.parts[row]===central.parts[row] ? '기본 하수인과 같은 문구' : '영웅 피해 반복 조합 제외') : '';
+        button.setAttribute('aria-label',card.name+' '+(row===0?'발동 조건 ':'효과 ')+card.parts[row]);
+      }
+    });
+    meta.textContent = '보조 후보 비용 '+costLabel(costRange(central.cost))+' 코스트 · 후보 '+donors.length+'장';
   }
-  centerPicker.value = central.id;
-  original = central.parts;
-  const donors = donorPool(central);
-  offers = draw(donors,2);
-  paintUnit(center,central);
-  paintUnit(boardUnit,central);
-  boardUnit.querySelectorAll('.mid').forEach((slot,row) => { slot.querySelector('.wording').textContent = original[row]; });
-  offers.forEach((card,side) => {
-    paintUnit(presented[side],card);
-    for (const button of presented[side].querySelectorAll('.pick')) {
-      const row = Number(button.dataset.row);
-      button.dataset.copy = card.parts[row];
-      button.disabled = !canReplace(central,card,row);
-      button.title = button.disabled ? (card.parts[row]===central.parts[row] ? '기본 하수인과 같은 문구' : '영웅 피해 반복 조합 제외') : '';
-      button.setAttribute('aria-label',card.name+' '+(row===0?'위쪽':'아래쪽')+' 문구 '+card.parts[row]);
-    }
-  });
-  meta.textContent = '보조 후보 비용 '+costLabel([min,max])+' 코스트 · '+classes[classPicker.value]+(classPicker.value==='NEUTRAL'?'':' 및 중립')+' · 후보 '+donors.length+'장';
   reset();
+  phase(central ? next : 'board');
+  refreshHand();
+  if (!central) status.textContent = '이 비용과 직업에서는 보조 두 장을 갖춘 기본 하수인이 없어요. 다른 비용이나 직업을 골라주세요.';
+  else if (next === 'board') status.textContent = completed ? '손패에서 완성 카드를 다시 볼 수 있어요.' : '손패의 기본 하수인을 눌러 조합을 시작하세요.';
   if(catalog.open) renderCatalog();
 }
 
@@ -1086,25 +1130,14 @@ function renderCatalog() {
         const button=document.createElement('button');
         button.type='button';
         button.textContent=card.name;
-        button.setAttribute('aria-label',card.name+'을 기본 하수인로 선택');
+        button.setAttribute('aria-label',card.name+' 기본 하수인으로 선택');
         button.onclick=()=>{
           costPicker.value=card.cost;
-          rebuild(card.id);
+          rebuild(card.id,{screen:'board'});
           centerPicker.focus();
           stage.scrollIntoView({block:'nearest'});
         };
         cell.replaceChildren(button);
-      }
-      if (index===0 && artwork[card.id]) {
-        const preview=document.createElement('img');
-        preview.alt='';
-        preview.loading='lazy';
-        preview.src=artwork[card.id];
-        const wrapper=document.createElement('div');
-        wrapper.className='catalog-card';
-        const name=cell.firstChild || document.createTextNode(card.name);
-        wrapper.append(preview,name);
-        cell.replaceChildren(wrapper);
       }
       row.append(cell);
     }
@@ -1115,7 +1148,14 @@ function renderCatalog() {
 costPicker.addEventListener('change',()=>rebuild());
 classPicker.addEventListener('change',()=>rebuild(central?.id));
 centerPicker.addEventListener('change',()=>rebuild(centerPicker.value));
-roll.addEventListener('click',()=>rebuild(central?.id));
+roll.addEventListener('click',()=>rebuild(central?.id,{reroll:true}));
+randomBase.addEventListener('click',()=>{
+  const next = draw(baseChoices().filter(card => card.id!==central?.id),1)[0];
+  if (next) rebuild(next.id);
+});
+donorPickers.forEach((picker,side) => picker.addEventListener('change',()=>{
+  rebuild(central?.id,{donor:{side,id:picker.value}});
+}));
 catalog.addEventListener('toggle',()=>{if(catalog.open)renderCatalog()});
 catalogText.addEventListener('input',renderCatalog);
 catalogCost.addEventListener('change',renderCatalog);
@@ -1130,6 +1170,7 @@ function phase(next) {
   stage.dataset.phase = next;
   const choosing = next === 'select';
   selection.inert = !choosing;
+  selection.hidden = next !== 'select' && next !== 'assembling';
   board.hidden = next !== 'board';
   result.hidden = next !== 'result';
   confirm.disabled = !choosing || !chosen || stage.classList.contains('moving');
@@ -1270,45 +1311,48 @@ confirm.addEventListener('click', () => {
     sparks(x,y,29,Math.min(165,stage.clientWidth*.36));
   }
   resultTimer = setTimeout(() => {
-    paintUnit(result.querySelector('.unit'),central);
-    const slots = result.querySelectorAll('.mid');
-    for (const [row, box] of slots.entries()) {
-      box.querySelector('.wording').textContent = row === chosen.row ? chosen.button.dataset.copy : original[row];
-      box.dataset.marker = row === chosen.row ? '교체' : '유지';
-      box.classList.toggle('applied', row === chosen.row);
-    }
-    phase('result');
+    completed = {card:central,row:chosen.row,wording:chosen.button.dataset.copy};
+    refreshHand();
+    showResult();
     status.textContent = '완성 카드를 손패에 추가했습니다.';
     result.querySelector('.replay').focus();
   }, wait);
 });
-hide.addEventListener('click', () => {
+function showResult() {
+  const {card,row,wording} = completed;
+  paintUnit(result.querySelector('.unit'),card);
+  for (const [index,box] of result.querySelectorAll('.mid').entries()) {
+    const changed = index===row;
+    box.querySelector('.wording').textContent = changed ? wording : card.parts[index];
+    box.dataset.marker = changed ? '교체' : '유지';
+    box.classList.toggle('applied',changed);
+  }
+  phase('result');
+  result.querySelector('.replay').focus({preventScroll:true});
+}
+function openBoard() {
   stopMotion();
   showSelection(true);
   phase('board');
-  board.querySelector('.return').focus();
-  status.textContent = '교체 전 기본 하수인의 능력을 확인할 수 있어요.';
-});
-function backToSelection() {
+  hand.focus({preventScroll:true});
+  status.textContent = completed ? '손패에서 완성 카드를 다시 볼 수 있어요.' : '손패의 기본 하수인을 눌러 조합을 시작하세요.';
+}
+hide.addEventListener('click',openBoard);
+hand.addEventListener('click',()=>{
+  if (completed) { showResult(); return; }
+  if (!central) return;
   phase('select');
-  (picks.find(button => !button.disabled) || hide).focus();
-  status.textContent = chosen ? '선택한 문구가 유지됐어요.' : '양옆 카드에서 가져올 문구 하나를 선택하세요.';
-}
-board.querySelector('.return').addEventListener('click', backToSelection);
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && stage.dataset.phase === 'board' && central) backToSelection();
+  (picks.find(button => !button.disabled) || hide).focus({preventScroll:true});
+  status.textContent = chosen ? '선택했던 문구를 확인할 수 있어요.' : '양옆 카드에서 가져올 문구 하나를 선택하세요.';
 });
-document.querySelector('#reset').addEventListener('click', start);
-result.querySelector('.replay').addEventListener('click', start);
-function start() {
-  reset();
-  if (!central) { costPicker.focus(); return; }
-  phase('board');
-  status.textContent = '기본 하수인을 확인한 뒤 조합을 시작하세요.';
-  board.querySelector('.return').focus({preventScroll:true});
-}
-rebuild('CORE_NEW1_021');
-start();
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape' && ['select','result'].includes(stage.dataset.phase) && central) openBoard();
+});
+document.querySelector('#reset').addEventListener('click',()=>{
+  rebuild(undefined,{reroll:true,screen:'board'});
+});
+result.querySelector('.replay').addEventListener('click',openBoard);
+rebuild(undefined,{screen:'board'});
 
 fetch(cardSource).then(response => {
   if (!response.ok) throw new Error('Card metadata unavailable');
