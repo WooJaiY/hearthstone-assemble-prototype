@@ -102,6 +102,25 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 @media(max-width:490px){.stage{border-width:2px}.unit-cost{left:0;top:19px}.unit-slots{margin-inline:3px;padding:2px}.slot{padding:4px 3px;min-height:50px}.illustration{margin-inline:15%}.unit-role,.race{font-size:9px}.unit-heading{min-height:26px}.arena{min-height:425px}.scenario>div{margin-top:113px}.tabletop{grid-template-rows:58px 1fr 1fr 52px}.avatar{width:43px;height:43px}.battle-row i{width:43px;height:55px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
+
+.arena::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .28s ease;background:radial-gradient(ellipse at 50% 45%,#1c322d32 5%,#111e1bc2 70%,#121417ed)}
+.stage:is([data-phase=select],[data-phase=assembling]) .arena::after{opacity:1}
+.selection,.scenario,.result{z-index:1}
+.stage[data-phase=select] .unit{animation:deal .32s cubic-bezier(.18,.71,.24,1) both}
+.stage[data-phase=select] .unit[data-side="1"]{animation-delay:.05s}
+.stage[data-phase=select] .unit[data-side="0"]{animation-delay:.025s}
+@keyframes deal{from{opacity:.25;transform:translateY(15px) scale(.95)}}
+.selection .mid.target{border-color:#c57c2b;box-shadow:inset 0 0 0 1px #e0a451}
+.pick[data-vacant="true"]{border-style:dashed;background:#b39a73;color:#513d2c;box-shadow:none}
+.pick[data-vacant="true"] .slot-label,.pick[data-vacant="true"] .wording{visibility:hidden}
+.flying{display:block;padding:6px 8px;overflow:hidden;background:#ffe2a2;box-shadow:0 0 14px #f4ba6588}
+.flying.returning{box-shadow:0 0 8px #e8b06170}
+.stage[data-phase=assembling] .unit[data-side="0"]{transform:translateX(22px) scale(.87)}
+.stage[data-phase=assembling] .unit[data-side="1"]{transform:translateX(-22px) scale(.87)}
+.stage[data-phase=assembling] .unit.center{filter:brightness(1.18);transform:scale(1.035)}
+.hand-flight{position:absolute;z-index:7;pointer-events:none;transform-origin:0 0;animation:none!important}
+.hand-card.completed{border-color:#9dd6c4;box-shadow:0 0 17px #68b29d80,0 6px 18px #0e0a08}
+
 </style>
 </head>
 <body>
@@ -1042,6 +1061,7 @@ function baseChoices() {
 function refreshHand() {
   const card = completed?.card || central;
   hand.hidden = !card;
+  hand.classList.toggle('completed',!!completed);
   if (!card) return;
   hand.querySelector('.mana-gem').textContent = card.cost;
   hand.querySelector('.hand-title').textContent = card.name;
@@ -1211,12 +1231,15 @@ function stopMotion() {
   }
   motion.clear();
   stage.classList.remove('moving');
+  for (const slot of middle) slot.classList.remove('target');
+  hand.style.removeProperty('opacity');
 }
 function showSelection(showPreview) {
   for (const button of picks) {
     const selected = chosen?.button === button;
     button.querySelector('.wording').textContent = button.dataset.copy || '';
     button.setAttribute('aria-pressed', String(selected));
+    button.dataset.vacant = String(selected);
   }
   for (const [row, box] of middle.entries()) {
     const changed = showPreview && chosen?.row === row;
@@ -1240,48 +1263,53 @@ function sparks(x, y, count, radius) {
     ], {duration:310 + (i % 5)*55, easing:'ease-out'});
   }
 }
-async function choose(button, row) {
-  if (!central || button.disabled || stage.dataset.phase !== 'select') return;
-  const from = coordinates(button);
-  stopMotion();
-  const ticket = action;
-  if (chosen?.button === button) {
-    chosen = null;
-    showSelection(false);
-    status.textContent = '교체할 문구를 다시 선택할 수 있어요.';
-    return;
-  }
-  chosen = {button, row};
-  if (reducedMotion.matches) {
-    showSelection(true);
-    status.textContent = '교체할 문구를 선택했어요.';
-    return;
-  }
-  stage.classList.add('moving');
-  showSelection(false);
-  const to = coordinates(middle[row]);
-  const dx = to.x - from.x, dy = to.y - from.y;
-  const flight = effect('slot flying', from.x, from.y);
+function moveWording(from, to, wording, returning) {
+  const flight = effect('slot flying' + (returning ? ' returning' : ''), from.x, from.y);
   flight.style.width = from.w + 'px';
   flight.style.height = from.h + 'px';
-  flight.textContent = button.dataset.copy;
-  const beam = effect('beam', from.x + from.w/2, from.y + from.h/2);
-  const bx = dx + (to.w-from.w)/2, by = dy + (to.h-from.h)/2;
-  beam.style.width = Math.hypot(bx,by) + 'px';
-  const rotation = `rotate(${Math.atan2(by,bx)}rad)`;
-  animate(beam,[{opacity:0,transform:rotation+' scaleX(.12)'},{opacity:1,offset:.45},{opacity:0,transform:rotation+' scaleX(1)'}],
-    {duration:470,easing:'ease-out'});
-  await animate(flight, [
-    {transform:'none',filter:'brightness(1)'},
-    {transform:`translate(${dx*.47}px,${dy*.47-21}px) scale(1.075) rotate(${dx>0?3:-3}deg)`,offset:.46,filter:'brightness(1.17)'},
-    {transform:`translate(${dx}px,${dy}px) scale(${to.w/from.w},${to.h/from.h})`,filter:'brightness(1.35)'},
-  ], {duration:480,easing:'cubic-bezier(.22,.74,.25,1)'});
+  flight.textContent = wording;
+  const dx = to.x-from.x;
+  const dy = to.y-from.y;
+  return animate(flight, [
+    {transform:'none',opacity:.98},
+    {transform:`translate(${dx*.52}px,${dy*.52-18}px) scale(1.04)`,offset:.46,opacity:1},
+    {transform:`translate(${dx}px,${dy}px) scale(${to.w/from.w},${to.h/from.h})`,opacity:1},
+  ], {duration:returning ? 300 : 390,easing:'cubic-bezier(.24,.69,.24,1)'});
+}
+
+async function choose(button, row) {
+  if (!central || button.disabled || stage.dataset.phase !== 'select') return;
+  const previous = chosen;
+  const cancelling = previous?.button === button;
+  stopMotion();
+  const ticket = action;
+  const outgoing = previous ? coordinates(middle[previous.row]) : null;
+  const from = coordinates(button);
+  chosen = cancelling ? null : {button,row};
+  if (reducedMotion.matches) {
+    showSelection(true);
+    status.textContent = cancelling ? '선택을 취소했어요.' : '선택한 문구를 적용했어요.';
+    return;
+  }
+
+  stage.classList.add('moving');
+  showSelection(false);
+  const arrivals = [];
+  if (previous) {
+    arrivals.push(moveWording(outgoing,coordinates(previous.button),previous.button.dataset.copy,true));
+  }
+  if (chosen) {
+    arrivals.push(moveWording(from,coordinates(middle[row]),button.dataset.copy,false));
+  }
+  await Promise.all(arrivals);
   if (ticket !== action) return;
   stage.classList.remove('moving');
   showSelection(true);
-  sparks(to.x + to.w/2, to.y + to.h/2, 12, 67);
-  middle[row].animate([{filter:'brightness(1.53)'},{filter:'brightness(1)'}], {duration:265});
-  status.textContent = '선택한 문구가 적용됐어요. 다른 문구를 고르거나 조합을 확정하세요.';
+  if (chosen) {
+    const to = coordinates(middle[row]);
+    sparks(to.x + to.w/2,to.y + to.h/2,8,50);
+  }
+  status.textContent = cancelling ? '선택을 취소했어요.' : '선택한 문구가 적용됐어요. 다른 문구를 고르거나 조합을 확정하세요.';
 }
 function reset(focus = false) {
   clearTimeout(resultTimer);
@@ -1293,31 +1321,54 @@ function reset(focus = false) {
   if (focus) (picks.find(button=>!button.disabled && central) || costPicker).focus();
 }
 for (const button of picks) {
-  button.addEventListener('click', () => choose(button, Number(button.dataset.row)));
+  const row = Number(button.dataset.row);
+  const hint = () => middle[row].classList.toggle('target',
+    !button.disabled && (button.matches(':hover') || document.activeElement === button));
+  for (const event of ['pointerenter','pointerleave','focus','blur']) button.addEventListener(event,hint);
+  button.addEventListener('click', () => choose(button,row));
 }
+
 confirm.addEventListener('click', () => {
   if (confirm.disabled) return;
+  const ticket = action;
+  const snapshot = {card:central,row:chosen.row,wording:chosen.button.dataset.copy};
   phase('assembling');
   status.textContent = '카드를 조합하고 있어요.';
-  const wait = reducedMotion.matches ? 0 : 680;
+  const wait = reducedMotion.matches ? 0 : 420;
   if (wait) {
     const box = coordinates(center);
-    const x = box.x + box.w/2, y = box.y + box.h/2;
-    const burst = effect('flare', x, y);
-    animate(burst, [
-      {opacity:0,transform:'translate(-50%,-50%) scale(.48)'},
-      {opacity:.86,transform:'translate(-50%,-50%) scale(1.28)',offset:.67},
-      {opacity:0,transform:'translate(-50%,-50%) scale(1.9)'},
-    ], {duration:650});
-    sparks(x,y,29,Math.min(165,stage.clientWidth*.36));
+    const node = effect('flare',box.x+box.w/2,box.y+box.h/2);
+    animate(node,[{opacity:0},{opacity:.9,offset:.48},{opacity:0}],{duration:410});
+    sparks(box.x+box.w/2,box.y+box.h/2,17,95);
   }
-  resultTimer = setTimeout(() => {
-    completed = {card:central,row:chosen.row,wording:chosen.button.dataset.copy};
+  resultTimer = setTimeout(async () => {
+    if (ticket !== action) return;
+    const from = coordinates(center);
+    const clone = center.cloneNode(true);
+    completed = snapshot;
     refreshHand();
-    showResult();
-    status.textContent = '완성 카드를 손패에 추가했습니다.';
-    result.querySelector('.replay').focus();
-  }, wait);
+    phase('board');
+    if (wait) {
+      const to = coordinates(hand);
+      const flying = effect('hand-flight',from.x,from.y);
+      flying.style.width = from.w + 'px';
+      clone.style.width = '100%';
+      flying.append(clone);
+      hand.style.opacity = '0';
+      const dx = to.x + to.w/2 - from.x - from.w*.18;
+      const dy = to.y + to.h/2 - from.y - from.h*.18;
+      const motion = [
+        {transform:'none',opacity:1},
+        {transform:`translate(${dx*.38}px,${dy*.28-12}px) scale(.78) rotate(4deg)`,offset:.38,opacity:1},
+        {transform:`translate(${dx}px,${dy}px) scale(.36)`,opacity:.18},
+      ];
+      await animate(flying,motion,{duration:510,easing:'cubic-bezier(.23,.72,.19,1)'});
+      if (ticket !== action) return;
+    }
+    hand.style.removeProperty('opacity');
+    hand.focus({preventScroll:true});
+    status.textContent = '완성 카드를 손패에 추가했어요. 손패에서 카드를 눌러 확인하세요.';
+  },wait);
 });
 function showResult() {
   const {card,row,wording} = completed;
@@ -1340,7 +1391,7 @@ function openBoard() {
 }
 hide.addEventListener('click',openBoard);
 hand.addEventListener('click',()=>{
-  if (completed) { showResult(); return; }
+  if (completed) { stopMotion(); showResult(); return; }
   if (!central) return;
   phase('select');
   (picks.find(button => !button.disabled) || hide).focus({preventScroll:true});
