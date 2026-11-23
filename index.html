@@ -74,7 +74,6 @@ button:disabled{cursor:default;opacity:.5}
 .mid[data-marker="유지"]{border-color:#577a65}
 .mid[data-marker]:not([data-marker=""])::after{content:attr(data-marker);position:absolute;right:5px;top:4px;color:#4f6952;font-size:.78em;font-weight:bold}
 .mid.applied::after{color:#94491a!important}
-.select-meta{margin:8px auto 0;color:#f0d9ad;font-size:11px;text-shadow:0 2px #21150e}
 .controls{max-width:735px;margin:8px auto 0}
 .controls button{font-size:12px}
 .result{position:relative;z-index:2;display:grid;justify-items:center;gap:8px;padding:15px 8px}
@@ -226,7 +225,24 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
   position:absolute;inset:0;display:grid;place-items:center;padding:5px;
   color:#fff3e0;background:#32273e;border-radius:3px;font-weight:700;text-align:center;
 }
-.selection .select-meta{color:#dcc8ed;text-shadow:0 1px #1a112d}
+.workbench{display:flex;flex-wrap:wrap}
+.workbench label{width:min(160px,43%)}
+.header-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.card-sidebar{
+  position:fixed;inset:0 0 0 auto;margin:0;max-height:none;height:100dvh;
+  width:min(100%,700px);max-width:100%;padding:18px;
+  color:inherit;background:#221c20;border:1px solid #8b6948;overflow:auto;
+}
+.card-sidebar::backdrop{background:#120a19a0}
+.card-sidebar h2{font-size:23px}
+.sidebar-pickers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sidebar-pickers label{min-width:0;display:grid;gap:5px;font-size:12px;color:var(--muted)}
+.sidebar-pickers select{min-width:0;width:100%}
+.sidebar-pickers .reroll{grid-column:1 / -1}
+.scenario .start-assembly{margin-top:6px}
+@media(max-width:480px){
+  .sidebar-pickers{grid-template-columns:1fr}
+}
 @supports(grid-template-rows:subgrid){
   .selection .cards{grid-template-rows:repeat(5,auto)}
   .selection .unit{grid-row:1 / span 5;grid-template-rows:subgrid;row-gap:0}
@@ -246,18 +262,14 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 </head>
 <body>
 <main>
-  <header><h1>하스스톤 조합</h1><button id="reset" class="quiet" type="button">전장 초기화</button></header>
+  <header><h1>하스스톤 조합</h1><div class="header-actions">
+    <button id="show-sidebar" class="quiet" type="button" aria-controls="card-sidebar">하수인 목록</button>
+    <button id="reset" class="quiet" type="button">전장 초기화</button>
+  </div></header>
   <section class="stage" aria-label="조합 전장" data-phase="board">
     <div class="workbench" aria-label="조합 하수인 선택">
       <label>직업<select id="hero-class"></select></label>
       <label>기본 비용<select id="mana"></select></label>
-      <label>기본 하수인<select id="center-card"></select></label>
-      <label>보조 하수인 A<select id="donor-a"></select></label>
-      <label>보조 하수인 B<select id="donor-b"></select></label>
-      <div class="reroll">
-        <button class="quiet" id="random-base" type="button">기본 무작위</button>
-        <button class="quiet" id="roll" type="button">보조 다시 뽑기</button>
-      </div>
     </div>
     <div class="arena">
       <div class="tabletop" aria-hidden="true">
@@ -294,15 +306,15 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
   <div class="unit-slots"><button class="slot pick" data-row="0" type="button"><span class="slot-label">발동 조건</span><span class="wording"></span></button><button class="slot pick" data-row="1" type="button"><span class="slot-label">효과</span><span class="wording"></span></button></div>
 </article>
 </div>
-      <p class="select-meta"></p>
     </div>
     <div class="scenario board" hidden>
       <h2>전장</h2>
       <div>
-        <button type="button" class="hand-card return">
+        <button type="button" class="hand-card return" hidden>
           <b class="mana-gem"></b><img class="hand-thumb" alt="" referrerpolicy="no-referrer">
-          <span><strong class="hand-title"></strong><small>눌러서 조합 시작</small></span>
+          <span><strong class="hand-title"></strong><small>완성 카드 보기</small></span>
         </button>
+        <button type="button" class="primary start-assembly">조합 시작</button>
       </div>
     </div>
     <div class="view result" hidden>
@@ -324,7 +336,18 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     </div>
   </section>
   <footer><p id="status" role="status" aria-live="polite"></p></footer>
-  <details id="catalog">
+  <dialog id="card-sidebar" class="card-sidebar" aria-labelledby="sidebar-title">
+    <header><h2 id="sidebar-title">하수인 목록</h2><form method="dialog"><button class="quiet">닫기</button></form></header>
+    <div class="sidebar-pickers">
+      <label>기본 하수인<select id="center-card"></select></label>
+      <label>보조 하수인 A<select id="donor-a"></select></label>
+      <label>보조 하수인 B<select id="donor-b"></select></label>
+      <div class="reroll">
+        <button class="quiet" id="random-base" type="button">기본 무작위</button>
+        <button class="quiet" id="roll" type="button">보조 다시 뽑기</button>
+      </div>
+    </div>
+    <details id="catalog">
     <summary>정규전 조건·발동 하수인 목록</summary>
     <div class="catalog-controls">
       <label for="catalog-text">이름·문구</label><input id="catalog-text" type="search" placeholder="예: 내 턴이 끝날 때">
@@ -337,7 +360,8 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     <p>확인일 2026-11-24 · 한국어 카드 데이터 빌드 256589 · <a href="https://api.hearthstonejson.com/v1/256589/koKR/cards.collectible.json">HearthstoneJSON</a> · <a href="https://hearthstone.blizzard.com/ko-kr/cards?set=standard">블리자드 정규전 카드 라이브러리</a></p>
     <p>카드 목록에는 발동 문구가 있는 하수인을 담았습니다. 시연 후보는 원본 데이터에 능력 분할 표시가 있고 조합 키워드를 갖지 않는 하수인으로 제한합니다. 영웅 피격이 같은 영웅에게 피해를 되돌리는 조합과 같은 문구로의 교체는 선택할 수 없습니다.</p>
     <p>기본 하수인과 같은 비용으로 후보를 표시합니다. 8~10코스트는 한 그룹으로 묶습니다. 직업을 선택하면 해당 직업과 중립 후보가 표시됩니다. 천상의 보호막 관련 반복 발동과 조합 발동 카드별 예외는 확인 범위에 포함되지 않습니다.</p>
-  </details>
+    </details>
+  </dialog>
 </main>
 <script type="application/json" id="card-data">[
 {"id":"CORE_GIL_531","name":"마녀의 수습생","set":"핵심","classes":["SHAMAN"],"cost":0,"atk":0,"hp":1,"text":"도발, 전투의 함성: 무작위 주술사 주문을 내 손으로 가져옵니다.","parts":null},
@@ -1089,6 +1113,8 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const cardData = JSON.parse(document.querySelector('#card-data').textContent);
 const artBase = 'https://art.hearthstonejson.com/v1/256x/';
 const hand = board.querySelector('.hand-card');
+const startButton = board.querySelector('.start-assembly');
+const sidebar = document.querySelector('#card-sidebar');
 const donorPickers = [document.querySelector('#donor-a'),document.querySelector('#donor-b')];
 const randomBase = document.querySelector('#random-base');
 let completed = null;
@@ -1102,7 +1128,6 @@ const costPicker = document.querySelector('#mana');
 const classPicker = document.querySelector('#hero-class');
 const centerPicker = document.querySelector('#center-card');
 const roll = document.querySelector('#roll');
-const meta = selection.querySelector('.select-meta');
 const cardsPanel = selection.querySelector('.cards');
 const catalog = document.querySelector('#catalog');
 const catalogText = document.querySelector('#catalog-text');
@@ -1141,7 +1166,6 @@ function canReplace(base, donor, row) {
   const effect = row === 1 ? donor.parts[1] : base.parts[1];
   return !repeatsHeroDamage(trigger, effect);
 }
-function costLabel([min,max]) { return min === max ? String(min) : min+'~'+max; }
 function donorPool(base) {
   const [min,max] = costRange(base.cost);
   return eligibleCards.filter(card => card.id !== base.id && card.name !== base.name &&
@@ -1188,13 +1212,12 @@ function baseChoices() {
   return eligibleCards.filter(card => card.cost===Number(costPicker.value) && allowedClass(card) && donorPool(card).length>=2);
 }
 function refreshHand() {
-  const card = completed?.card || central;
+  const card = completed?.card;
   hand.hidden = !card;
   hand.classList.toggle('completed',!!completed);
   if (!card) return;
   hand.querySelector('.mana-gem').textContent = card.cost;
   hand.querySelector('.hand-title').textContent = card.name;
-  hand.querySelector('small').textContent = completed ? '완성 카드 보기' : '눌러서 조합 시작';
   const thumbnail = hand.querySelector('img');
   const picture = artBase + encodeURIComponent(card.id) + '.jpg';
   if (thumbnail.getAttribute('src') !== picture) {
@@ -1215,7 +1238,7 @@ function updateDonors(pool) {
   }
 }
 function rebuild(requestedId, {donor,reroll=false,screen}={}) {
-  const next = screen || (stage.dataset.phase === 'select' ? 'select' : 'board');
+  const next = screen || (stage.dataset.phase === 'peek' ? 'peek' : 'select');
   completed = null;
   const pool = baseChoices();
   central = pool.find(card => card.id===requestedId) || draw(pool,1)[0] || null;
@@ -1258,19 +1281,37 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
         button.setAttribute('aria-label',card.name+' '+(row===0?'발동 조건 ':'효과 ')+card.parts[row]);
       }
     });
-    meta.textContent = '보조 후보 비용 '+costLabel(costRange(central.cost))+' 코스트 · 후보 '+donors.length+'장';
   }
   reset();
   phase(central ? next : 'board');
   refreshHand();
   if (!central) status.textContent = '이 비용과 직업에서는 보조 두 장을 갖춘 기본 하수인이 없어요. 다른 비용이나 직업을 골라주세요.';
-  else if (next === 'board') status.textContent = completed ? '손패에서 완성 카드를 다시 볼 수 있어요.' : '손패의 기본 하수인을 눌러 조합을 시작하세요.';
+  else scheduleAssemblyClock();
+  if(catalog.open) renderCatalog();
+}
+
+function prepareStart() {
+  central = null;
+  offers = [];
+  completed = null;
+  reset();
+  phase('board');
+  refreshHand();
+  const available = baseChoices().length>0;
+  startButton.disabled = !available;
+  centerPicker.replaceChildren(option('','조합 시작 후 표시'));
+  centerPicker.disabled = true;
+  updateDonors([]);
+  randomBase.disabled = true;
+  roll.disabled = true;
+  status.textContent = available ? '' : '이 비용과 직업에는 조합할 수 있는 하수인이 없어요. 다른 비용이나 직업을 골라주세요.';
   if(catalog.open) renderCatalog();
 }
 
 function renderCatalog() {
   const query = catalogText.value.trim().toLocaleLowerCase('ko');
   const cost = catalogCost.value;
+  const canPickBase = central && ['select','peek'].includes(stage.dataset.phase);
   const currentPool = new Set(central ? donorPool(central).map(card=>card.id) : []);
   const results = cardData.filter(card => (!cost || card.cost===Number(cost)) &&
     (!catalogCandidates.checked || currentPool.has(card.id)) &&
@@ -1283,16 +1324,14 @@ function renderCatalog() {
       const cell=document.createElement('td');
       cell.textContent=value;
       if(index===1) cell.className='numeric';
-      if(index===0 && eligibleSet.has(card.id) && allowedClass(card) && donorPool(card).length>=2){
+      if(index===0 && canPickBase && card.cost===central.cost && eligibleSet.has(card.id) && allowedClass(card) && donorPool(card).length>=2){
         const button=document.createElement('button');
         button.type='button';
         button.textContent=card.name;
         button.setAttribute('aria-label',card.name+' 기본 하수인으로 선택');
         button.onclick=()=>{
-          costPicker.value=card.cost;
-          rebuild(card.id,{screen:'board'});
+          rebuild(card.id);
           centerPicker.focus();
-          stage.scrollIntoView({block:'nearest'});
         };
         cell.replaceChildren(button);
       }
@@ -1302,8 +1341,9 @@ function renderCatalog() {
   }
   document.querySelector('#catalog-rows').replaceChildren(fragment);
 }
-costPicker.addEventListener('change',()=>rebuild());
-classPicker.addEventListener('change',()=>rebuild(central?.id));
+costPicker.addEventListener('change',prepareStart);
+classPicker.addEventListener('change',prepareStart);
+document.querySelector('#show-sidebar').addEventListener('click',()=>sidebar.showModal());
 centerPicker.addEventListener('change',()=>rebuild(centerPicker.value));
 roll.addEventListener('click',()=>rebuild(central?.id,{reroll:true}));
 randomBase.addEventListener('click',()=>{
@@ -1369,6 +1409,7 @@ function phase(next) {
   hide.textContent = peeking ? '조합' : '숨기기';
   confirm.hidden = !choosing;
   hand.disabled = peeking;
+  startButton.hidden = next !== 'board';
   result.hidden = next !== 'result';
   confirm.disabled = !choosing || !chosen || stage.classList.contains('moving');
 }
@@ -1510,6 +1551,8 @@ function assemble(automatic = false) {
   showSelection(true);
   const ticket = action;
   phase('assembling');
+  for (const picker of [centerPicker,...donorPickers,randomBase,roll]) picker.disabled = true;
+  if (catalog.open) renderCatalog();
   status.textContent = '카드를 조합하고 있어요.';
   const wait = reducedMotion.matches || !wasVisible ? 0 : 420;
   if (wait) {
@@ -1569,7 +1612,7 @@ function openBoard() {
   showSelection(true);
   phase('board');
   hand.focus({preventScroll:true});
-  status.textContent = completed ? '손패에서 완성 카드를 다시 볼 수 있어요.' : '손패의 기본 하수인을 눌러 조합을 시작하세요.';
+  status.textContent = '손패에서 완성 카드를 다시 볼 수 있어요.';
 }
 function showAssembly() {
   phase('select');
@@ -1589,9 +1632,10 @@ hide.addEventListener('click',()=>{
 });
 hand.addEventListener('click',()=>{
   if (completed) { stopMotion(); showResult(); return; }
-  if (!central) return;
-  scheduleAssemblyClock();
-  showAssembly();
+});
+startButton.addEventListener('click',()=>{
+  rebuild(undefined,{reroll:true,screen:'select'});
+  if (central) showAssembly();
 });
 document.addEventListener('keydown',event=>{
   if (event.key !== 'Escape' || !central) return;
@@ -1599,11 +1643,9 @@ document.addEventListener('keydown',event=>{
   else if (stage.dataset.phase === 'peek') showAssembly();
   else if (stage.dataset.phase === 'result') openBoard();
 });
-document.querySelector('#reset').addEventListener('click',()=>{
-  rebuild(undefined,{reroll:true,screen:'board'});
-});
+document.querySelector('#reset').addEventListener('click',prepareStart);
 result.querySelector('.replay').addEventListener('click',openBoard);
-rebuild(undefined,{screen:'board'});
+prepareStart();
 
 fetch(cardSource).then(response => {
   if (!response.ok) throw new Error('Card metadata unavailable');
