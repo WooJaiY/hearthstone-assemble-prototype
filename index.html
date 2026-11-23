@@ -104,7 +104,13 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 
-.arena::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .28s ease;background:radial-gradient(ellipse at 50% 45%,#1c322d32 5%,#111e1bc2 70%,#121417ed)}
+.arena::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .28s ease;
+  background:
+    radial-gradient(ellipse at 22% 47%,#703dc050,transparent 37%),
+    radial-gradient(ellipse at 78% 43%,#713fc05e,transparent 36%),
+    radial-gradient(ellipse at 50% 41%,#5c3373 0%,#25193e 52%,#100e24 95%);
+}
 .stage:is([data-phase=select],[data-phase=assembling]) .arena::after{opacity:1}
 .selection,.scenario,.result{z-index:1}
 .stage[data-phase=select] .unit{animation:deal .32s cubic-bezier(.18,.71,.24,1) both}
@@ -123,6 +129,77 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .stage[data-phase=assembling] .unit.center{filter:brightness(1.18);transform:scale(1.035)}
 .hand-flight{position:absolute;z-index:7;pointer-events:none;transform-origin:0 0;animation:none!important}
 .hand-card.completed{border-color:#9dd6c4;box-shadow:0 0 17px #68b29d80,0 6px 18px #0e0a08}
+
+.selection{
+  --card-spacing:clamp(6px,2.25vw,30px);
+  --card-columns:minmax(0,1fr) minmax(0,1.42fr) minmax(0,1fr);
+  padding-top:clamp(17px,3vw,30px);
+  padding-bottom:clamp(17px,2.7vw,27px);
+}
+.selection h2{
+  display:inline-block;padding:7px 17px 9px;color:#f5e9ff;
+  border-block:1px solid #b697ec9c;letter-spacing:-.035em;
+  background:linear-gradient(90deg,transparent,#714ca152 26% 74%,transparent);
+  text-shadow:0 0 12px #ab72ee;
+}
+.selection .cards{
+  grid-template-columns:var(--card-columns);gap:0 var(--card-spacing);
+  margin-top:clamp(11px,2.25vw,23px);
+}
+.selection .unit{
+  border:2px solid #a27bc1;border-radius:17px 17px 9px 9px;
+  background:linear-gradient(150deg,#50335b,#242137 48%,#352942);
+  box-shadow:0 12px 22px #0a0615bb,0 0 22px #b076e970,inset 0 0 0 2px #372943;
+}
+.selection .unit.center{
+  border-color:#dbbaf7;
+  background:linear-gradient(150deg,#71507f,#312640 52%,#4a3657);
+  box-shadow:0 12px 27px #0a0615cc,0 0 28px #bd84f584,inset 0 0 0 2px #503663;
+}
+.selection .unit.center.has-choice{border-color:#eac9fc}
+.selection .unit-role{color:#dcc8ed}
+.selection .illustration{
+  border-color:#ab85c9;margin-inline:9%;
+  border-radius:13px 13px 7px 7px;background:radial-gradient(#5f4779,#28233d);
+}
+.selection .center .illustration{height:clamp(91px,14vw,155px)}
+.selection .unit-heading{
+  min-height:26px;margin:4px 6% 0;
+  border-color:#735987;background:#2b2337;color:#f4e8ff;box-shadow:none;
+}
+.selection .unit-slots{background:#35283f}
+.selection .mid:not(.applied){background:#262231;border-color:#795e8f;color:#f1e7fa}
+.selection .mid:not(.applied) .slot-label{color:#cdc0dd}
+.selection .mid:not(.applied)[data-marker]::after{color:#d8c8e8}
+.selection .mid.target:not(.applied){border-color:#e6c393;box-shadow:inset 0 0 0 1px #e0a451}
+.selection .controls{
+  display:grid;grid-template-columns:var(--card-columns);gap:var(--card-spacing);
+  margin-top:12px;align-items:start;
+}
+.selection .hide{
+  justify-self:start;background:#252440;color:#e4ddff;
+  border-color:#9780be;
+}
+.selection .hide:hover{background:#40325c}
+.selection .confirm{
+  justify-self:center;min-width:min(100%,117px);
+  border-color:#f8d063;box-shadow:0 0 13px #ffd96865;
+  background:linear-gradient(#ffeaaa,#e9bb4e);
+}
+.selection .select-meta{color:#dcc8ed;text-shadow:0 1px #1a112d}
+@supports(grid-template-rows:subgrid){
+  .selection .cards{grid-template-rows:repeat(6,auto)}
+  .selection .unit{grid-row:1 / span 6;grid-template-rows:subgrid;row-gap:0}
+  .selection .illustration{align-self:end}
+  .selection .unit-slots{grid-row:4 / span 2;grid-template-rows:subgrid;row-gap:4px}
+  .selection .stats{grid-row:6}
+  .selection .slot{min-height:50px}
+}
+@media(max-width:490px){
+  .selection .unit-heading{padding-inline:2px}
+  .selection .unit-slots{margin-inline:2px}
+  .selection .controls button{padding-inline:5px}
+}
 
 </style>
 </head>
@@ -175,8 +252,9 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
   <div class="stats"><b class="attack" aria-label="공격력"></b><span class="race" hidden></span><b class="health" aria-label="생명력"></b></div>
   <div class="unit-slots"><button class="slot pick" data-row="0" type="button"><span class="slot-label">발동 조건</span><span class="wording"></span></button><button class="slot pick" data-row="1" type="button"><span class="slot-label">효과</span><span class="wording"></span></button></div>
 </article>
-</div><p class="select-meta"></p>
+</div>
       <div class="controls"><button class="quiet hide" type="button">전장으로</button><button class="primary confirm" type="button" disabled>조합 확정</button></div>
+      <p class="select-meta"></p>
     </div>
     <div class="scenario board" hidden>
       <h2>전장</h2>
