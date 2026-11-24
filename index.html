@@ -404,7 +404,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     <thead><tr><th>하수인</th><th>비용</th><th>직업</th><th>구분</th><th>카드 문구</th></tr></thead><tbody id="catalog-rows"></tbody>
     </table></div>
     <p>확인일 2026-11-24 · 한국어 카드 데이터 빌드 256589 · <a href="https://api.hearthstonejson.com/v1/256589/koKR/cards.collectible.json">HearthstoneJSON</a> · <a href="https://hearthstone.blizzard.com/ko-kr/cards?set=standard">블리자드 정규전 카드 라이브러리</a></p>
-    <p>카드 목록에는 발동 문구가 있는 하수인을 담았습니다. 시연 후보는 원본 데이터에 능력 분할 표시가 있고 조합 키워드를 갖지 않는 하수인으로 제한합니다. 영웅 피격이 같은 영웅에게 피해를 되돌리는 조합과 같은 문구로의 교체는 선택할 수 없습니다.</p>
+    <p>카드 목록에는 발동 문구가 있는 하수인을 담았습니다. 시연에는 원본 데이터에 능력 분할 표시가 있는 하수인과 이 화면의 규칙으로 추가한 하수인이 나옵니다. 직접 추가한 하수인은 목록에서 ‘프로토타입 추가 후보’로 표시합니다. 영웅 피격이 같은 영웅에게 피해를 되돌리는 조합과 같은 문구로의 교체는 선택할 수 없습니다.</p>
     <p>기본 하수인과 같은 비용으로 후보를 표시합니다. 8~10코스트는 한 그룹으로 묶습니다. 직업을 선택하면 해당 직업과 중립 후보가 표시됩니다. 천상의 보호막 관련 반복 발동과 조합 발동 카드별 예외는 확인 범위에 포함되지 않습니다.</p>
     </details>
   </dialog>
@@ -423,7 +423,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CORE_BT_351","name":"더러운 마귀","set":"핵심","classes":["DEMONHUNTER"],"cost":1,"atk":1,"hp":2,"text":"내 영웅이 공격한 후에, 공격력을 +1 얻습니다.","parts":["내 영웅이 공격한 후에,","공격력을 +1 얻습니다."]},
 {"id":"EDR_971","name":"동물 관리인","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":1,"atk":2,"hp":2,"text":"내 턴이 끝날 때, 각 영웅의 생명력을3 회복시킵니다.","parts":["내 턴이 끝날 때,","각 영웅의 생명력을3 회복시킵니다."]},
 {"id":"END_022","name":"뒤틀린 시간의 예언자","set":"시간의 길 너머로","classes":["MAGE","WARRIOR"],"cost":1,"atk":1,"hp":3,"text":"피해를 받은 상태면 주문 공격력 +2를 얻습니다.","parts":null},
-{"id":"DINO_434","name":"랩터둥지 간호사","set":"운고로의 잃어버린 도시","classes":["HUNTER"],"cost":1,"atk":1,"hp":1,"text":"전투의 함성: 비용이 1인 무작위 하수인을 얻습니다. 죽음의 메아리: 비용이 1인 무작위 주문을 얻습니다.","parts":["전투의 함성: 비용이 1인 무작위 하수인을 얻습니다. 죽음의 메아리:","비용이 1인 무작위 주문을 얻습니다."]},
+{"id":"DINO_434","name":"랩터둥지 간호사","set":"운고로의 잃어버린 도시","classes":["HUNTER"],"cost":1,"atk":1,"hp":1,"text":"전투의 함성: 비용이 1인 무작위 하수인을 얻습니다. 죽음의 메아리: 비용이 1인 무작위 주문을 얻습니다.","parts":["전투의 함성: 비용이 1인 무작위 하수인을 얻습니다.","죽음의 메아리: 비용이 1인 무작위 주문을 얻습니다."],"partKind":"effects"},
 {"id":"MEND_040","name":"먼지 벌레","set":"대격변","classes":["DRUID"],"cost":1,"atk":6,"hp":6,"text":"휴면 상태로 시작합니다. 내 전장이 가득 차면 깨어납니다.","parts":null},
 {"id":"CORE_EX1_509","name":"멀록 파도술사","set":"핵심","classes":["NEUTRAL"],"cost":1,"atk":1,"hp":2,"text":"내가 멀록을 소환할 때마다 공격력을 +1 얻습니다.","parts":null},
 {"id":"BE_588","name":"미미론","set":"검은 제국의 지배","classes":["HUNTER"],"cost":1,"atk":2,"hp":1,"text":"전투의 함성: 내 전장에 기계가 있으면, 완벽한 테크 카드를 발견합니다.","parts":null},
@@ -482,7 +482,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"RLK_511","name":"겨울의 전령","set":"핵심","classes":["DEATHKNIGHT"],"cost":2,"atk":3,"hp":2,"text":"죽음의 메아리: 냉기 주문을 뽑습니다.","parts":["죽음의 메아리:","냉기 주문을 뽑습니다."]},
 {"id":"JAIL_878","name":"경비견","set":"보랏빛 요새 탈출 작전","classes":["HUNTER"],"cost":2,"atk":3,"hp":1,"text":"죽음의 메아리: 비용이 1인 무작위 죽음의 메아리 하수인을 소환합니다.","parts":["죽음의 메아리:","비용이 1인 무작위 죽음의 메아리 하수인을 소환합니다."]},
 {"id":"CORE_DMF_067","name":"경품 상인","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":3,"text":"전투의 함성과 죽음의 메아리: 각 플레이어가 카드를 뽑습니다.","parts":["전투의 함성과 죽음의 메아리:","각 플레이어가 카드를 뽑습니다."]},
-{"id":"TIME_015","name":"경화빛 수호자","set":"시간의 길 너머로","classes":["PALADIN"],"cost":2,"atk":2,"hp":1,"text":"천상의 보호막, 전투의 함성: 내 영웅의 생명력을 3 회복시키고 천상의 보호막을 부여합니다.","parts":null},
+{"id":"TIME_015","name":"경화빛 수호자","set":"시간의 길 너머로","classes":["PALADIN"],"cost":2,"atk":2,"hp":1,"text":"천상의 보호막, 전투의 함성: 내 영웅의 생명력을 3 회복시키고 천상의 보호막을 부여합니다.","parts":["천상의 보호막, 전투의 함성:","내 영웅의 생명력을 3 회복시키고 천상의 보호막을 부여합니다."],"prototypeOnly":true},
 {"id":"TLC_245","name":"고대 랩터","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":1,"text":"전투의 함성: 공격력 +3, 천상의 보호막, \"죽음의 메아리: 1/1 식물을 둘 소환합니다.\" 중 하나를 선택하여 얻습니다.","parts":null},
 {"id":"BE_851","name":"골짜기의 급사","set":"검은 제국의 지배","classes":["DRUID"],"cost":2,"atk":2,"hp":3,"text":"전투의 함성: 야수를 조합합니다.","parts":null},
 {"id":"TLC_822","name":"공룡돌보미","set":"운고로의 잃어버린 도시","classes":["HUNTER"],"cost":2,"atk":2,"hp":3,"text":"내 턴이 끝날 때, 내 손에 있는 무작위 야수의 비용이 (1) 감소합니다.","parts":["내 턴이 끝날 때,","내 손에 있는 무작위 야수의 비용이 (1) 감소합니다."]},
@@ -496,7 +496,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"BE_541","name":"느조스의 대리인","set":"검은 제국의 지배","classes":["ROGUE"],"cost":2,"atk":3,"hp":2,"text":"죽음의 메아리: 내 손에 있는 다른 무작위 죽음의 메아리 하수인을 복사하여 얻습니다.","parts":null},
 {"id":"JAIL_986","name":"다급한 위조범","set":"보랏빛 요새 탈출 작전","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":2,"text":"전투의 함성: 비용을 낼 수 있는 무작위 주문을 얻습니다. 그 주문이 일시적입니다.","parts":null},
 {"id":"CORE_LOOT_413","name":"단단한 딱정벌레","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":3,"text":"죽음의 메아리: 방어도를 3 얻습니다.","parts":["죽음의 메아리:","방어도를 3 얻습니다."]},
-{"id":"EDR_449","name":"달빛날개 전령","set":"에메랄드의 꿈 속으로","classes":["PRIEST"],"cost":2,"atk":3,"hp":2,"text":"생명력 흡수, 전투의 함성: 내 영웅 능력을 연마합니다.","parts":null},
+{"id":"EDR_449","name":"달빛날개 전령","set":"에메랄드의 꿈 속으로","classes":["PRIEST"],"cost":2,"atk":3,"hp":2,"text":"생명력 흡수, 전투의 함성: 내 영웅 능력을 연마합니다.","parts":["생명력 흡수, 전투의 함성:","내 영웅 능력을 연마합니다."],"prototypeOnly":true},
 {"id":"CORE_EX1_131","name":"데피아즈단 두목","set":"핵심","classes":["ROGUE"],"cost":2,"atk":3,"hp":2,"text":"연계: 2/1 데피아즈단 무법자를 소환합니다.","parts":["연계:","2/1 데피아즈단 무법자를 소환합니다."]},
 {"id":"CATA_612","name":"동상에 걸린 임프","set":"대격변","classes":["NEUTRAL"],"cost":2,"atk":5,"hp":3,"text":"전투의 함성: 이 하수인을 빙결시킵니다.","parts":null},
 {"id":"EDR_540","name":"뒤틀린 그물거미","set":"에메랄드의 꿈 속으로","classes":["ROGUE"],"cost":2,"atk":2,"hp":3,"text":"내가 이미 낸 적 있는 다른 하수인을 낼 때마다 카드를 뽑습니다.","parts":["내가 이미 낸 적 있는 다른 하수인을 낼 때마다","카드를 뽑습니다."]},
@@ -512,7 +512,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"JAIL_455","name":"변장한 보초","set":"보랏빛 요새 탈출 작전","classes":["WARRIOR"],"cost":2,"atk":2,"hp":4,"text":"어느 쪽에든 낼 수 있습니다. 전투의 함성: 다른 모든 아군 하수인에게 피해를 1 줍니다. 두 번 발동합니다.","parts":null},
 {"id":"TLC_438","name":"보랏빛 보물지느러미","set":"운고로의 잃어버린 도시","classes":["PALADIN"],"cost":2,"atk":1,"hp":2,"text":"전투의 함성: 내 덱에서 비용이 (2) 이하인 무작위 주문을 시전합니다. (가능하다면 이 하수인을 대상으로 선택)","parts":null},
 {"id":"BE_EVENT_103","name":"보물 마귀","set":"이벤트","classes":["WARLOCK"],"cost":2,"atk":2,"hp":2,"text":"전투의 함성: 카드를 2장 뽑습니다. 내가 한 장을 낸 후, 나머지 한 장을 버립니다.","parts":null},
-{"id":"CORE_ULD_271","name":"부상당한 톨비르","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":6,"text":"도발, 전투의 함성: 자신에게 피해를 3 줍니다.","parts":null},
+{"id":"CORE_ULD_271","name":"부상당한 톨비르","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":6,"text":"도발, 전투의 함성: 자신에게 피해를 3 줍니다.","parts":["도발, 전투의 함성:","자신에게 피해를 3 줍니다."],"prototypeOnly":true},
 {"id":"DINO_404","name":"불아가미","set":"운고로의 잃어버린 도시","classes":["PALADIN"],"cost":2,"atk":3,"hp":2,"text":"유사: 내 다른 하수인들에게 속공을 부여합니다.","parts":["유사:","내 다른 하수인들에게 속공을 부여합니다."]},
 {"id":"JAIL_328","name":"붉은십자군 투사","set":"보랏빛 요새 탈출 작전","classes":["PALADIN"],"cost":2,"atk":2,"hp":2,"text":"죽음의 메아리: 내 덱에 중립 카드가 없으면 무작위 성기사 카드를 얻습니다. 그 카드의 비용이 (2) 감소합니다.","parts":["죽음의 메아리: 내 덱에 중립 카드가 없으면","무작위 성기사 카드를 얻습니다. 그 카드의 비용이 (2) 감소합니다."]},
 {"id":"CORE_NEW1_018","name":"붉은해적단 약탈자","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":3,"text":"전투의 함성: 내 무기의 공격력만큼 공격력을 얻습니다.","parts":null},
@@ -588,7 +588,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CORE_RLK_066","name":"혈기술사","set":"핵심","classes":["DEATHKNIGHT"],"cost":2,"atk":2,"hp":3,"text":"전투의 함성: 시체를 소모해 혈기 룬 카드를 발견합니다.","parts":["전투의 함성: 시체를 소모해","혈기 룬 카드를 발견합니다."]},
 {"id":"CORE_EX1_012","name":"혈법사 탈노스","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":1,"hp":1,"text":"주문 공격력 +1 죽음의 메아리: 카드를 뽑습니다.","parts":null},
 {"id":"TLC_244","name":"호기심 많은 탐험가","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":2,"atk":3,"hp":5,"text":"죽음의 메아리: 상대편 손에 있는 하수인의 비용이 (2) 감소합니다.","parts":null},
-{"id":"TIME_431","name":"호박색 여사제","set":"시간의 길 너머로","classes":["PRIEST"],"cost":2,"atk":1,"hp":4,"text":"도발, 전투의 함성: 캐릭터의 생명력을 이 하수인의 생명력만큼 회복합니다.","parts":null},
+{"id":"TIME_431","name":"호박색 여사제","set":"시간의 길 너머로","classes":["PRIEST"],"cost":2,"atk":1,"hp":4,"text":"도발, 전투의 함성: 캐릭터의 생명력을 이 하수인의 생명력만큼 회복합니다.","parts":["도발, 전투의 함성:","캐릭터의 생명력을 이 하수인의 생명력만큼 회복합니다."],"prototypeOnly":true},
 {"id":"TIME_601","name":"화살 수거자","set":"시간의 길 너머로","classes":["HUNTER"],"cost":2,"atk":3,"hp":1,"text":"전투의 함성: 내 카드가 3장이 될 때까지 카드를 뽑습니다.","parts":["전투의 함성:","내 카드가 3장이 될 때까지 카드를 뽑습니다."]},
 {"id":"CORE_BT_321","name":"황천방랑자","set":"핵심","classes":["DEMONHUNTER"],"cost":2,"atk":2,"hp":2,"text":"전투의 함성: 악마를 발견합니다.","parts":["전투의 함성:","악마를 발견합니다."]},
 {"id":"CORE_KAR_062","name":"황천의 원령 역사가","set":"핵심","classes":["NEUTRAL"],"cost":2,"atk":2,"hp":3,"text":"전투의 함성: 내 손에 용족이 있으면, 용족을 발견합니다.","parts":null},
@@ -634,7 +634,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"END_018","name":"무한의 수행사제","set":"시간의 길 너머로","classes":["WARLOCK"],"cost":3,"atk":5,"hp":5,"text":"전투의 함성: 내 손에 있는 무작위 카드의 비용을 무한대로 만듭니다! 죽음의 메아리: 다시 원래대로 바꿉니다.","parts":null},
 {"id":"BE_044","name":"물어ON","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"전투의 함성: 비용이 4인 하수인을 조합합니다.","parts":null},
 {"id":"CORE_EX1_014","name":"밀림의 왕 무클라","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":5,"hp":6,"text":"전투의 함성: 상대편에게 바나나를 2개 줍니다.","parts":null},
-{"id":"Core_UNG_072","name":"바위언덕 수호병","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":1,"hp":5,"text":"도발, 전투의 함성: 도발 하수인을 발견합니다.","parts":null},
+{"id":"Core_UNG_072","name":"바위언덕 수호병","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":1,"hp":5,"text":"도발, 전투의 함성: 도발 하수인을 발견합니다.","parts":["도발, 전투의 함성:","도발 하수인을 발견합니다."],"prototypeOnly":true},
 {"id":"CORE_WON_141","name":"박물관 컵","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"전투의 함성: 종족이 서로 다른 무작위 아군 하수인 셋에게 +1/+1을 부여합니다.","parts":null},
 {"id":"DINO_400","name":"방벽 파괴자","set":"운고로의 잃어버린 도시","classes":["WARRIOR"],"cost":3,"atk":4,"hp":3,"text":"내가 방어도를 얻을 때마다 +2/+2를 얻고 무작위 적 하수인을 공격합니다.","parts":null},
 {"id":"DINO_137","name":"변덕스러운 소스 요리사","set":"운고로의 잃어버린 도시","classes":["DEMONHUNTER"],"cost":3,"atk":4,"hp":2,"text":"전투의 함성: 내 손에서 양옆에 있는 카드들의 비용이 (1) 감소합니다.","parts":null},
@@ -643,10 +643,10 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"JAIL_101","name":"보랏빛 응징자","set":"보랏빛 요새 탈출 작전","classes":["NEUTRAL"],"cost":3,"atk":4,"hp":3,"text":"전투의 함성: 적 하수인을 선택합니다. 그 하수인의 추가 효과를 가져오고 가져온 효과 하나당 +1/+1을 획득합니다.","parts":null},
 {"id":"CATA_304","name":"부상당한 수행원","set":"대격변","classes":["PRIEST"],"cost":3,"atk":3,"hp":8,"text":"생명력 흡수, 전투의 함성: 이 하수인에게 피해를 4 줍니다.","parts":["생명력 흡수, 전투의 함성:","이 하수인에게 피해를 4 줍니다."]},
 {"id":"TLC_233","name":"부화장 도우미","set":"운고로의 잃어버린 도시","classes":["DRUID"],"cost":3,"atk":2,"hp":3,"text":"전투의 함성: 공격력이 2 이하인 내 다른 하수인들에게 +1/+1과 도발을 부여합니다.","parts":["전투의 함성:","공격력이 2 이하인 내 다른 하수인들에게 +1/+1과 도발을 부여합니다."]},
-{"id":"TLC_836","name":"분화구의 니리","set":"운고로의 잃어버린 도시","classes":["HUNTER"],"cost":3,"atk":2,"hp":5,"text":"내가 비용이 1인 하수인을 낼 때마다 그 하수인의 능력치가 2배가 됩니다. 내가 비용이 1인 주문을 시전할 때마다 그 주문을 2번 시전합니다.","parts":null},
+{"id":"TLC_836","name":"분화구의 니리","set":"운고로의 잃어버린 도시","classes":["HUNTER"],"cost":3,"atk":2,"hp":5,"text":"내가 비용이 1인 하수인을 낼 때마다 그 하수인의 능력치가 2배가 됩니다. 내가 비용이 1인 주문을 시전할 때마다 그 주문을 2번 시전합니다.","parts":["내가 비용이 1인 하수인을 낼 때마다 그 하수인의 능력치가 2배가 됩니다.","내가 비용이 1인 주문을 시전할 때마다 그 주문을 2번 시전합니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"MEND_801","name":"불굴의 구원자","set":"대격변","classes":["PALADIN"],"cost":3,"atk":3,"hp":1,"text":"천상의 보호막 이 하수인이 천상의 보호막을 잃은 후에, 내 은빛 성기사단 신병들에게 이번 게임 동안 생명력을 +1 부여합니다.","parts":null},
 {"id":"CATA_EVENT_002","name":"불길한 화염마","set":"이벤트","classes":["WARRIOR"],"cost":3,"atk":4,"hp":3,"text":"전투의 함성: 내가 이번 턴에 화염 주문을 냈으면, 하수인을 처치합니다.","parts":null},
-{"id":"TIME_037","name":"비둘기의 사도","set":"시간의 길 너머로","classes":["PRIEST"],"cost":3,"atk":2,"hp":2,"text":"전투의 함성: 하수인을 뽑습니다. 내 손에 있는 하수인들에게 생명력을 +2 부여합니다.","parts":["전투의 함성: 하수인을 뽑습니다.","내 손에 있는 하수인들에게 생명력을 +2 부여합니다."]},
+{"id":"TIME_037","name":"비둘기의 사도","set":"시간의 길 너머로","classes":["PRIEST"],"cost":3,"atk":2,"hp":2,"text":"전투의 함성: 하수인을 뽑습니다. 내 손에 있는 하수인들에게 생명력을 +2 부여합니다.","parts":["전투의 함성: 하수인을 뽑습니다.","내 손에 있는 하수인들에게 생명력을 +2 부여합니다."],"partKind":"effects"},
 {"id":"TLC_237","name":"비명익룡 알","set":"운고로의 잃어버린 도시","classes":["DRUID"],"cost":3,"atk":0,"hp":2,"text":"죽음의 메아리: 2/1 새끼를 넷 소환합니다.","parts":["죽음의 메아리:","2/1 새끼를 넷 소환합니다."]},
 {"id":"BE_169","name":"사마귀 선도자","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"전투의 함성: 내 영웅이 무기를 장착하고 있으면, +1/+1과 속공을 얻습니다.","parts":null},
 {"id":"EDR_254","name":"살아 움직이는 달샘","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":3,"atk":1,"hp":4,"text":"내가 주문을 시전한 후 그 주문의 비용만큼 공격력을 얻습니다.","parts":null},
@@ -678,7 +678,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CATA_185","name":"얼굴 없는 복제자","set":"대격변","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"모면, 죽음의 메아리: 이 하수인을 처치한 하수인을 얼굴 없는 복제자로 변신시킵니다.","parts":null},
 {"id":"EDR_781","name":"역병 걸린 자의 전령","set":"에메랄드의 꿈 속으로","classes":["ROGUE"],"cost":3,"atk":2,"hp":3,"text":"이 하수인이 전장에서 내 손으로 들어올 때마다, 비용이 2인 무작위 하수인을 둘 소환합니다.","parts":null},
 {"id":"JAIL_470","name":"연꽃 골칫덩이","set":"보랏빛 요새 탈출 작전","classes":["ROGUE"],"cost":3,"atk":2,"hp":2,"text":"전투의 함성: 무작위 적에게 피해를 1 줍니다.","parts":null},
-{"id":"TLC_428","name":"온천 활공꾼","set":"운고로의 잃어버린 도시","classes":["PALADIN"],"cost":3,"atk":2,"hp":4,"text":"전투의 함성: 내 다음 멀록의 비용이 (1) 감소합니다. 유사: 그리고 천상의 보호막을 얻습니다.","parts":null},
+{"id":"TLC_428","name":"온천 활공꾼","set":"운고로의 잃어버린 도시","classes":["PALADIN"],"cost":3,"atk":2,"hp":4,"text":"전투의 함성: 내 다음 멀록의 비용이 (1) 감소합니다. 유사: 그리고 천상의 보호막을 얻습니다.","parts":["전투의 함성: 내 다음 멀록의 비용이 (1) 감소합니다.","유사: 그리고 천상의 보호막을 얻습니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"TIME_036","name":"왕실 정보통","set":"시간의 길 너머로","classes":["ROGUE"],"cost":3,"atk":2,"hp":4,"text":"전투의 함성: 상대편의 손에서 가장 오른쪽에 있는 카드가 제시됩니다. 그 카드를 복사하여 내 손으로 가져오거나, 그 카드의 비용을 (2) 증가시킵니다.","parts":null},
 {"id":"JAIL_860","name":"요리사 네스렉","set":"보랏빛 요새 탈출 작전","classes":["DRUID"],"cost":3,"atk":3,"hp":3,"text":"개전: 내 덱에 비용이 (3) 이하인 카드만 있으면, 5턴 후 내 마나를 10으로 만듭니다!","parts":null},
 {"id":"CORE_DRG_403","name":"용접하는 파괴공작원","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"전투의 함성: 상대편의 다음 영웅 능력의 비용이 (2) 증가합니다.","parts":null},
@@ -692,7 +692,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TLC_443","name":"의욕 없는 사육사","set":"운고로의 잃어버린 도시","classes":["DEATHKNIGHT"],"cost":3,"atk":1,"hp":1,"text":"환생, 죽음의 메아리: 도발 능력이 있는 2/2 언데드 야수를 소환합니다.","parts":["환생, 죽음의 메아리:","도발 능력이 있는 2/2 언데드 야수를 소환합니다."]},
 {"id":"END_008","name":"인내의 바퀴벌레","set":"시간의 길 너머로","classes":["DRUID","DEMONHUNTER"],"cost":3,"atk":3,"hp":4,"text":"내가 영웅 능력을 사용한 후 마나 수정을 2개 회복합니다.","parts":["내가 영웅 능력을 사용한 후","마나 수정을 2개 회복합니다."]},
 {"id":"JAIL_399","name":"임프 무리 앞잡이","set":"보랏빛 요새 탈출 작전","classes":["WARLOCK"],"cost":3,"atk":2,"hp":5,"text":"도발, 죽음의 메아리: 도발과 생명력 흡수 능력이 있는 8/8 악마 둘을 내 덱 맨 아래에 놓습니다.","parts":null},
-{"id":"FIR_927","name":"잉걸불의 흉터가 난 새끼용","set":"에메랄드의 꿈 속으로","classes":["SHAMAN"],"cost":3,"atk":3,"hp":2,"text":"전투의 함성: 비용이 5인 카드를 발견합니다. 다음 턴에만 마나 수정을 1개 얻습니다.","parts":["전투의 함성: 비용이 5인 카드를 발견합니다.","다음 턴에만 마나 수정을 1개 얻습니다."]},
+{"id":"FIR_927","name":"잉걸불의 흉터가 난 새끼용","set":"에메랄드의 꿈 속으로","classes":["SHAMAN"],"cost":3,"atk":3,"hp":2,"text":"전투의 함성: 비용이 5인 카드를 발견합니다. 다음 턴에만 마나 수정을 1개 얻습니다.","parts":["전투의 함성: 비용이 5인 카드를 발견합니다.","다음 턴에만 마나 수정을 1개 얻습니다."],"partKind":"effects"},
 {"id":"TIME_101","name":"잘못 놓인 화염술사","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":3,"atk":4,"hp":3,"text":"내가 카드를 분쇄할 때마다 모든 적 하수인에게 피해를 2 줍니다.","parts":null},
 {"id":"TLC_101","name":"잠복 이교도","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":3,"atk":2,"hp":3,"text":"도발, 환생 피해를 받은 상태면 공격력을 +3 얻습니다.","parts":null},
 {"id":"FIR_955","name":"잿불뿌리 파괴자","set":"에메랄드의 꿈 속으로","classes":["WARLOCK"],"cost":3,"atk":3,"hp":3,"text":"내 턴에 내 영웅이 피해를 받을 때마다 무작위 적 하수인에게 피해를 3 줍니다.","parts":["내 턴에 내 영웅이 피해를 받을 때마다","무작위 적 하수인에게 피해를 3 줍니다."]},
@@ -702,13 +702,13 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CORE_RLK_121","name":"죽음의 수행사제","set":"핵심","classes":["DEATHKNIGHT"],"cost":3,"atk":2,"hp":4,"text":"아군 언데드가 죽은 후에, 카드를 뽑습니다.","parts":null},
 {"id":"JAIL_882","name":"쥐잡이","set":"보랏빛 요새 탈출 작전","classes":["HUNTER"],"cost":3,"atk":4,"hp":2,"text":"전투의 함성: 내 덱에 있는 모든 주문을 복사합니다. 죽음의 메아리: 하나를 뽑습니다.","parts":null},
 {"id":"TIME_008","name":"지나간 파멸예언자","set":"시간의 길 너머로","classes":["WARLOCK"],"cost":3,"atk":3,"hp":3,"text":"되돌리기, 전투의 함성: 두 플레이어 모두 무작위로 카드를 버립니다.","parts":null},
-{"id":"MEND_501","name":"지맥 방랑자","set":"대격변","classes":["MAGE"],"cost":3,"atk":4,"hp":2,"text":"전투의 함성: 이번 게임에서 내 지맥들의 비용이 (1) 감소합니다. 죽음의 메아리: 무작위 지맥을 얻습니다.","parts":null},
+{"id":"MEND_501","name":"지맥 방랑자","set":"대격변","classes":["MAGE"],"cost":3,"atk":4,"hp":2,"text":"전투의 함성: 이번 게임에서 내 지맥들의 비용이 (1) 감소합니다. 죽음의 메아리: 무작위 지맥을 얻습니다.","parts":["전투의 함성: 이번 게임에서 내 지맥들의 비용이 (1) 감소합니다.","죽음의 메아리: 무작위 지맥을 얻습니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"CORE_WC_701","name":"지옥방울뱀","set":"핵심","classes":["DEMONHUNTER"],"cost":3,"atk":3,"hp":2,"text":"속공, 죽음의 메아리: 모든 적 하수인에게 피해를 1 줍니다.","parts":["속공, 죽음의 메아리:","모든 적 하수인에게 피해를 1 줍니다."]},
 {"id":"CORE_GIL_534","name":"짐승단 폭력배","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"내 영웅이 공격한 후에, 이 하수인이 +1/+1을 얻습니다.","parts":null},
 {"id":"TIME_003","name":"차원문 선봉대원","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":3,"atk":2,"hp":2,"text":"되돌리기, 전투의 함성: 무작위 하수인을 뽑습니다. 그 하수인에게 +2/+2를 부여합니다.","parts":null},
 {"id":"END_021","name":"차원의 무기 제작자","set":"시간의 길 너머로","classes":["WARRIOR"],"cost":3,"atk":2,"hp":5,"text":"전투의 함성: 내 손에 있는 모든 하수인과 무기에게 공격력을 +2 부여합니다.","parts":["전투의 함성:","내 손에 있는 모든 하수인과 무기에게 공격력을 +2 부여합니다."]},
 {"id":"JAIL_513","name":"창살에 갇힌 두개골","set":"보랏빛 요새 탈출 작전","classes":["WARLOCK"],"cost":3,"atk":3,"hp":1,"text":"도발, 전투의 함성: 내 손에 있는 카드 1장당 생명력을 +1 얻습니다.","parts":["도발, 전투의 함성:","내 손에 있는 카드 1장당 생명력을 +1 얻습니다."]},
-{"id":"TLC_226","name":"창조된 사서","set":"운고로의 잃어버린 도시","classes":["MAGE"],"cost":3,"atk":2,"hp":2,"text":"죽음의 메아리: 주문을 뽑습니다. 유사: 이 하수인을 복사하여 소환합니다.","parts":["죽음의 메아리: 주문을 뽑습니다. 유사:","이 하수인을 복사하여 소환합니다."]},
+{"id":"TLC_226","name":"창조된 사서","set":"운고로의 잃어버린 도시","classes":["MAGE"],"cost":3,"atk":2,"hp":2,"text":"죽음의 메아리: 주문을 뽑습니다. 유사: 이 하수인을 복사하여 소환합니다.","parts":["죽음의 메아리: 주문을 뽑습니다.","유사: 이 하수인을 복사하여 소환합니다."],"partKind":"effects"},
 {"id":"CATA_979","name":"창조술 전문가","set":"대격변","classes":["MAGE"],"cost":3,"atk":3,"hp":4,"text":"전투의 함성: 내 손에 있는 주문을 선택합니다. 그 주문을 비용이 같은 무작위 주문 둘로 나눕니다.","parts":null},
 {"id":"CORE_REV_023","name":"철거 재건축가","set":"핵심","classes":["NEUTRAL"],"cost":3,"atk":3,"hp":3,"text":"교환성 전투의 함성: 적 장소를 파괴합니다.","parts":null},
 {"id":"BE_600","name":"철의 생환술사","set":"검은 제국의 지배","classes":["WARRIOR"],"cost":3,"atk":2,"hp":5,"text":"내가 방어도를 얻은 후 카드를 뽑습니다.","parts":null},
@@ -721,7 +721,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TLC_831","name":"테러닥스 알","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":3,"atk":0,"hp":3,"text":"죽음의 메아리: 다른 모든 하수인으로부터 생명력을 1 가져오는 3/3 테러닥스를 소환합니다.","parts":null},
 {"id":"CATA_566","name":"톨비르 조각사","set":"대격변","classes":["HUNTER"],"cost":3,"atk":3,"hp":2,"text":"전투의 함성: 내 손에 있는 카드를 선택합니다. 내 턴이 시작될 때, 그 카드의 비용이 (1) 감소합니다.","parts":null},
 {"id":"CATA_563","name":"파지직거리는 구름기수","set":"대격변","classes":["SHAMAN"],"cost":3,"atk":4,"hp":3,"text":"전투의 함성: 내 손에서 비용이 (4) 이하인 주문을 선택하여 흡수합니다. 죽음의 메아리: 그 주문을 시전합니다.","parts":null},
-{"id":"CORE_EDR_003","name":"팔릭","set":"핵심","classes":["DEATHKNIGHT"],"cost":3,"atk":2,"hp":4,"text":"시체를 평소의 두 배만큼 획득합니다. 전투의 함성: 시체를 소모하는 카드를 뽑습니다.","parts":["시체를 평소의 두 배만큼 획득합니다. 전투의 함성:","시체를 소모하는 카드를 뽑습니다."]},
+{"id":"CORE_EDR_003","name":"팔릭","set":"핵심","classes":["DEATHKNIGHT"],"cost":3,"atk":2,"hp":4,"text":"시체를 평소의 두 배만큼 획득합니다. 전투의 함성: 시체를 소모하는 카드를 뽑습니다.","parts":["시체를 평소의 두 배만큼 획득합니다.","전투의 함성: 시체를 소모하는 카드를 뽑습니다."],"partKind":"effects"},
 {"id":"EDR_571","name":"페이 요술사","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":3,"atk":2,"hp":4,"text":"죽음의 메아리: 비용이 (5) 이상인 주문을 뽑습니다.","parts":null},
 {"id":"JAIL_029","name":"폭도","set":"보랏빛 요새 탈출 작전","classes":["WARRIOR"],"cost":3,"atk":1,"hp":6,"text":"아군 하수인이 피해를 받고 생존한 후에, 그 하수인에게 공격력을 +1 부여합니다.","parts":null},
 {"id":"TLC_827","name":"풀 뜯는 스테고돈","set":"운고로의 잃어버린 도시","classes":["HUNTER"],"cost":3,"atk":0,"hp":5,"text":"내 턴이 끝날 때 공격력을 +1 얻습니다. (손이나 덱에 있을 때도)","parts":null},
@@ -738,20 +738,20 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"JAIL_303","name":"고대 점술가","set":"보랏빛 요새 탈출 작전","classes":["WARLOCK"],"cost":4,"atk":2,"hp":6,"text":"전투의 함성: 상대편의 손에 있는 카드 3장을 보고 비밀리에 한 장을 선택합니다. 죽음의 메아리: 그 카드를 버립니다.","parts":null},
 {"id":"TLC_246","name":"고대 테러닥스","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":4,"text":"전투의 함성: 모면, 질풍, 다음 턴까지 은신 중 하나를 선택하여 얻습니다.","parts":null},
 {"id":"BE_327","name":"고서 번역가","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":4,"atk":5,"hp":4,"text":"전투의 함성: ??? (2턴 후에 해독됨)","parts":null},
-{"id":"EDR_459","name":"고통받는 섬멸자","set":"에메랄드의 꿈 속으로","classes":["WARRIOR"],"cost":4,"atk":6,"hp":6,"text":"전투의 함성: 다른 모든 아군 하수인에게 피해를 3 줍니다. 죽음의 메아리: 모든 적 하수인에게 피해를 3 줍니다.","parts":null},
+{"id":"EDR_459","name":"고통받는 섬멸자","set":"에메랄드의 꿈 속으로","classes":["WARRIOR"],"cost":4,"atk":6,"hp":6,"text":"전투의 함성: 다른 모든 아군 하수인에게 피해를 3 줍니다. 죽음의 메아리: 모든 적 하수인에게 피해를 3 줍니다.","parts":["전투의 함성: 다른 모든 아군 하수인에게 피해를 3 줍니다.","죽음의 메아리: 모든 적 하수인에게 피해를 3 줍니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"EDR_841","name":"공포영혼 타락자","set":"에메랄드의 꿈 속으로","classes":["DEMONHUNTER"],"cost":4,"atk":4,"hp":4,"text":"전투의 함성과 죽음의 메아리: 휴면 상태인 무작위 공포 씨앗을 소환합니다.","parts":["전투의 함성과 죽음의 메아리:","휴면 상태인 무작위 공포 씨앗을 소환합니다."]},
 {"id":"TLC_432","name":"공포의 랩터","set":"운고로의 잃어버린 도시","classes":["DEATHKNIGHT"],"cost":4,"atk":3,"hp":4,"text":"전투의 함성: 비용이 (3) 이하인 죽음의 메아리 하수인을 뽑습니다. 유사: 그 하수인의 비용이 (0)이 됩니다.","parts":null},
 {"id":"JAIL_440","name":"구울의 탑","set":"보랏빛 요새 탈출 작전","classes":["DEATHKNIGHT"],"cost":4,"atk":2,"hp":7,"text":"이 하수인이 피해를 받은 후에, 1/1 취약한 구울을 둘 소환합니다.","parts":["이 하수인이 피해를 받은 후에,","1/1 취약한 구울을 둘 소환합니다."]},
 {"id":"JAIL_421","name":"굽은니","set":"보랏빛 요새 탈출 작전","classes":["WARRIOR"],"cost":4,"atk":3,"hp":3,"text":"돌진. 내 턴 중 하나에 아군 캐릭터 넷이 피해를 받으면, 이 하수인을 손이나 덱에서 소환합니다.","parts":null},
 {"id":"EDR_524","name":"그림자망토 습격자","set":"에메랄드의 꿈 속으로","classes":["ROGUE"],"cost":4,"atk":3,"hp":5,"text":"전투의 함성: 내 손에 상대편과 같은 카드가 있으면 상대편의 그 카드를 상대편의 덱에 섞어 넣습니다.","parts":null},
-{"id":"FIR_952","name":"그을음돌격자","set":"에메랄드의 꿈 속으로","classes":["DEMONHUNTER"],"cost":4,"atk":4,"hp":4,"text":"전투의 함성: 지옥 주문을 발견합니다. 내 손에 있는 지옥 주문들의 비용이 (1) 감소합니다.","parts":["전투의 함성: 지옥 주문을 발견합니다.","내 손에 있는 지옥 주문들의 비용이 (1) 감소합니다."]},
+{"id":"FIR_952","name":"그을음돌격자","set":"에메랄드의 꿈 속으로","classes":["DEMONHUNTER"],"cost":4,"atk":4,"hp":4,"text":"전투의 함성: 지옥 주문을 발견합니다. 내 손에 있는 지옥 주문들의 비용이 (1) 감소합니다.","parts":["전투의 함성: 지옥 주문을 발견합니다.","내 손에 있는 지옥 주문들의 비용이 (1) 감소합니다."],"partKind":"effects"},
 {"id":"TLC_224","name":"기계화 마그마","set":"운고로의 잃어버린 도시","classes":["SHAMAN"],"cost":4,"atk":2,"hp":5,"text":"내가 화염 주문을 낼 때마다 그 주문의 비용만큼 능력치를 얻습니다.","parts":null},
 {"id":"TLC_100","name":"길잡이 엘리스","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":4,"atk":3,"hp":5,"text":"전투의 함성: 게임이 시작됐을 때 내 덱에 비용이 서로 다른 카드가 10장 있었으면 원하는 장소를 제작합니다.","parts":null},
 {"id":"EDR_256","name":"꿈지기","set":"에메랄드의 꿈 속으로","classes":["PALADIN"],"cost":4,"atk":3,"hp":4,"text":"도발, 전투의 함성: 게임이 시작됐을 때 내 덱에 없던 카드가 내 덱에 있으면, 그 카드를 뽑고 +2/+2를 얻습니다.","parts":null},
 {"id":"CATA_186","name":"끈적탄 파괴공작원","set":"대격변","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":4,"text":"전투의 함성: 상대편에게 비용이 2인 파괴 공작을 줍니다. 그 옆에 있는 카드들의 비용이 (1) 증가합니다.","parts":null},
 {"id":"CORE_EX1_005","name":"나 이런 사냥꾼이야","set":"핵심","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":2,"text":"교환성, 전투의 함성: 공격력이 7 이상인 하수인을 처치합니다.","parts":null},
 {"id":"END_032","name":"날개 달린 돌연변이","set":"시간의 길 너머로","classes":["ROGUE","SHAMAN"],"cost":4,"atk":4,"hp":4,"text":"속공, 연계: (2)만큼 과부하되어 이번 턴에 면역을 얻고, 질풍을 얻습니다.","parts":null},
-{"id":"CORE_RLK_062","name":"네루비안 무리수호병","set":"핵심","classes":["DEATHKNIGHT"],"cost":4,"atk":1,"hp":3,"text":"도발, 전투의 함성: 이 하수인을 둘 복사하여 소환합니다.","parts":null},
+{"id":"CORE_RLK_062","name":"네루비안 무리수호병","set":"핵심","classes":["DEATHKNIGHT"],"cost":4,"atk":1,"hp":3,"text":"도발, 전투의 함성: 이 하수인을 둘 복사하여 소환합니다.","parts":["도발, 전투의 함성:","이 하수인을 둘 복사하여 소환합니다."],"prototypeOnly":true},
 {"id":"TLC_516","name":"네페르세트 무기 제작자","set":"운고로의 잃어버린 도시","classes":["ROGUE"],"cost":4,"atk":5,"hp":4,"text":"전투의 함성: 다른 직업의 무작위 무기를 얻습니다. 연계: 그 무기에 공격력을 +2 부여합니다.","parts":null},
 {"id":"CORE_BAR_878","name":"노련한 전쟁의무관","set":"핵심","classes":["PALADIN"],"cost":4,"atk":3,"hp":5,"text":"내가 신성 주문을 시전한 후에, 생명력 흡수 능력이 있는 2/2 의무병을 소환합니다.","parts":["내가 신성 주문을 시전한 후에,","생명력 흡수 능력이 있는 2/2 의무병을 소환합니다."]},
 {"id":"JAIL_330","name":"달라란 용사","set":"보랏빛 요새 탈출 작전","classes":["PALADIN"],"cost":4,"atk":3,"hp":3,"text":"천상의 보호막, 도발 이 하수인이 능력치를 얻은 후 추가로 +1/+1을 얻습니다. (어디에 있든)","parts":null},
@@ -826,7 +826,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CATA_160","name":"이글거리는 약탈자","set":"대격변","classes":["WARRIOR"],"cost":4,"atk":4,"hp":3,"text":"전투의 함성: {0}|1(을,를) 예고합니다. 그 병사에게 속공 능력을 부여합니다.","parts":null},
 {"id":"JAIL_719","name":"이리다 신시커","set":"보랏빛 요새 탈출 작전","classes":["DEMONHUNTER"],"cost":4,"atk":7,"hp":7,"text":"생명력 흡수. 전투의 함성: 내 덱을 카드 1장을 제외하고 공허로 보냅니다. 내 턴이 시작될 때, 공허에서 카드를 2장 얻습니다.","parts":null},
 {"id":"CATA_615","name":"저주받은 왕 겐","set":"대격변","classes":["NEUTRAL"],"cost":4,"atk":5,"hp":4,"text":"내 손에 있을 때, 손에 있는 다른 카드들의 비용이 모두 짝수거나 모두 홀수면, 6/5 늑대인간 왕으로 변신합니다.","parts":null},
-{"id":"TIME_017","name":"전차 기술자","set":"시간의 길 너머로","classes":["PALADIN"],"cost":4,"atk":2,"hp":1,"text":"천상의 보호막, 죽음의 메아리: 천상의 보호막 능력이 있는 7/7 전차를 소환합니다.","parts":null},
+{"id":"TIME_017","name":"전차 기술자","set":"시간의 길 너머로","classes":["PALADIN"],"cost":4,"atk":2,"hp":1,"text":"천상의 보호막, 죽음의 메아리: 천상의 보호막 능력이 있는 7/7 전차를 소환합니다.","parts":["천상의 보호막, 죽음의 메아리:","천상의 보호막 능력이 있는 7/7 전차를 소환합니다."],"prototypeOnly":true},
 {"id":"TIME_427","name":"정화하는 빛의 정령","set":"시간의 길 너머로","classes":["PRIEST"],"cost":4,"atk":2,"hp":3,"text":"생명력 흡수, 전투의 함성: 이 하수인의 생명력만큼 적 하수인에게 피해를 줍니다.","parts":null},
 {"id":"CATA_216","name":"정화하는 성직자","set":"대격변","classes":["PRIEST"],"cost":4,"atk":4,"hp":5,"text":"전투의 함성: 생명력을 회복시키는 내 카드와 능력들이 이번 게임 동안 생명력을 2 더 회복시킵니다.","parts":null},
 {"id":"JAIL_851","name":"조사관 멀록 홈즈","set":"보랏빛 요새 탈출 작전","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":5,"text":"전투의 함성: 적의 손에 있는 카드를 조사합니다. 적이 다음 턴에 그 이름의 카드를 내면, 동전을 3개 얻습니다.","parts":null},
@@ -844,7 +844,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TLC_102","name":"토르가","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":4,"atk":2,"hp":7,"text":"전투의 함성: 유사 카드를 뽑고 그 카드를 활성화하는 카드를 추가로 뽑습니다.","parts":null},
 {"id":"FIR_958","name":"틴드랄 세이지스위프트","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":3,"text":"죽음의 메아리: 모든 적에게 피해를 1 줍니다. 상대편의 턴이면, 피해를 4 줍니다.","parts":null},
 {"id":"CATA_EVENT_001","name":"파괴의 불사조","set":"이벤트","classes":["WARLOCK"],"cost":4,"atk":5,"hp":5,"text":"전투의 함성: 내 손에 있는 카드를 선택하여 불사릅니다. 3턴 후에, 그 카드를 버리고 이 하수인을 복사하여 소환합니다.","parts":null},
-{"id":"EDR_800","name":"팔랑날개 수호자","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":4,"text":"도발, 천상의 보호막 전투의 함성: 내 영웅 능력을 연마합니다.","parts":null},
+{"id":"EDR_800","name":"팔랑날개 수호자","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":4,"atk":4,"hp":4,"text":"도발, 천상의 보호막 전투의 함성: 내 영웅 능력을 연마합니다.","parts":["도발, 천상의 보호막 전투의 함성:","내 영웅 능력을 연마합니다."],"prototypeOnly":true},
 {"id":"CORE_WW_329","name":"폭파용 투척로봇","set":"핵심","classes":["WARRIOR"],"cost":4,"atk":3,"hp":4,"text":"도발, 전투의 함성: 내 손에 있는 모든 도발 하수인에게 +2/+2를 부여합니다.","parts":["도발, 전투의 함성:","내 손에 있는 모든 도발 하수인에게 +2/+2를 부여합니다."]},
 {"id":"MEND_503","name":"폭풍 바늘","set":"대격변","classes":["MAGE"],"cost":4,"atk":3,"hp":5,"text":"전투의 함성: 이번 게임에서 내 지맥들이 한 번 더 발동합니다.","parts":null},
 {"id":"CATA_724","name":"폭풍술사","set":"대격변","classes":["SHAMAN"],"cost":4,"atk":7,"hp":7,"text":"죽음의 메아리: 과부하된 내 마나 수정이 모두 잠금 해제됩니다. 과부하: (3)","parts":null},
@@ -902,7 +902,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CORE_CFM_344","name":"비성 핀자","set":"핵심","classes":["NEUTRAL"],"cost":5,"atk":3,"hp":5,"text":"은신, 이 하수인은 공격하여 다른 하수인을 처치할 때마다 내 덱에서 멀록을 2마리 소환합니다.","parts":null},
 {"id":"TIME_047","name":"사악한 코요테","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":5,"atk":5,"hp":3,"text":"은신, 이번 턴에 적 영웅이 피해를 받을 때마다 비용이 (1) 감소합니다.","parts":null},
 {"id":"FIR_901","name":"서리불꽃 어미","set":"에메랄드의 꿈 속으로","classes":["DEATHKNIGHT"],"cost":5,"atk":4,"hp":4,"text":"전투의 함성: 내 손에 어둠의 선물 능력이 있는 하수인이 있으면 도발 능력이 있는 4/4 용족을 둘 소환합니다.","parts":["전투의 함성: 내 손에 어둠의 선물 능력이 있는 하수인이 있으면","도발 능력이 있는 4/4 용족을 둘 소환합니다."]},
-{"id":"CAP_106","name":"선장 크롤리","set":"보랏빛 요새 탈출 작전","classes":["WARRIOR"],"cost":5,"atk":4,"hp":5,"text":"내 포대장들이 1발을 추가로 발사합니다. 전투의 함성: 1/1 포대장을 둘 소환합니다.","parts":null},
+{"id":"CAP_106","name":"선장 크롤리","set":"보랏빛 요새 탈출 작전","classes":["WARRIOR"],"cost":5,"atk":4,"hp":5,"text":"내 포대장들이 1발을 추가로 발사합니다. 전투의 함성: 1/1 포대장을 둘 소환합니다.","parts":["내 포대장들이 1발을 추가로 발사합니다.","전투의 함성: 1/1 포대장을 둘 소환합니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"TLC_467","name":"속삭이는 돌","set":"운고로의 잃어버린 도시","classes":["WARLOCK"],"cost":5,"atk":0,"hp":8,"text":"도발, 죽음의 메아리: 무작위 지옥 주문을 2개 얻습니다. 그 주문들이 마나 대신 생명력을 비용으로 사용합니다.","parts":null},
 {"id":"EDR_271","name":"숲 구체자","set":"에메랄드의 꿈 속으로","classes":["DRUID"],"cost":5,"atk":3,"hp":6,"text":"내가 자연 주문을 시전한 후에 \"죽음의 메아리: 무작위 자연 주문을 얻음\" 능력이 있는 2/2 나무정령을 소환합니다.","parts":null},
 {"id":"CORE_REV_946","name":"스팀청소로봇","set":"핵심","classes":["NEUTRAL"],"cost":5,"atk":5,"hp":5,"text":"전투의 함성: 각 플레이어의 덱에서 게임이 시작됐을 때 없던 카드를 모두 파괴합니다.","parts":null},
@@ -915,7 +915,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CORE_BAR_313","name":"안쉬의 사제","set":"핵심","classes":["PRIEST"],"cost":5,"atk":5,"hp":5,"text":"도발, 전투의 함성: 이번 턴에 생명력을 회복했으면 +3/+3을 얻습니다.","parts":["도발, 전투의 함성: 이번 턴에 생명력을 회복했으면","+3/+3을 얻습니다."]},
 {"id":"TIME_055","name":"알 수 없는 여행자","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":5,"atk":4,"hp":5,"text":"이 하수인이 피해를 받고 생존한 후에 비용이 7인 무작위 하수인으로 변신합니다.","parts":null},
 {"id":"EDR_493","name":"알라라시","set":"에메랄드의 꿈 속으로","classes":["DEMONHUNTER"],"cost":5,"atk":5,"hp":5,"text":"전투의 함성: 내 손에 있는 하수인들을 무작위 악마로 변신시킵니다.(실제 능력치와 비용은 변하지 않습니다.)\u003c/I>","parts":null},
-{"id":"BE_270","name":"얼음띠 마법사","set":"검은 제국의 지배","classes":["MAGE"],"cost":5,"atk":2,"hp":4,"text":"전투의 함성: 카드를 2장 뽑습니다. 하수인이 아닌 카드의 수만큼 3/6 물의 정령을 소환합니다.","parts":["전투의 함성: 카드를 2장 뽑습니다.","하수인이 아닌 카드의 수만큼 3/6 물의 정령을 소환합니다."]},
+{"id":"BE_270","name":"얼음띠 마법사","set":"검은 제국의 지배","classes":["MAGE"],"cost":5,"atk":2,"hp":4,"text":"전투의 함성: 카드를 2장 뽑습니다. 하수인이 아닌 카드의 수만큼 3/6 물의 정령을 소환합니다.","parts":["전투의 함성: 카드를 2장 뽑습니다.","하수인이 아닌 카드의 수만큼 3/6 물의 정령을 소환합니다."],"partKind":"effects"},
 {"id":"TIME_002","name":"영겁의 마술사","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":5,"atk":3,"hp":5,"text":"되돌리기, 전투의 함성: 내 직업의 무작위 주문을 둘 얻습니다.","parts":null},
 {"id":"EDR_979","name":"옛적의 고대정령","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":5,"atk":5,"hp":5,"text":"2턴 동안 휴면합니다. 휴면 상태라면, 내 턴이 끝날 때 방어도를 3 얻고 카드를 뽑습니다.","parts":null},
 {"id":"EDR_519","name":"위습기수","set":"에메랄드의 꿈 속으로","classes":["MAGE"],"cost":5,"atk":4,"hp":4,"text":"전투의 함성: 내 영웅 능력을 연마하여 발동시킵니다.","parts":null},
@@ -924,12 +924,12 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TLC_482","name":"잿가루발톱","set":"운고로의 잃어버린 도시","classes":["SHAMAN"],"cost":5,"atk":3,"hp":4,"text":"전투의 함성: 2/1 지글거리는 잿불을 둘 소환합니다. 유사: 내 지글거리는 잿불들의 죽음의 메아리를 발동합니다.","parts":null},
 {"id":"CORE_KAR_061","name":"전시 관리인","set":"핵심","classes":["NEUTRAL"],"cost":5,"atk":4,"hp":6,"text":"도발, 전투의 함성: 야수, 용족, 멀록을 뽑습니다.","parts":["도발, 전투의 함성:","야수, 용족, 멀록을 뽑습니다."]},
 {"id":"BE_093","name":"정신부패 정복자","set":"검은 제국의 지배","classes":["WARLOCK"],"cost":5,"atk":4,"hp":5,"text":"전투의 함성: 양옆의 하수인을 이 하수인으로 변신시킵니다.","parts":null},
-{"id":"BE_749","name":"젤노스 거수","set":"검은 제국의 지배","classes":["DEATHKNIGHT"],"cost":5,"atk":5,"hp":3,"text":"죽음의 메아리: 비용이 1인 무작위 하수인을 둘 소환합니다. 내 하수인들에게 공격력을 +3 부여합니다.","parts":["죽음의 메아리: 비용이 1인 무작위 하수인을 둘 소환합니다.","내 하수인들에게 공격력을 +3 부여합니다."]},
+{"id":"BE_749","name":"젤노스 거수","set":"검은 제국의 지배","classes":["DEATHKNIGHT"],"cost":5,"atk":5,"hp":3,"text":"죽음의 메아리: 비용이 1인 무작위 하수인을 둘 소환합니다. 내 하수인들에게 공격력을 +3 부여합니다.","parts":["죽음의 메아리: 비용이 1인 무작위 하수인을 둘 소환합니다.","내 하수인들에게 공격력을 +3 부여합니다."],"partKind":"effects"},
 {"id":"MEND_041","name":"주름투성이 자연교감자","set":"대격변","classes":["DRUID"],"cost":5,"atk":3,"hp":7,"text":"도발, 전투의 함성: 내가 이전 턴에 하수인을 내지 않았다면, 마나 수정을 3개 회복합니다.","parts":null},
 {"id":"DINO_131","name":"지배당한 동물술사","set":"운고로의 잃어버린 도시","classes":["WARLOCK"],"cost":5,"atk":2,"hp":2,"text":"죽음의 메아리: 내 덱에서 무작위 야수를 소환하고 생명력 흡수를 부여합니다.","parts":null},
 {"id":"BE_256","name":"천공의 중재자","set":"검은 제국의 지배","classes":["MAGE"],"cost":5,"atk":5,"hp":4,"text":"전투의 함성과 죽음의 메아리: 비용이 3인 무작위 주문을 시전합니다.","parts":["전투의 함성과 죽음의 메아리:","비용이 3인 무작위 주문을 시전합니다."]},
 {"id":"CATA_478","name":"청동 구원자","set":"대격변","classes":["PALADIN"],"cost":5,"atk":3,"hp":3,"text":"내 턴이 끝날 때, 이 하수인과 능력치가 같은 용족을 소환합니다.","parts":["내 턴이 끝날 때,","이 하수인과 능력치가 같은 용족을 소환합니다."]},
-{"id":"TIME_720","name":"청동용군단 병사","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":5,"atk":5,"hp":3,"text":"도발, 전투의 함성: 이 하수인의 생명력이 2배가 됩니다.","parts":null},
+{"id":"TIME_720","name":"청동용군단 병사","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":5,"atk":5,"hp":3,"text":"도발, 전투의 함성: 이 하수인의 생명력이 2배가 됩니다.","parts":["도발, 전투의 함성:","이 하수인의 생명력이 2배가 됩니다."],"prototypeOnly":true},
 {"id":"BE_996","name":"최전방 철의 후예","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":5,"atk":3,"hp":5,"text":"내 턴에 적 하수인이 죽은 후 +2/+2와 무작위 추가 효과를 얻습니다.","parts":["내 턴에 적 하수인이 죽은 후","+2/+2와 무작위 추가 효과를 얻습니다."]},
 {"id":"EDR_230","name":"콩나무 투사","set":"에메랄드의 꿈 속으로","classes":["SHAMAN"],"cost":5,"atk":4,"hp":4,"text":"전투의 함성: 내 다음 하수인 셋에게 +4/+4를 부여합니다.","parts":["전투의 함성:","내 다음 하수인 셋에게 +4/+4를 부여합니다."]},
 {"id":"END_006","name":"크로니카르","set":"시간의 길 너머로","classes":["DEMONHUNTER"],"cost":5,"atk":3,"hp":5,"text":"전투의 함성: 이번 턴과 다음 턴, 그다음 턴에 내 영웅에게 공격력을 +3 부여합니다.","parts":null},
@@ -940,11 +940,11 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TIME_048","name":"태엽돌이 광전사","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":5,"atk":5,"hp":1,"text":"전투의 함성: 이번 게임에서 내가 진행한 턴마다 생명력을 +1 얻습니다.@ (@턴)","parts":null},
 {"id":"CS3_024","name":"탤런 폴드링","set":"핵심","classes":["NEUTRAL"],"cost":5,"atk":3,"hp":3,"text":"도발, 천상의 보호막 죽음의 메아리: 내 덱에서 비용이 가장 높은 하수인을 뽑습니다.","parts":["도발, 천상의 보호막 죽음의 메아리:","내 덱에서 비용이 가장 높은 하수인을 뽑습니다."]},
 {"id":"END_015","name":"트리에니움 렉스","set":"시간의 길 너머로","classes":["HUNTER"],"cost":5,"atk":5,"hp":5,"text":"유사 및 죽음의 메아리: 무작위 죽음의 메아리 하수인을 얻습니다. 그 하수인의 비용이 (2) 감소합니다.","parts":["유사 및 죽음의 메아리:","무작위 죽음의 메아리 하수인을 얻습니다. 그 하수인의 비용이 (2) 감소합니다."]},
-{"id":"CATA_586","name":"파괴의 불길","set":"대격변","classes":["WARRIOR"],"cost":5,"atk":3,"hp":3,"text":"피해를 받고 살아남은 후에, 파괴의 불길을 소환합니다. 죽음의 메아리: 무작위 적에게 피해를 2 줍니다.","parts":null},
+{"id":"CATA_586","name":"파괴의 불길","set":"대격변","classes":["WARRIOR"],"cost":5,"atk":3,"hp":3,"text":"피해를 받고 살아남은 후에, 파괴의 불길을 소환합니다. 죽음의 메아리: 무작위 적에게 피해를 2 줍니다.","parts":["피해를 받고 살아남은 후에, 파괴의 불길을 소환합니다.","죽음의 메아리: 무작위 적에게 피해를 2 줍니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"CORE_EX1_310","name":"파멸수호병","set":"핵심","classes":["WARLOCK"],"cost":5,"atk":5,"hp":7,"text":"돌진, 전투의 함성: 무작위로 카드를 2장 버립니다.","parts":["돌진, 전투의 함성:","무작위로 카드를 2장 버립니다."]},
-{"id":"EDR_110","name":"포자갈이","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":5,"atk":1,"hp":5,"text":"독성, 죽음의 메아리: 무작위 적 하수인에게 피해를 1 줍니다.","parts":null},
+{"id":"EDR_110","name":"포자갈이","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":5,"atk":1,"hp":5,"text":"독성, 죽음의 메아리: 무작위 적 하수인에게 피해를 1 줍니다.","parts":["독성, 죽음의 메아리:","무작위 적 하수인에게 피해를 1 줍니다."],"prototypeOnly":true},
 {"id":"TIME_217","name":"폭풍떼까마귀","set":"시간의 길 너머로","classes":["SHAMAN"],"cost":5,"atk":5,"hp":5,"text":"내가 이 하수인에게 자연 주문으로 피해를 줄 때마다 대신 비용이 5인 무작위 하수인을 소환합니다.","parts":null},
-{"id":"TLC_107","name":"폭풍의 양조사","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":5,"atk":3,"hp":6,"text":"이 하수인이 공격할 때마다 그 대상에게 먼저 피해를 3 줍니다. 유사: 속공을 얻습니다.","parts":null},
+{"id":"TLC_107","name":"폭풍의 양조사","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":5,"atk":3,"hp":6,"text":"이 하수인이 공격할 때마다 그 대상에게 먼저 피해를 3 줍니다. 유사: 속공을 얻습니다.","parts":["이 하수인이 공격할 때마다 그 대상에게 먼저 피해를 3 줍니다.","유사: 속공을 얻습니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"TIME_852","name":"하늘빛 여왕 신드라고사","set":"시간의 길 너머로","classes":["MAGE"],"cost":5,"atk":2,"hp":8,"text":"설화, 내 전장에 다른 용족이 있으면, 내 비전 주문들의 비용이 (2) 감소합니다.","parts":null},
 {"id":"EDR_845","name":"하뮬 룬토템","set":"에메랄드의 꿈 속으로","classes":["DRUID"],"cost":5,"atk":5,"hp":6,"text":"개전: 내 덱에 있는 모든 주문이 자연 주문이면 내 영웅 능력을 연마합니다. 주문을 3번 시전할 때마다 반복합니다.","parts":null},
 {"id":"BE_850t","name":"호기심 많은 암영스라소니","set":"검은 제국의 지배","classes":["DRUID"],"cost":5,"atk":2,"hp":5,"text":"도발, 전투의 함성: 속공 능력이 있는 {0}/{1} 야수를 소환합니다. (그 야수의 능력치는 이 하수인의 반대입니다!)","parts":null},
@@ -994,7 +994,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TIME_050","name":"자아가 있는 모래시계","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":6,"atk":4,"hp":9,"text":"속공, 이 하수인이 피해를 받고 생존한 후에 공격력과 생명력을 서로 바꿉니다.","parts":["속공, 이 하수인이 피해를 받고 생존한 후에","공격력과 생명력을 서로 바꿉니다."]},
 {"id":"FIR_940","name":"자칼리 화염마술사","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":6,"atk":4,"hp":4,"text":"전투의 함성: 내 손에 있는 모든 카드의 비용이 다르면, 그 카드들의 비용이 (2) 감소합니다.","parts":null},
 {"id":"TIME_033","name":"재생의 드루이드","set":"시간의 길 너머로","classes":["DRUID"],"cost":6,"atk":3,"hp":5,"text":"되돌리기, 전투의 함성: 무작위 자연 주문을 둘 시전합니다.","parts":null},
-{"id":"BE_550","name":"전차 연대","set":"검은 제국의 지배","classes":["HUNTER"],"cost":6,"atk":3,"hp":3,"text":"전투의 함성: 이 하수인을 둘 복사하여 소환합니다. 죽음의 메아리: 무작위 적에게 피해를 3 줍니다.","parts":["전투의 함성: 이 하수인을 둘 복사하여 소환합니다. 죽음의 메아리:","무작위 적에게 피해를 3 줍니다."]},
+{"id":"BE_550","name":"전차 연대","set":"검은 제국의 지배","classes":["HUNTER"],"cost":6,"atk":3,"hp":3,"text":"전투의 함성: 이 하수인을 둘 복사하여 소환합니다. 죽음의 메아리: 무작위 적에게 피해를 3 줍니다.","parts":["전투의 함성: 이 하수인을 둘 복사하여 소환합니다.","죽음의 메아리: 무작위 적에게 피해를 3 줍니다."],"partKind":"effects"},
 {"id":"TLC_479","name":"죽음부패 아귀","set":"운고로의 잃어버린 도시","classes":["WARLOCK"],"cost":6,"atk":2,"hp":8,"text":"도발, 죽음의 메아리: 무작위 지옥 야수를 소환합니다.","parts":["도발, 죽음의 메아리:","무작위 지옥 야수를 소환합니다."]},
 {"id":"JAIL_398","name":"지옥불임프","set":"보랏빛 요새 탈출 작전","classes":["NEUTRAL"],"cost":6,"atk":6,"hp":6,"text":"죽음의 메아리: 다른 모든 캐릭터에게 피해를 3 줍니다. (손이나 덱에서도 발동됩니다.)","parts":null},
 {"id":"CATA_552","name":"칠흑비늘 정찰병","set":"대격변","classes":["HUNTER"],"cost":6,"atk":4,"hp":4,"text":"전투의 함성: 이 하수인의 공격력만큼 피해를 줍니다. (내 손에 있는 동안 용족을 내면 8/8 용족이 됩니다!)","parts":null},
@@ -1012,7 +1012,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"END_030","name":"폭주하는 용뿔두꺼비","set":"시간의 길 너머로","classes":["SHAMAN"],"cost":6,"atk":4,"hp":6,"text":"모면, 도발. 이번 게임에서 과부하된 내 마나 수정 하나당 비용이 (1)씩 감소합니다.","parts":null},
 {"id":"JAIL_007","name":"하수도 임프","set":"보랏빛 요새 탈출 작전","classes":["NEUTRAL"],"cost":6,"atk":4,"hp":6,"text":"도발, 죽음의 메아리: 모든 적에게 피해를 2 줍니다.","parts":["도발, 죽음의 메아리:","모든 적에게 피해를 2 줍니다."]},
 {"id":"TLC_401","name":"혹한 스테고돈","set":"운고로의 잃어버린 도시","classes":["DEATHKNIGHT"],"cost":6,"atk":6,"hp":3,"text":"죽음의 메아리: 무작위 적 셋에게 피해를 6 줍니다.","parts":null},
-{"id":"EDR_810","name":"흉측한 허물","set":"에메랄드의 꿈 속으로","classes":["DEATHKNIGHT"],"cost":6,"atk":3,"hp":5,"text":"내 거머리들이 희생자의 생명력을 1 더 훔칩니다. 전투의 함성: 0/2 거머리를 둘 소환합니다.","parts":null},
+{"id":"EDR_810","name":"흉측한 허물","set":"에메랄드의 꿈 속으로","classes":["DEATHKNIGHT"],"cost":6,"atk":3,"hp":5,"text":"내 거머리들이 희생자의 생명력을 1 더 훔칩니다. 전투의 함성: 0/2 거머리를 둘 소환합니다.","parts":["내 거머리들이 희생자의 생명력을 1 더 훔칩니다.","전투의 함성: 0/2 거머리를 둘 소환합니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"CATA_300","name":"검은 피","set":"대격변","classes":["PRIEST"],"cost":7,"atk":5,"hp":9,"text":"거수 +3. 내가 캐릭터의 생명력을 회복한 후, 무작위 적 하수인을 공격합니다.","parts":["거수 +3. 내가 캐릭터의 생명력을 회복한 후,","무작위 적 하수인을 공격합니다."]},
 {"id":"TLC_829","name":"게걸스러운 데빌사우루스","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":7,"atk":3,"hp":3,"text":"전투의 함성: 하수인을 처치합니다. 유사: 그 하수인의 능력치를 얻습니다.","parts":null},
 {"id":"JAIL_435","name":"광란하는 사냥개","set":"보랏빛 요새 탈출 작전","classes":["WARRIOR"],"cost":7,"atk":4,"hp":12,"text":"준비, 전투의 함성: 모든 적 하수인이 이 하수인을 공격하게 만듭니다.","parts":["준비, 전투의 함성:","모든 적 하수인이 이 하수인을 공격하게 만듭니다."]},
@@ -1027,7 +1027,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TIME_704","name":"명가의 스승","set":"시간의 길 너머로","classes":["DRUID"],"cost":7,"atk":6,"hp":6,"text":"전투의 함성: 2/2 제자를 얻습니다. 비용이 (7) 이상인 과거의 주문을 발견해 그 제자에게 가르칩니다.","parts":null},
 {"id":"MEND_046","name":"바샤나 룬토템","set":"대격변","classes":["DRUID"],"cost":7,"atk":4,"hp":4,"text":"전투의 함성: 2/2 나무정령을 셋 얻습니다. 그 나무정령들에게 마나의 합이 12인 자연 주문들을 새깁니다.","parts":null},
 {"id":"CORE_BT_493","name":"분노의 여사제","set":"핵심","classes":["DEMONHUNTER"],"cost":7,"atk":6,"hp":7,"text":"내 턴이 끝날 때, 모든 적에게 6의 피해를 무작위로 나누어 입힙니다.","parts":["내 턴이 끝날 때,","모든 적에게 6의 피해를 무작위로 나누어 입힙니다."]},
-{"id":"END_004","name":"분노의 잔재","set":"시간의 길 너머로","classes":["DEATHKNIGHT","DEMONHUNTER"],"cost":7,"atk":5,"hp":4,"text":"이번 턴에 죽은 하수인 하나당 비용이 (1)씩 감소합니다. 전투의 함성: 카드를 2장 뽑습니다.","parts":["이번 턴에 죽은 하수인 하나당 비용이 (1)씩 감소합니다. 전투의 함성:","카드를 2장 뽑습니다."]},
+{"id":"END_004","name":"분노의 잔재","set":"시간의 길 너머로","classes":["DEATHKNIGHT","DEMONHUNTER"],"cost":7,"atk":5,"hp":4,"text":"이번 턴에 죽은 하수인 하나당 비용이 (1)씩 감소합니다. 전투의 함성: 카드를 2장 뽑습니다.","parts":["이번 턴에 죽은 하수인 하나당 비용이 (1)씩 감소합니다.","전투의 함성: 카드를 2장 뽑습니다."],"partKind":"effects"},
 {"id":"CATA_488","name":"불카노스","set":"대격변","classes":["MAGE"],"cost":7,"atk":4,"hp":8,"text":"거수 +2, 내 턴이 끝날 때, 다른 모든 하수인에게 피해를 3 줍니다.","parts":["거수 +2, 내 턴이 끝날 때,","다른 모든 하수인에게 피해를 3 줍니다."]},
 {"id":"EDR_892","name":"사나운 지옥박쥐","set":"에메랄드의 꿈 속으로","classes":["DEMONHUNTER"],"cost":7,"atk":7,"hp":5,"text":"죽음의 메아리: 비용이 (5) 이상인 다른 아군 죽음의 메아리 하수인을 부활시킵니다. 그 하수인을 복사하여 소환합니다.","parts":null},
 {"id":"CATA_591","name":"사령관 게돈","set":"대격변","classes":["WARRIOR"],"cost":7,"atk":7,"hp":7,"text":"전투의 함성: 매 턴마다 카드를 뽑지 않고, 그 대신 내 덱에서 카드를 발견합니다. 그 카드의 비용이 (3) 감소합니다. 나머지 카드는 파괴됩니다.","parts":null},
@@ -1048,7 +1048,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"CORE_SCH_717","name":"열쇠지기 알라바스터","set":"핵심","classes":["NEUTRAL"],"cost":7,"atk":6,"hp":8,"text":"상대편이 카드를 뽑을 때마다 그 카드를 복사하여 내 손으로 가져옵니다. 그 카드의 비용이 (1)이 됩니다.","parts":null},
 {"id":"CS3_035","name":"영원한 노즈도르무","set":"핵심","classes":["NEUTRAL"],"cost":7,"atk":8,"hp":8,"text":"개전: 두 플레이어 모두 덱에 이 하수인이 있다면, 플레이어들의 턴 제한 시간이 15초로 감소합니다.","parts":null},
 {"id":"JAIL_430","name":"영혼절단 아잘리나","set":"보랏빛 요새 탈출 작전","classes":["PRIEST"],"cost":7,"atk":7,"hp":7,"text":"내 영웅의 시작 생명력이 40이 됩니다. 덱이 카드 20장과 적의 카드를 복사한 카드 20장으로 구성됩니다. 전투의 함성: 내 손이 가득 찰 때까지 카드를 뽑습니다.","parts":null},
-{"id":"JAIL_912","name":"예언자","set":"보랏빛 요새 탈출 작전","classes":["PRIEST"],"cost":7,"atk":6,"hp":6,"text":"준비, 도발, 죽음의 메아리: 내 영웅의 생명력을 6 회복시킵니다. 비용이 6인 무작위 하수인을 소환합니다.","parts":["준비, 도발, 죽음의 메아리: 내 영웅의 생명력을 6 회복시킵니다.","비용이 6인 무작위 하수인을 소환합니다."]},
+{"id":"JAIL_912","name":"예언자","set":"보랏빛 요새 탈출 작전","classes":["PRIEST"],"cost":7,"atk":6,"hp":6,"text":"준비, 도발, 죽음의 메아리: 내 영웅의 생명력을 6 회복시킵니다. 비용이 6인 무작위 하수인을 소환합니다.","parts":["준비, 도발, 죽음의 메아리: 내 영웅의 생명력을 6 회복시킵니다.","비용이 6인 무작위 하수인을 소환합니다."],"partKind":"effects"},
 {"id":"EDR_844","name":"용군단의 전령 나랄렉스","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":7,"atk":7,"hp":7,"text":"매 턴마다 내가 처음 내는 용족의 비용이 (1)이 됩니다.","parts":null},
 {"id":"CATA_550","name":"용암아귀","set":"대격변","classes":["HUNTER"],"cost":7,"atk":2,"hp":12,"text":"거수 +99, 자리가 있을 때 남은 부속 기관을 소환합니다.","parts":null},
 {"id":"EDR_465","name":"이손드레","set":"에메랄드의 꿈 속으로","classes":["WARRIOR"],"cost":7,"atk":8,"hp":5,"text":"도발, 죽음의 메아리: 이번 게임에서 이손드레가 죽은 횟수만큼 무작위 용족을 소환합니다.","parts":null},
@@ -1060,7 +1060,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"DINO_409","name":"테키사우루스","set":"운고로의 잃어버린 도시","classes":["MAGE"],"cost":7,"atk":3,"hp":6,"text":"도발, 게임이 시작됐을 때 내 덱에 없던 카드를 낼 때마다, 비용이 (1)씩 감소합니다.","parts":null},
 {"id":"EDR_464","name":"티란데","set":"에메랄드의 꿈 속으로","classes":["PRIEST"],"cost":7,"atk":5,"hp":7,"text":"전투의 함성: 다음에 내가 내는 주문 3개가 두 번 시전됩니다.","parts":["전투의 함성:","다음에 내가 내는 주문 3개가 두 번 시전됩니다."]},
 {"id":"TIME_850","name":"피의 투사 로고쉬","set":"시간의 길 너머로","classes":["WARRIOR"],"cost":7,"atk":7,"hp":7,"text":"설화, 속공, 죽음의 메아리: 내 손에서 피의 투사를 소환합니다. 그 투사가 +5/+5를 얻고 무작위 적을 공격합니다.","parts":null},
-{"id":"TIME_004","name":"합일점 파괴자","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":7,"atk":7,"hp":7,"text":"되돌리기, 전투의 함성: 무작위 적에게 피해를 7 줍니다.","parts":null},
+{"id":"TIME_004","name":"합일점 파괴자","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":7,"atk":7,"hp":7,"text":"되돌리기, 전투의 함성: 무작위 적에게 피해를 7 줍니다.","parts":["되돌리기, 전투의 함성:","무작위 적에게 피해를 7 줍니다."],"prototypeOnly":true},
 {"id":"BE_209","name":"해일의 군주 넵튤론","set":"검은 제국의 지배","classes":["SHAMAN"],"cost":7,"atk":7,"hp":7,"text":"전투의 함성: 이번 게임 동안 내가 소환하는 정령들의 능력치를 5/5로 만듭니다.","parts":null},
 {"id":"END_033","name":"혜안의 비단비룡","set":"시간의 길 너머로","classes":["NEUTRAL"],"cost":7,"atk":5,"hp":8,"text":"모면, 내 손에 다른 용족이 있으면 비용이 (3) 감소합니다.","parts":null},
 {"id":"TLC_810","name":"고위 이교도 헤렌","set":"운고로의 잃어버린 도시","classes":["DEATHKNIGHT"],"cost":8,"atk":8,"hp":6,"text":"전투의 함성: 내 덱에서 죽음의 메아리 하수인을 둘 소환합니다. 그 하수인들이 싸웁니다!","parts":null},
@@ -1074,7 +1074,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"BE_560","name":"놋쇠너클 싸움꾼","set":"검은 제국의 지배","classes":["WARRIOR"],"cost":8,"atk":6,"hp":6,"text":"돌진, 전투의 함성: 내 방어도가 10 이상이면 +4/+4를 얻습니다.","parts":null},
 {"id":"CORE_SCH_181","name":"대마녀 윌로우","set":"핵심","classes":["WARLOCK"],"cost":8,"atk":5,"hp":5,"text":"전투의 함성: 내 손과 덱에 있는 무작위 악마를 소환합니다.","parts":null},
 {"id":"FIR_953","name":"마그마 사냥개","set":"에메랄드의 꿈 속으로","classes":["HUNTER"],"cost":8,"atk":5,"hp":8,"text":"속공, 이 하수인이 다른 하수인을 공격하고 생존한 후, 모든 적에게 이 하수인의 공격력만큼의 피해를 나누어 입힙니다.","parts":["속공, 이 하수인이 다른 하수인을 공격하고 생존한 후,","모든 적에게 이 하수인의 공격력만큼의 피해를 나누어 입힙니다."]},
-{"id":"CORE_SW_068","name":"모아그 괴철로마귀","set":"핵심","classes":["NEUTRAL"],"cost":8,"atk":8,"hp":8,"text":"도발, 죽음의 메아리: 방어도를 8 얻습니다.","parts":null},
+{"id":"CORE_SW_068","name":"모아그 괴철로마귀","set":"핵심","classes":["NEUTRAL"],"cost":8,"atk":8,"hp":8,"text":"도발, 죽음의 메아리: 방어도를 8 얻습니다.","parts":["도발, 죽음의 메아리:","방어도를 8 얻습니다."],"prototypeOnly":true},
 {"id":"TIME_872","name":"무패의 용사","set":"시간의 길 너머로","classes":["WARRIOR"],"cost":8,"atk":13,"hp":13,"text":"속공, 전투의 함성: 상대편의 전장을 비용이 1인 무작위 하수인으로 가득 채웁니다.","parts":["속공, 전투의 함성:","상대편의 전장을 비용이 1인 무작위 하수인으로 가득 채웁니다."]},
 {"id":"JAIL_852","name":"밀수왕 토그왜글","set":"보랏빛 요새 탈출 작전","classes":["NEUTRAL"],"cost":8,"atk":5,"hp":5,"text":"전투의 함성: 두 플레이어의 손에 있는 카드를 함께 뒤섞습니다.","parts":null},
 {"id":"TLC_600","name":"바람봉우리 비룡","set":"운고로의 잃어버린 도시","classes":["WARRIOR"],"cost":8,"atk":6,"hp":6,"text":"전투의 함성: 피해를 5 주고 방어도를 5 얻습니다. 유사: 비용이 (2) 감소합니다.","parts":null},
@@ -1085,7 +1085,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"BE_852","name":"아뮤내","set":"검은 제국의 지배","classes":["DRUID"],"cost":8,"atk":6,"hp":6,"text":"전투의 함성: 이번 게임 동안 내가 죽음의 메아리 하수인을 낸 후에, 그 하수인을 복사하여 소환합니다.","parts":null},
 {"id":"DINO_132","name":"아스픽시오돈","set":"운고로의 잃어버린 도시","classes":["WARLOCK"],"cost":8,"atk":6,"hp":12,"text":"도발, 내 턴이 끝날 때, 무작위 적 하수인에게 피해를 5 줍니다.","parts":["도발, 내 턴이 끝날 때,","무작위 적 하수인에게 피해를 5 줍니다."]},
 {"id":"EDR_430","name":"아에시나","set":"에메랄드의 꿈 속으로","classes":["MAGE"],"cost":8,"atk":6,"hp":8,"text":"전투의 함성: 이번 게임에 아군 하수인이 20마리 죽었다면, 모든 적에게 20의 피해를 무작위로 나누어 입힙니다.@ ({0}마리 남음!)@ (준비 완료!)","parts":null},
-{"id":"BE_721","name":"아퀴르 거수","set":"검은 제국의 지배","classes":["ROGUE"],"cost":8,"atk":4,"hp":5,"text":"이번 턴에 낸 연계 카드 하나당 비용이 (2)씩 감소합니다. 전투의 함성: 카드를 2장 뽑습니다.","parts":null},
+{"id":"BE_721","name":"아퀴르 거수","set":"검은 제국의 지배","classes":["ROGUE"],"cost":8,"atk":4,"hp":5,"text":"이번 턴에 낸 연계 카드 하나당 비용이 (2)씩 감소합니다. 전투의 함성: 카드를 2장 뽑습니다.","parts":["이번 턴에 낸 연계 카드 하나당 비용이 (2)씩 감소합니다.","전투의 함성: 카드를 2장 뽑습니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"DINO_431","name":"아틀라사우루스","set":"운고로의 잃어버린 도시","classes":["PRIEST"],"cost":8,"atk":5,"hp":10,"text":"도발, 죽음의 메아리: 비용이 (5) 이상인 무작위 도발 하수인을 소환합니다.","parts":["도발, 죽음의 메아리:","비용이 (5) 이상인 무작위 도발 하수인을 소환합니다."]},
 {"id":"TIME_022","name":"영생의 뱀","set":"시간의 길 너머로","classes":["DEMONHUNTER"],"cost":8,"atk":7,"hp":9,"text":"속공 휴면 상태인 하수인이 있으면 비용이 (4) 감소합니다.","parts":null},
 {"id":"EDR_259","name":"우르솔","set":"에메랄드의 꿈 속으로","classes":["PALADIN"],"cost":8,"atk":9,"hp":7,"text":"전투의 함성: 내 손에서 비용이 가장 높은 주문을 3턴 지속되는 오라로 시전합니다.","parts":null},
@@ -1119,7 +1119,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"EDR_031","name":"온아라","set":"에메랄드의 꿈 속으로","classes":["SHAMAN"],"cost":9,"atk":5,"hp":11,"text":"내 턴이 끝날 때, 내 다음 카드 3장을 냅니다.","parts":["내 턴이 끝날 때,","내 다음 카드 3장을 냅니다."]},
 {"id":"EDR_819","name":"우르속","set":"에메랄드의 꿈 속으로","classes":["DEATHKNIGHT"],"cost":9,"atk":6,"hp":14,"text":"전투의 함성: 다른 모든 하수인을 공격합니다. 죽음의 메아리: 이 하수인이 처치한 모든 하수인을 부활시킵니다.","parts":null},
 {"id":"JAIL_118","name":"임박한 죽음 브아마","set":"보랏빛 요새 탈출 작전","classes":["PALADIN"],"cost":9,"atk":5,"hp":5,"text":"전투의 함성: 성기사 하수인이 아닌 모든 하수인을 처치합니다.","parts":null},
-{"id":"CORE_CATA_001","name":"티콘드리우스","set":"핵심","classes":["DEMONHUNTER"],"cost":9,"atk":9,"hp":8,"text":"내 영웅이 면역 상태가 됩니다. 전투의 함성: 이번 턴의 내 다음 악마의 비용이 (0)이 됩니다.","parts":["내 영웅이 면역 상태가 됩니다. 전투의 함성:","이번 턴의 내 다음 악마의 비용이 (0)이 됩니다."]},
+{"id":"CORE_CATA_001","name":"티콘드리우스","set":"핵심","classes":["DEMONHUNTER"],"cost":9,"atk":9,"hp":8,"text":"내 영웅이 면역 상태가 됩니다. 전투의 함성: 이번 턴의 내 다음 악마의 비용이 (0)이 됩니다.","parts":["내 영웅이 면역 상태가 됩니다.","전투의 함성: 이번 턴의 내 다음 악마의 비용이 (0)이 됩니다."],"partKind":"effects"},
 {"id":"BE_784","name":"티탄의 천적, 이샤라즈","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":9,"atk":10,"hp":10,"text":"고대 신, 전투의 함성: 이번 게임에 하수인에 마나를 30 소모했으면, 1턴 동안 면역을 얻습니다. ({0} 남음!)@고대 신, 전투의 함성: 이번 게임에 하수인에 마나를 30 소모했으면, 1턴 동안 면역을 얻습니다. (준비 완료!)@고대 신, 전투의 함성: 이번 게임에 하수인에 마나를 30 소모했으면, 1턴 동안 면역을 얻습니다.","parts":null},
 {"id":"FIR_778","name":"파괴의 화신","set":"에메랄드의 꿈 속으로","classes":["SHAMAN"],"cost":9,"atk":9,"hp":9,"text":"도발, 죽음의 메아리: 모든 적 하수인에게 피해를 9 줍니다.","parts":["도발, 죽음의 메아리:","모든 적 하수인에게 피해를 9 줍니다."]},
 {"id":"CORE_WON_145","name":"하스스톤의 화신","set":"핵심","classes":["NEUTRAL"],"cost":9,"atk":5,"hp":5,"text":"전투의 함성: 정규 카드 팩을 개봉합니다. 그 팩에서 나오는 모든 카드를 냅니다.","parts":null},
@@ -1128,7 +1128,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 {"id":"TLC_243","name":"회전하는 폭풍비룡","set":"운고로의 잃어버린 도시","classes":["NEUTRAL"],"cost":9,"atk":8,"hp":8,"text":"속공, 질풍 유사: 이번 턴에 면역을 얻습니다.","parts":null},
 {"id":"BE_009","name":"흑막 요그사론","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":9,"atk":7,"hp":5,"text":"고대 신, 전투의 함성: 내 턴을 끝냅니다. 요그사론이 나를 대신해서 한 번 더 턴을 진행합니다. (게임당 1회만 가능)","parts":null},
 {"id":"CORE_ICC_214","name":"흑요석 석상","set":"핵심","classes":["PRIEST"],"cost":9,"atk":4,"hp":8,"text":"도발, 생명력 흡수 죽음의 메아리: 무작위 적 하수인을 처치합니다.","parts":["도발, 생명력 흡수 죽음의 메아리:","무작위 적 하수인을 처치합니다."]},
-{"id":"FIR_959","name":"광염의 피락","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":10,"atk":7,"hp":7,"text":"화염 주문에 면역입니다. 전투의 함성: 무작위 적들에게 마나의 합이 15인 화염 주문들을 시전합니다.","parts":null},
+{"id":"FIR_959","name":"광염의 피락","set":"에메랄드의 꿈 속으로","classes":["NEUTRAL"],"cost":10,"atk":7,"hp":7,"text":"화염 주문에 면역입니다. 전투의 함성: 무작위 적들에게 마나의 합이 15인 화염 주문들을 시전합니다.","parts":["화염 주문에 면역입니다.","전투의 함성: 무작위 적들에게 마나의 합이 15인 화염 주문들을 시전합니다."],"partKind":"effects","prototypeOnly":true},
 {"id":"BE_732","name":"꿰뚫는 자 크론","set":"검은 제국의 지배","classes":["HUNTER"],"cost":10,"atk":6,"hp":6,"text":"전투의 함성: 내 모든 하수인이 무작위 적에게 자신의 공격력만큼 피해를 줍니다.","parts":null},
 {"id":"BE_036","name":"마더","set":"검은 제국의 지배","classes":["NEUTRAL"],"cost":10,"atk":9,"hp":7,"text":"전투의 함성: 내 손에 있는 카드의 비용을 (5) 감소시킵니다. 양옆으로 이어지며 카드마다 감소량이 (1)씩 줄어듭니다.","parts":null},
 {"id":"CATA_570","name":"모르초크","set":"대격변","classes":["SHAMAN"],"cost":10,"atk":10,"hp":10,"text":"전투의 함성: 카드를 뽑고 그 카드의 비용을 (10) 감소시킵니다. 초과한 비용 감소가 있으면 반복합니다.","parts":null},
@@ -1181,7 +1181,7 @@ const catalogText = document.querySelector('#catalog-text');
 const catalogCost = document.querySelector('#catalog-cost');
 const catalogCandidates = document.querySelector('#catalog-candidates');
 const classes = {
-  NEUTRAL:'중립만', DEATHKNIGHT:'죽음의 기사', DEMONHUNTER:'악마사냥꾼', DRUID:'드루이드',
+  DEATHKNIGHT:'죽음의 기사', DEMONHUNTER:'악마사냥꾼', DRUID:'드루이드',
   HUNTER:'사냥꾼', MAGE:'마법사', PALADIN:'성기사', PRIEST:'사제', ROGUE:'도적',
   SHAMAN:'주술사', WARLOCK:'흑마법사', WARRIOR:'전사',
 };
@@ -1191,7 +1191,11 @@ let original = ['', ''];
 const presented = [selection.querySelector('[data-side="0"]'), selection.querySelector('[data-side="1"]')];
 
 function option(value,label) {return new Option(label,value)}
-for (let cost=0;cost<=10;cost+=1) {
+function partLabel(card, row) {
+  if (card?.partKind === 'effects') return row === 0 ? '상단 효과' : '하단 효과';
+  return row === 0 ? '발동 조건' : '효과';
+}
+for (let cost=1;cost<=10;cost+=1) {
   costPicker.add(option(cost,cost+' 코스트'));
   catalogCost.add(option(cost,cost+' 코스트'));
 }
@@ -1308,6 +1312,7 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
       for (const button of presented[side].querySelectorAll('.pick')) {
         const row = Number(button.dataset.row);
         button.dataset.copy = card.parts[row];
+        button.querySelector('.slot-label').textContent = partLabel(card,row);
         let name = button.querySelector('.vacant-name');
         if (!name) {
           name = document.createElement('span');
@@ -1317,7 +1322,7 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
         name.textContent = card.name;
         button.disabled = !canReplace(central,card,row);
         button.title = button.disabled ? (card.parts[row]===central.parts[row] ? '기본 하수인과 같은 문구' : '영웅 피해 반복 조합 제외') : '';
-        button.setAttribute('aria-label',card.name+' '+(row===0?'발동 조건 ':'효과 ')+card.parts[row]);
+        button.setAttribute('aria-label',card.name+' '+partLabel(card,row)+' '+card.parts[row]);
       }
     });
   }
@@ -1356,7 +1361,7 @@ function renderCatalog() {
   const fragment = document.createDocumentFragment();
   for (const card of results) {
     const row = document.createElement('tr');
-    for(const [index,value] of [card.name,card.cost,card.classes.map(code=>classes[code]==='중립만'?'중립':classes[code]||code).join(' / '),eligibleSet.has(card.id)?'조합에 사용 가능':'목록에서 참고',card.text].entries()) {
+    for(const [index,value] of [card.name,card.cost,card.classes.map(code=>code==='NEUTRAL'?'중립':classes[code]||code).join(' / '),eligibleSet.has(card.id) ? (card.prototypeOnly ? '프로토타입 추가 후보' : '조합에 사용 가능') : '목록에서 참고',card.text].entries()) {
       const cell=document.createElement('td');
       cell.textContent=value;
       if(index===1) cell.className='numeric';
@@ -1502,6 +1507,8 @@ function showSelection(showPreview) {
   for (const [row, box] of middle.entries()) {
     const changed = showPreview && chosen?.row === row;
     box.querySelector('.wording').textContent = changed ? chosen.button.dataset.copy : original[row];
+    box.querySelector('.slot-label').textContent = changed
+      ? chosen.button.querySelector('.slot-label').textContent : partLabel(central,row);
     box.dataset.marker = changed ? '교체' : showPreview && chosen ? '유지' : '';
     box.classList.toggle('applied', changed);
   }
@@ -1587,8 +1594,8 @@ function assemble(automatic = false) {
   const wasVisible = stage.dataset.phase === 'select';
   if (!central || (!wasVisible && stage.dataset.phase !== 'peek')) return;
   const replacement = chosen
-    ? {row:chosen.row,wording:chosen.button.dataset.copy}
-    : {row:0,wording:offers[0].parts[0]};
+    ? {row:chosen.row,wording:chosen.button.dataset.copy,label:chosen.button.querySelector('.slot-label').textContent}
+    : {row:0,wording:offers[0].parts[0],label:partLabel(offers[0],0)};
   const snapshot = {card:central,...replacement};
   stopAssemblyClock();
   stopMotion();
@@ -1618,13 +1625,14 @@ function assemble(automatic = false) {
 confirm.addEventListener('click', () => {
   if (!confirm.disabled) assemble();
 });
-function addCompletedCard({card,row,wording}) {
+function addCompletedCard({card,row,wording,label}) {
   const entry = completedCardTemplate.content.firstElementChild.cloneNode(true);
   const unit = entry.querySelector('.unit');
   paintUnit(unit,card);
   for (const [index,box] of unit.querySelectorAll('.mid').entries()) {
     const changed = index===row;
     box.querySelector('.wording').textContent = changed ? wording : card.parts[index];
+    box.querySelector('.slot-label').textContent = changed ? label : partLabel(card,index);
     box.dataset.marker = changed ? '교체' : row === null ? '' : '유지';
     box.classList.toggle('applied',changed);
   }
