@@ -211,6 +211,32 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .assembly-clock{justify-self:center;text-align:center;color:#f3d7ff;font-size:12px}
 .assembly-clock strong{display:block;font-size:23px;font-variant-numeric:tabular-nums;line-height:1.05}
 .assembly-clock[data-urgent=true]{color:#ffc58c}
+.stage[data-phase=peek] .assembly-clock{visibility:hidden}
+.turn-rope{
+  position:absolute;z-index:2;top:50%;left:50%;width:min(74%,660px);height:14px;
+  translate:-50% -50%;visibility:hidden;pointer-events:none;
+  --rope-progress:0%;
+}
+.stage[data-phase=peek] .turn-rope{visibility:visible}
+.rope-fiber{
+  position:absolute;inset:4px 0;border-radius:6px;
+  background:repeating-linear-gradient(112deg,#674023 0 3px,#b77942 3px 6px,#e4b779 6px 8px);
+  box-shadow:0 1px 2px #1e100a;
+  clip-path:inset(0 0 0 var(--rope-progress));
+}
+.rope-ember{
+  position:absolute;top:0;left:var(--rope-progress);width:14px;height:14px;
+  border-radius:50%;translate:-50% 0;
+  background:radial-gradient(circle,#fffada 9%,#ffce63 34%,#ee621e 65%,transparent 75%);
+  box-shadow:0 0 10px 3px #ff792ba6;
+}
+@media(prefers-reduced-motion:no-preference){
+  .rope-fiber{animation:rope-consume var(--rope-duration) linear both}
+  .rope-ember{animation:rope-travel var(--rope-duration) linear both,rope-flicker .29s ease-in-out infinite alternate}
+}
+@keyframes rope-consume{from{clip-path:inset(0 0 0 0%)}to{clip-path:inset(0 0 0 100%)}}
+@keyframes rope-travel{from{left:0}to{left:100%}}
+@keyframes rope-flicker{from{scale:.8;opacity:.82}to{scale:1.18;opacity:1}}
 .pick .vacant-name{display:none}
 .pick[data-vacant=true] .vacant-name{
   position:absolute;inset:0;display:grid;place-items:center;padding:5px;
@@ -320,6 +346,9 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
       <button class="quiet hide" type="button">숨기기</button>
       <button class="primary confirm" type="button" disabled>조립</button>
       <p class="assembly-clock" hidden>남은 시간 <strong role="timer"></strong></p>
+    </div>
+    <div class="turn-rope" role="img" aria-label="턴 제한 시간이 줄어드는 중" hidden>
+      <span class="rope-fiber"></span><span class="rope-ember"></span>
     </div>
     </div>
   </section>
@@ -1108,6 +1137,7 @@ const confirm = assemblyControls.querySelector('.confirm');
 const hide = assemblyControls.querySelector('.hide');
 const clock = assemblyControls.querySelector('.assembly-clock');
 const clockValue = clock.querySelector('strong');
+const turnRope = stage.querySelector('.turn-rope');
 const status = document.querySelector('#status');
 const picks = [...selection.querySelectorAll('.pick')];
 const middle = [...center.querySelectorAll('.mid')];
@@ -1209,13 +1239,20 @@ function paintRace(unit, id) {
 }
 
 function baseChoices() {
-  return eligibleCards.filter(card => card.cost===Number(costPicker.value) && allowedClass(card) && donorPool(card).length>=2);
+  return eligibleCards.filter(card => {
+    if (card.cost!==Number(costPicker.value) || !allowedClass(card)) return false;
+    const pool = donorPool(card);
+    return pool.length>=2 && pool.some(donor => canAutoUseCondition(card,donor));
+  });
+}
+function canAutoUseCondition(base, donor) {
+  return !repeatsHeroDamage(donor.parts[0],base.parts[1]);
 }
 function updateDonors(pool) {
   for (const [side,picker] of donorPickers.entries()) {
     picker.replaceChildren(...pool.map(card => {
       const entry = option(card.id,card.name + ' · ' + card.cost);
-      entry.disabled = card.id === offers[1-side]?.id;
+      entry.disabled = card.id === offers[1-side]?.id || (side===0 && !canAutoUseCondition(central,card));
       return entry;
     }));
     picker.disabled = !central;
@@ -1239,10 +1276,11 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
   const previous = reroll ? [] : offers;
   const desired = [previous[0],previous[1]];
   if (donor) desired[donor.side] = donors.find(card => card.id===donor.id);
-  offers = desired.map(card => donors.find(candidate => candidate.id===card?.id));
-  const available = donors.filter(card => !offers.includes(card));
-  const drawn = draw(available,2-offers.filter(Boolean).length);
-  offers = offers.map(card => card || drawn.shift());
+  const leftPool = central ? donors.filter(card => canAutoUseCondition(central,card)) : [];
+  const right = donors.find(card => card.id===desired[1]?.id);
+  const left = leftPool.find(card => card.id===desired[0]?.id) ||
+    draw(leftPool.filter(card => card!==right),1)[0] || draw(leftPool,1)[0];
+  offers = [left, right && right!==left ? right : draw(donors.filter(card => card!==left),1)[0]];
   updateDonors(donors);
 
   if (central) {
@@ -1346,12 +1384,14 @@ let resultTimer;
 let assemblyTimer;
 let countdownAt = null;
 let countdownStarted = false;
+const turnLimit = 20000;
 
 function stopAssemblyClock() {
   clearTimeout(assemblyTimer);
   countdownAt = null;
   countdownStarted = false;
   clock.hidden = true;
+  turnRope.hidden = true;
 }
 function tickAssemblyClock() {
   if (countdownAt === null) return;
@@ -1360,13 +1400,19 @@ function tickAssemblyClock() {
     assemblyTimer = setTimeout(tickAssemblyClock,countdownAt-now);
     return;
   }
-  countdownStarted = true;
-  const remaining = countdownAt + 20000 - now;
+  const remaining = countdownAt + turnLimit - now;
   if (remaining <= 0) {
     assemble(true);
     return;
   }
+  if (!countdownStarted) {
+    countdownStarted = true;
+    turnRope.style.setProperty('--rope-duration',turnLimit+'ms');
+    turnRope.hidden = false;
+    for (const layer of turnRope.children) layer.style.animationDelay = (remaining-turnLimit)+'ms';
+  }
   const seconds = Math.ceil(remaining/1000);
+  turnRope.style.setProperty('--rope-progress',(100-remaining/turnLimit*100)+'%');
   clock.hidden = false;
   clock.dataset.urgent = String(seconds<=5);
   clockValue.textContent = seconds;
@@ -1523,7 +1569,10 @@ for (const button of picks) {
 function assemble(automatic = false) {
   const wasVisible = stage.dataset.phase === 'select';
   if (!central || (!wasVisible && stage.dataset.phase !== 'peek')) return;
-  const snapshot = {card:central,row:chosen?.row ?? null,wording:chosen?.button.dataset.copy};
+  const replacement = chosen
+    ? {row:chosen.row,wording:chosen.button.dataset.copy}
+    : {row:0,wording:offers[0].parts[0]};
+  const snapshot = {card:central,...replacement};
   stopAssemblyClock();
   stopMotion();
   showSelection(true);
@@ -1545,7 +1594,7 @@ function assemble(automatic = false) {
     phase('board');
     startButton.focus({preventScroll:true});
     status.textContent = automatic
-      ? (snapshot.row === null ? '시간이 끝나 기본 하수인을 완성 카드 목록에 추가했어요.' : '시간이 끝나 선택한 문구로 조립했어요. 전장 아래에서 확인할 수 있어요.')
+      ? (chosen ? '시간이 끝나 선택한 문구로 조립했어요.' : '시간이 끝나 자동으로 조립했어요. 전장 아래에서 확인할 수 있어요.')
       : '완성 카드를 전장 아래 목록에 추가했어요.';
   },wait);
 }
