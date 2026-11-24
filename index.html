@@ -203,7 +203,9 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .selection .unit-heading{
   clip-path:inset(50%);
 }
-.selection .unit-slots{inset:49.5% 8% 14.5% 9%}
+.selection .unit-slots{
+  inset:49.5% 8% 14.5% 9%;grid-template-rows:minmax(0,2fr) minmax(0,3fr);
+}
 .selection .center .wording,.completed-cards .wording{font-weight:700}
 .selection .mid:not(.applied){background:#262231;border-color:#795e8f;color:#f1e7fa}
 .selection .mid:not(.applied) .slot-label{color:#cdc0dd}
@@ -286,12 +288,20 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 
 .completed-section{margin-top:12px;padding:15px;border:1px solid #65513b;border-radius:8px;background:#221c18}
 .completed-section > p{margin-top:8px;color:var(--muted);font-size:13px}
-.completed-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(216px,100%),1fr));gap:14px;margin:10px 0 0;padding:0;list-style:none}
+.completed-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(236px,100%),1fr));gap:14px;margin:10px 0 0;padding:0;list-style:none}
 .completed-cards:empty{margin:0}
 .completed-cards .unit{
   width:min(100%,236px);min-height:320px;aspect-ratio:236 / 320;margin-inline:auto;
   animation:reveal .3s ease-out;
 }
+.completed-cards .unit-slots{grid-template-rows:minmax(0,2fr) minmax(0,3fr)}
+.completed-cards .unit-slots .slot{
+  grid-template-rows:minmax(0,1fr);font-size:clamp(10px,5.75cqi,13px);
+}
+.completed-cards .slot-label{
+  position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
+}
+.completed-cards .slot.mid[data-marker]::after{content:none}
 .completed-cards .slot.mid:not(.applied){background:#f6e6c3ce}
 </style>
 </head>
