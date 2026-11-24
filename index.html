@@ -404,7 +404,7 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
     <thead><tr><th>하수인</th><th>비용</th><th>직업</th><th>구분</th><th>카드 문구</th></tr></thead><tbody id="catalog-rows"></tbody>
     </table></div>
     <p>확인일 2026-11-24 · 한국어 카드 데이터 빌드 256589 · <a href="https://api.hearthstonejson.com/v1/256589/koKR/cards.collectible.json">HearthstoneJSON</a> · <a href="https://hearthstone.blizzard.com/ko-kr/cards?set=standard">블리자드 정규전 카드 라이브러리</a></p>
-    <p>카드 목록에는 발동 문구가 있는 하수인을 담았습니다. 시연에는 원본 데이터에 능력 분할 표시가 있는 하수인과 이 화면의 규칙으로 추가한 하수인이 나옵니다. 직접 추가한 하수인은 목록에서 ‘프로토타입 추가 후보’로 표시합니다. 영웅 피격이 같은 영웅에게 피해를 되돌리는 조합과 같은 문구로의 교체는 선택할 수 없습니다.</p>
+    <p>카드 목록에는 발동 문구가 있는 하수인을 담았습니다. 시연에는 원본 데이터에 능력 분할 표시가 있는 하수인과 이 화면의 규칙으로 추가한 하수인이 나옵니다. 직접 추가한 하수인은 목록에서 ‘프로토타입 추가 후보’로 표시합니다. 기본 하수인과 상단 또는 하단 문구가 하나라도 같은 하수인은 보조 후보에서 제외합니다. 영웅 피격이 같은 영웅에게 피해를 되돌리는 조합은 선택할 수 없습니다.</p>
     <p>기본 하수인과 같은 비용으로 후보를 표시합니다. 8~10코스트는 한 그룹으로 묶습니다. 직업을 선택하면 해당 직업과 중립 후보가 표시됩니다. 천상의 보호막 관련 반복 발동과 조합 발동 카드별 예외는 확인 범위에 포함되지 않습니다.</p>
     </details>
   </dialog>
@@ -1212,7 +1212,6 @@ function repeatsHeroDamage(trigger, effect) {
     && /(?:내|아군|각|양쪽) 영웅(?:에게| 모두에게)[^.]*피해를[^.]*줍니다/.test(effect);
 }
 function canReplace(base, donor, row) {
-  if (donor.parts[row] === base.parts[row]) return false;
   const trigger = row === 0 ? donor.parts[0] : base.parts[0];
   const effect = row === 1 ? donor.parts[1] : base.parts[1];
   return !repeatsHeroDamage(trigger, effect);
@@ -1221,6 +1220,7 @@ function donorPool(base) {
   const [min,max] = costRange(base.cost);
   return eligibleCards.filter(card => card.id !== base.id && card.name !== base.name &&
     allowedClass(card) && card.cost>=min && card.cost<=max &&
+    card.parts.every(part => !base.parts.includes(part)) &&
     card.parts.some((_,row) => canReplace(base,card,row)));
 }
 function draw(pool, num) {
@@ -1321,7 +1321,7 @@ function rebuild(requestedId, {donor,reroll=false,screen}={}) {
         }
         name.textContent = card.name;
         button.disabled = !canReplace(central,card,row);
-        button.title = button.disabled ? (card.parts[row]===central.parts[row] ? '기본 하수인과 같은 문구' : '영웅 피해 반복 조합 제외') : '';
+        button.title = button.disabled ? '영웅 피해 반복 조합 제외' : '';
         button.setAttribute('aria-label',card.name+' '+partLabel(card,row)+' '+card.parts[row]);
       }
     });
@@ -1352,7 +1352,8 @@ function prepareStart() {
 function renderCatalog() {
   const query = catalogText.value.trim().toLocaleLowerCase('ko');
   const cost = catalogCost.value;
-  const canPickBase = central && ['select','peek'].includes(stage.dataset.phase);
+  const selectableBases = new Set(central && ['select','peek'].includes(stage.dataset.phase)
+    ? baseChoices().map(card => card.id) : []);
   const currentPool = new Set(central ? donorPool(central).map(card=>card.id) : []);
   const results = cardData.filter(card => (!cost || card.cost===Number(cost)) &&
     (!catalogCandidates.checked || currentPool.has(card.id)) &&
@@ -1365,7 +1366,7 @@ function renderCatalog() {
       const cell=document.createElement('td');
       cell.textContent=value;
       if(index===1) cell.className='numeric';
-      if(index===0 && canPickBase && card.cost===central.cost && eligibleSet.has(card.id) && allowedClass(card) && donorPool(card).length>=2){
+      if(index===0 && selectableBases.has(card.id)){
         const button=document.createElement('button');
         button.type='button';
         button.textContent=card.name;
