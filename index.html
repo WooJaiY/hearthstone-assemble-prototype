@@ -97,10 +97,13 @@ button:disabled{cursor:default;opacity:.5}
 }
 .unit-slots .slot{
   min-height:0;grid-template-rows:auto minmax(0,1fr);padding:3px clamp(3px,3cqi,8px);
-  font-size:clamp(9px,5.9cqi,15px);line-height:1.22;
+  font-size:clamp(11px,5.9cqi,15px);line-height:1.22;
 }
 .unit-slots .slot-label{font-size:.77em}
-.unit-slots .wording{min-height:0;overflow:auto;scrollbar-width:thin}
+.unit-slots .wording{
+  min-height:0;line-height:1.24;font-size:var(--wording-size,1em);
+  overflow-wrap:anywhere;white-space:pre-line;
+}
 .slot{position:relative;display:grid;align-content:start;gap:2px;min-width:0;width:100%;border:1px solid #ad8d62;border-radius:4px;background:#f5e4bd;color:#36261b;padding:4px 5px;text-align:left;font-size:clamp(10px,1.24vw,13px);line-height:1.33;overflow-wrap:anywhere}
 .slot-label{font-weight:750;color:#694a32;font-size:.82em}
 .pick:enabled:not([data-vacant=true]){border-color:#42c871;box-shadow:inset 0 0 0 1px #42c871,0 0 8px #52e57b9c}
@@ -162,13 +165,13 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 
 .arena{aspect-ratio:55 / 31;min-height:min-content}
 .arena{
-  --card-spacing:clamp(6px,2.25vw,30px);
-  --card-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);
-  --assembly-controls-width:735px;
+  --card-spacing:4%;
+  --card-columns:minmax(0,1fr) minmax(0,1.22fr) minmax(0,1fr);
+  --assembly-controls-width:min(74%,800px);
+  --selection-bottom:68px;
 }
 .selection{
-  padding-top:clamp(17px,3vw,30px);
-  padding-bottom:86px;
+  padding:clamp(12px,2vw,22px) 0 var(--selection-bottom);
 }
 .stage[data-phase=peek] .selection{visibility:hidden}
 .stage[data-phase=peek] .board{position:absolute;inset-inline:0}
@@ -192,32 +195,70 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .selection h2::after{left:calc(100% - 1px);transform:scaleX(-1)}
 .selection .cards{
   grid-template-columns:var(--card-columns);gap:0 var(--card-spacing);
-  max-width:var(--assembly-controls-width);margin-top:clamp(23px,3vw,32px);
+  position:relative;isolation:isolate;width:var(--assembly-controls-width);
+  max-width:none;margin-top:clamp(16px,2.4vw,29px);align-items:start;
+  --effect-top:clamp(84px,14vw,153px);
+  --side-drop:clamp(11px,2.6vw,30px);
+  --effect-row-size:clamp(55px,6vw,70px);
+  --effect-gap:4px;
+  --card-foot:clamp(29px,4.4vw,56px);
 }
+.selection .cards::before{
+  content:"";position:absolute;z-index:-1;inset:4% 30% -53px;
+  border:1px solid #ac83c5;border-radius:18px;
+  background:linear-gradient(100deg,#422b56,#2b2040 50%,#422b56);
+  box-shadow:inset 0 0 0 4px #ae8ccc29,0 0 18px #110c2480;
+}
+.selection .cards::after{
+  content:"";position:absolute;z-index:-1;inset-inline:12%;
+  top:calc(var(--effect-top) + 12px);height:18px;
+  border-block:1px solid #a17cbe;
+  box-shadow:0 calc(var(--effect-row-size) + var(--extra-top,0px) + var(--effect-gap)) #714e8a;
+  background:#714e8a;
+}
+.unit-slots{
+  grid-template-rows:calc(var(--effect-row-size) + var(--extra-top,0px)) calc(var(--effect-row-size) + var(--extra-bottom,0px));
+  gap:var(--effect-gap);
+}
+.unit-slots .slot{grid-template-rows:auto auto}
 .selection .unit{
-  height:clamp(248px,42vw,344px);
+  --card-height:calc(var(--effect-top) + 2 * var(--effect-row-size) + var(--extra-top,0px) + var(--extra-bottom,0px) + var(--effect-gap) + var(--card-foot));
+  height:var(--card-height);
   filter:drop-shadow(0 4px 8px #10091c) drop-shadow(0 0 7px #a857e48c);
 }
+.selection .unit[data-side]{
+  margin-top:var(--side-drop);
+  height:calc(var(--card-height) - var(--side-drop) - var(--card-foot) * .26);
+}
+.selection .illustration{height:calc(var(--effect-top) * 2.12)}
+.selection .unit[data-side] .illustration{height:calc((var(--effect-top) - var(--side-drop)) * 2.12)}
+.selection .unit-role{display:none}
+.selection .stats b{height:min(16%,var(--card-foot));bottom:0}
+.selection .unit[data-side] .stats b{height:min(16%,var(--card-foot) * .72)}
+.selection .race{bottom:clamp(5px,1vw,12px)}
 .selection .unit.center{filter:drop-shadow(0 4px 8px #10091c) drop-shadow(0 0 10px #b993f8a6)}
 .selection .unit[data-side] .unit-cost{display:none}
 .selection .unit-heading{
   clip-path:inset(50%);
 }
 .selection .unit-slots{
-  inset:49.5% 8% 14.5% 9%;grid-template-rows:minmax(0,2fr) minmax(0,3fr);
+  inset:var(--effect-top) 8% auto 9%;
 }
+.selection .unit[data-side] .unit-slots{top:calc(var(--effect-top) - var(--side-drop))}
+.selection .slot-label{padding-right:0}
+.selection .mid .slot-label{padding-right:2.6em}
 .selection .center .wording,.completed-cards .wording{font-weight:700}
 .selection .mid:not(.applied){background:#262231;border-color:#795e8f;color:#f1e7fa}
 .selection .mid:not(.applied) .slot-label{color:#cdc0dd}
 .selection .mid:not(.applied)[data-marker]::after{color:#d8c8e8}
 .selection .mid.target:not(.applied){border-color:#e6c393;box-shadow:inset 0 0 0 1px #e0a451}
 .assembly-controls{
-  position:absolute;z-index:2;inset-inline:clamp(5px,2vw,24px);bottom:18px;
+  position:absolute;z-index:2;inset-inline:0;bottom:calc(50% - var(--selection-height,0px) / 2 + 16px);
   display:grid;grid-template-columns:var(--card-columns);gap:var(--card-spacing);
-  max-width:var(--assembly-controls-width);margin-inline:auto;align-items:center;
+  width:var(--assembly-controls-width);max-width:none;margin-inline:auto;align-items:center;
 }
 .assembly-controls .hide{
-  justify-self:start;background:#252440;color:#e4ddff;
+  justify-self:start;margin-inline-start:9%;background:#252440;color:#e4ddff;
   border-color:#9780be;
 }
 .assembly-controls .hide:hover{background:#40325c}
@@ -279,11 +320,19 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
   .sidebar-pickers{grid-template-columns:1fr}
 }
 @media(max-width:680px){
-  .arena{aspect-ratio:auto;min-height:425px}
+  .arena{aspect-ratio:auto;min-height:425px;--assembly-controls-width:94%;--card-spacing:2%}
+  .selection h2{font-size:18px}
+}
+@media(max-width:390px){
+  .selection .unit-slots{inset-inline:5%}
+  .selection .slot{padding-inline:3px}
+  .selection .mid .slot-label{padding-right:2em}
+  .selection .mid[data-marker]::after{right:2px}
 }
 @media(max-width:490px){
   .assembly-controls button{padding-inline:5px}
 }
+.flying .wording{white-space:pre-line;line-height:1.24}
 
 
 .completed-section{margin-top:12px;padding:15px;border:1px solid #65513b;border-radius:8px;background:#221c18}
@@ -291,13 +340,16 @@ td button{border:0;padding:0;background:none;text-align:left;text-decoration:und
 .completed-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(236px,100%),1fr));gap:14px;margin:10px 0 0;padding:0;list-style:none}
 .completed-cards:empty{margin:0}
 .completed-cards .unit{
-  width:min(100%,236px);min-height:320px;aspect-ratio:236 / 320;margin-inline:auto;
-  animation:reveal .3s ease-out;
+  --effect-row-size:46px;--effect-gap:4px;
+  width:min(100%,236px);height:calc(320px + var(--extra-top,0px) + var(--extra-bottom,0px));
+  margin-inline:auto;animation:reveal .3s ease-out;
 }
-.completed-cards .unit-slots{grid-template-rows:minmax(0,2fr) minmax(0,3fr)}
-.completed-cards .unit-slots .slot{
-  grid-template-rows:minmax(0,1fr);font-size:clamp(10px,5.75cqi,13px);
-}
+.completed-cards .illustration{height:320px}
+.completed-cards .unit-heading{top:150px;height:35px}
+.completed-cards .unit-slots{inset:182px 10% auto 12%}
+.completed-cards .stats b{height:44px}
+.completed-cards .race{bottom:19px}
+.completed-cards .unit-slots .slot{grid-template-rows:auto;font-size:clamp(11px,5.75cqi,14px)}
 .completed-cards .slot-label{
   position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
 }
@@ -1527,6 +1579,43 @@ function stopMotion() {
   stage.classList.remove('moving');
   for (const slot of middle) slot.classList.remove('target');
 }
+function fitEffectPanels(container) {
+  const rows = [0,0];
+  container.style.removeProperty('--extra-top');
+  container.style.removeProperty('--extra-bottom');
+
+  for (const slot of container.querySelectorAll('.unit-slots .slot')) {
+    const wording = slot.querySelector('.wording');
+    wording.style.removeProperty('--wording-size');
+    // Keep the type readable. Give the entire row more room if 11px still overflows.
+    const preferred = parseFloat(getComputedStyle(wording).fontSize);
+    for (let size = Math.max(11,preferred); size > 11 && slot.scrollHeight > slot.clientHeight;) {
+      size = Math.max(11,size - 1);
+      wording.style.setProperty('--wording-size',size + 'px');
+    }
+    const row = Number(slot.dataset.row);
+    rows[row] = Math.max(rows[row], slot.scrollHeight - slot.clientHeight);
+  }
+
+  container.style.setProperty('--extra-top',rows[0] + 'px');
+  container.style.setProperty('--extra-bottom',rows[1] + 'px');
+}
+
+const panelWidths = new WeakMap();
+const panelResize = new ResizeObserver(entries => {
+  for (const {target,contentRect} of entries) {
+    if (!contentRect.width || panelWidths.get(target) === contentRect.width) continue;
+    panelWidths.set(target,contentRect.width);
+    fitEffectPanels(target);
+  }
+});
+panelResize.observe(cardsPanel);
+new ResizeObserver(() => {
+  if (!selection.hidden) {
+    assemblyControls.style.setProperty('--selection-height',selection.offsetHeight + 'px');
+  }
+}).observe(selection);
+
 function showSelection(showPreview) {
   for (const button of picks) {
     const selected = chosen?.button === button;
@@ -1543,6 +1632,7 @@ function showSelection(showPreview) {
     box.classList.toggle('applied', changed);
   }
   center.classList.toggle('has-choice', showPreview && !!chosen);
+  if (central) fitEffectPanels(cardsPanel);
   confirm.disabled = !chosen || stage.classList.contains('moving');
 }
 function sparks(x, y, count, radius) {
@@ -1558,11 +1648,15 @@ function sparks(x, y, count, radius) {
     ], {duration:310 + (i % 5)*55, easing:'ease-out'});
   }
 }
-function moveWording(from, to, wording, returning) {
+function moveWording(from, to, source, returning) {
   const flight = effect('slot flying' + (returning ? ' returning' : ''), from.x, from.y);
   flight.style.width = from.w + 'px';
   flight.style.height = from.h + 'px';
-  flight.textContent = wording;
+  const wording = document.createElement('span');
+  wording.className = 'wording';
+  wording.style.fontSize = getComputedStyle(source.querySelector('.wording')).fontSize;
+  wording.textContent = source.dataset.copy;
+  flight.append(wording);
   const dx = to.x-from.x;
   const dy = to.y-from.y;
   return animate(flight, [
@@ -1591,10 +1685,10 @@ async function choose(button, row) {
   showSelection(false);
   const arrivals = [];
   if (previous) {
-    arrivals.push(moveWording(outgoing,coordinates(previous.button),previous.button.dataset.copy,true));
+    arrivals.push(moveWording(outgoing,coordinates(previous.button),previous.button,true));
   }
   if (chosen) {
-    arrivals.push(moveWording(from,coordinates(middle[row]),button.dataset.copy,false));
+    arrivals.push(moveWording(from,coordinates(middle[row]),button,false));
   }
   await Promise.all(arrivals);
   if (ticket !== action) return;
@@ -1667,6 +1761,8 @@ function addCompletedCard({card,row,wording,label}) {
     box.classList.toggle('applied',changed);
   }
   completedCards.prepend(entry);
+  fitEffectPanels(unit);
+  panelResize.observe(unit);
   completedEmpty.hidden = true;
 }
 function showAssembly() {
